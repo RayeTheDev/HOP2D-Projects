@@ -31,11 +31,6 @@ const Contact = (props) => {
 function App() {
   return (
     <div className="App">
-<<<<<<< HEAD
-      <header className="App-header">
-      ds
-      </header>
-=======
       {data.map((item, index) => {
         return (
           <Contact
@@ -45,7 +40,6 @@ function App() {
           />
         );
       })}
->>>>>>> bc028e7c6c6daf9e33aa5e91e7010a8192b5bd9d
     </div>
   );
 }

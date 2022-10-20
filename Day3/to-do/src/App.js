@@ -1,42 +1,77 @@
-import logo from "./logo.svg";
-import React, { useState , useRef} from "react";
+import React, { useState, useRef } from "react";
 import "./App.css";
+import { RiCloseCircleLine } from 'react-icons/ri'
+import { MdOutlineVerified } from 'react-icons/md'
 
-const ToDo = (props) => {
+const ToDo = ({ task, index, complete, remove }) => {
   return (
-    <div className="Container">
-      <input type="checkbox" value={props.text} />
-      <div style={{textDecoration: task.Completed ? 'line-through':""}} className="toDo ">{props.text}</div>
+    <div className={task.isCompleted ? 'Container toDoCompleted' : 'Container'}>
+
+      <div className='toDo' >{task.text}</div>
+
+
+      {/* <button className="deleteBut" onClick={() => remove(index)}>X</button> */}
+      <div className="icons">
+        <MdOutlineVerified onClick={() => complete(index)} />
+        <RiCloseCircleLine onClick={() => remove(index)} />
+      </div>
     </div>
+
   );
 };
 
 
 function App() {
   const ref = useRef(null);
-  const inputEl = document.getElementById("input");
   const [tasks, setTasks] = useState([]);
 
   const add = () => {
     const newTask = { text: ref.current.value, isCompleted: false };
     setTasks([...tasks, newTask]);
     ref.current.value = ''
-    
-  };
+  }
+  const complete = index => {
+    const newTask = [...tasks];
+    newTask[index].isCompleted = !newTask[index].isCompleted
+    setTasks(newTask)
+    // let updated = tasks.map(task => {
+    //   if (task.index === index) {
+    //     task.isCompleted = !task.isCompleted
+    //   }
+    //   return task
+    // })
+    // setTasks(updated)
+    console.log(index)
+  }
+  const remove = index => {
+    const newTask = [...tasks];
+    newTask.splice(index, 1)
+    setTasks(newTask)
 
- 
+  }
   return (
     <div className="App">
-      {/* <Write /> */}
-      <input ref={ref} id="input" type="text" placeholder="Enter new task" />
-      <button onClick={add}>Add</button>
-      {tasks.map((task, index) => (
-        <ToDo
-          text={task.text}
-          key={task.text + index}
-          isCompleted={task.isCompleted}
-        />
-      ))}
+      <div className="boxCont">
+        <h1>To Do List</h1>
+
+        {/* <h2>Whats the Plan for Today?</h2> */}
+        <div className="addSector">
+          <input className="input" ref={ref} type="text" placeholder="Enter new task" />
+          <button className="addButton" onClick={add}>Add</button>
+        </div>
+
+        {tasks.map((task, index) => (
+          <ToDo
+            text={task.text}
+            task={task}
+            index={index}
+            key={task.text + index}
+            // isCompleted={task.isCompleted}
+            complete={complete}
+            remove={remove}
+          />
+        ))}
+      </div>
     </div>
   );
 }
