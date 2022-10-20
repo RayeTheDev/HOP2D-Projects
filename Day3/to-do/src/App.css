@@ -1,18 +1,19 @@
 body {
   padding: 10px 10px 10px 10px;
-  /* background: linear-gradient(
+  background: linear-gradient(
     90deg,
     rgba(48, 16, 255, 1) 0%,
     rgba(100, 115, 255, 1) 100%
-  ); */
+  );
   background-image: url(4k.jpg);
-  background-size: 1920px 1080px;
+  background-size: 2320px 1080px;
   background-repeat: no-repeat;
 }
 .App {
   padding: 3px;
   gap: 10px;
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 .boxCont {
@@ -114,4 +115,8 @@ input:focus {
   font-weight: bold;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+}
+.completedCont {
+  width: 90%;
+  gap: 10px;
 }
