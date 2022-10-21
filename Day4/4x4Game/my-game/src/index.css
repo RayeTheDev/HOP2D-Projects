@@ -1,10 +1,10 @@
 .App {
   display: flex;
-  
   justify-content: center;
 }
 .boxCont {
   width: 500px;
+  gap: 4px;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -12,6 +12,12 @@
 .box {
   width: 100px;
   height: 100px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
   background-color: black;
+}
+
+.Insert {
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
