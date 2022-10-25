@@ -7,16 +7,15 @@ const Home = () => {
 };
 
 const Users = () => {
-  const {params} = useParams()
   return <div> Users:
-    <Link to="/user">{params.name}</Link>
+    <Link to="/user">Bayraa</Link>
 
   </div>;
 };
 
 const User = () => {
-  
-  return <div>Zolboo</div>;
+  const { params } = useParams()
+  return <div>User: {params.username}</div>;
 };
 
 const Market = () => {
@@ -47,9 +46,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home />}></Route>
-        <Route path="/users" > 
-          <Route path=":username" element={<User/>}> 
-            
+        <Route path="/users" element={<Users />} >
+          <Route path=":username" >
+
           </Route>
         </Route>
         <Route path="/contact" element={<Contact />} />

@@ -28,10 +28,10 @@ function App() {
   };
 
   const complete = (index) => {
+    console.log(index)
     const newTask = [...tasks];
     newTask[index].isCompleted = !newTask[index].isCompleted;
     setTasks(newTask);
-
 
   };
 

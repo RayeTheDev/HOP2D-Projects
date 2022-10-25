@@ -25,3 +25,6 @@
 .Insert {
   background-color: red;
 }
+.done {
+  display: none;
+}
