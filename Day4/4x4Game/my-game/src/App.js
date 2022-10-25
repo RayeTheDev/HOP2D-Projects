@@ -64,7 +64,7 @@ function App() {
     <div className="App">
       <div class="boxCont">
         {arr.map((box, index) => (
-          <Box value={value} index={index} insert={[insert, setInsert]}></Box>
+          <Box value={data.value} index={index} insert={[insert, setInsert]}></Box>
         ))}
       </div>
     </div>
