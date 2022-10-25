@@ -12,7 +12,7 @@ const Box = (props) => {
   return <div onClick = {() => props.checked(props.index)}  className="box">{props.value.id}</div>;
   
 };
-
+const d = d;
 function App() {
   const choosed = useRef([]) 
   const [arr, setArr] = useState([
