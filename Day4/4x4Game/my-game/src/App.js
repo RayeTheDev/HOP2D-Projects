@@ -3,6 +3,7 @@ import { useEffect, useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const Box = (props) => {
+
   // if (props.R === true && props.index === props.selected[0]) {
   //   return <div className="box done">{props.value}</div>
   // }
@@ -52,12 +53,8 @@ function App() {
   function moveAndCheck(e) {
 
     if (e.key === 'w' && insert >= 4) {
-
-
       setInsert(insert - 4);
     } else if (e.key === 's' && insert < 12) {
-
-
       setInsert(insert + 4);
     } else if (e.key === 'a' && insert % 4 !== 0) {
 
