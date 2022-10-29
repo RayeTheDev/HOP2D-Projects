@@ -1,31 +1,34 @@
 import "./App.css";
 import { useEffect, useState, useRef } from "react";
-import { v4 as uuidv4 } from "uuid";
+// import { v4 as uuidv4 } from "uuid";
 
-const Box = (props) => {
-  // if (props.R === true && props.index === props.selected[0]) {
-  //   return <div className="box done">{props.value}</div>
-  // }
-
-  if (props.R === true) {
-    return <div className="box done">{props.value}</div>
-
+const Box = (props, gg) => {
+  if (props.Removed === true && props.index === props.selected[0]) {
+    return <div className="box done">{props.value}</div>;
   }
-  if (props.S === true) {
-    return <div className="box insert">{props.value}</div>
+
+  if (props.Removed === true) {
+    return <div className="box done">{props.value}</div>;
+  }
+  if (props.Selected === true) {
+    return <div className="box insert">{props.value}</div>;
   }
 
   if (props.index === props.selected[0]) {
-    return <div className="box insert"></div>
+    return <div className="box insert"></div>;
   }
+  if (gg.isWon == true) {
+    // document.body.style.backgroundColor = "red"
+    console.log(gg.isWon)
 
-  return <div className="box"></div>
-
+  }
+  return <div className="box"></div>;
 };
-
 
 function App() {
   let choosed = useRef([]);
+  const [gg, setGg] = useState({ isWon: false });
+  const [win, setWin] = useState(1);
   const [count, setCount] = useState(0);
   const [insert, setInsert] = useState(0);
   const [arr, setArr] = useState([
@@ -47,24 +50,18 @@ function App() {
     { isSelected: false, isRemoved: false, id: 8 },
   ]);
 
+  document.onkeydown = move;
 
-  document.onkeydown = moveAndCheck;
-  function moveAndCheck(e) {
-
-    if (e.key === 'w' && insert >= 4) {
-
-
+  //Move keys with: w,s,a,d
+  function move(e) {
+    if (e.key === "w" && insert >= 4) {
       setInsert(insert - 4);
-    } else if (e.key === 's' && insert < 12) {
-
-
+    } else if (e.key === "s" && insert < 12) {
       setInsert(insert + 4);
-    } else if (e.key === 'a' && insert % 4 !== 0) {
-
-
+    } else if (e.key === "a" && insert % 4 !== 0) {
       setInsert(insert - 1);
     } else if (
-      e.key === 'd' &&
+      e.key === "d" &&
       insert !== 3 &&
       insert !== 7 &&
       insert !== 11 &&
@@ -74,38 +71,47 @@ function App() {
     }
 
     if (
-      e.key === ' ' &&
+      e.key === " " &&
       arr[insert].isRemoved === false &&
       insert !== choosed.current[0] &&
-      (count === 0 || count === 1)
+      (count == 1 || count == 0)
     ) {
-      arr[insert].isSelected = true;
-      choosed.current.push(insert);
-      setCount(count + 1);
-      if (count === 1) {
-        if (
-          arr[choosed.current[0]].id ===
-          arr[choosed.current[1]].id
-        ) {
-          arr[choosed.current[0]].isRemoved = true;
-          arr[choosed.current[1]].isRemoved = true;
-          choosed.current = [];
-          setCount(0);
-          return;
-        }
-        // setCount(100);
-
-        setTimeout(() => {
-          arr[choosed.current[0]].isSelected = false;
-          arr[choosed.current[1]].isSelected = false;
-          choosed.current = [];
-          setCount(0);
-          return;
-        }, 1000);
-      }
+      check();
     }
   }
 
+  //Check the cards if their id is same
+  function check() {
+    arr[insert].isSelected = true;
+    choosed.current.push(insert);
+    setCount(count + 1);
+    if (count === 1) {
+      if (arr[choosed.current[0]].id === arr[choosed.current[1]].id) {
+        arr[choosed.current[0]].isRemoved = true;
+        arr[choosed.current[1]].isRemoved = true;
+        setWin(win + 1);
+        choosed.current = [];
+        setCount(0);
+        console.log(win);
+        if (win === 8) {
+          gg.isWon = true;
+    
+          
+        }
+        return;
+      }
+
+      setTimeout(() => {
+        arr[choosed.current[0]].isSelected = false;
+        arr[choosed.current[1]].isSelected = false;
+        choosed.current = [];
+        setCount(0);
+        return;
+      }, 1000);
+    }
+  }
+
+  //Randomize the box array
   useEffect(() => {
     function shuffle() {
       setArr((prev) => {
@@ -113,7 +119,7 @@ function App() {
         let currentIndex = arr.length,
           randomIndex;
 
-        // While there remain elements to shuffle. 
+        // While there remain elements to shuffle.
         while (currentIndex !== 0) {
           // Pick a remaining element.
           randomIndex = Math.floor(Math.random() * currentIndex);
@@ -130,28 +136,29 @@ function App() {
       });
     }
 
+    if(gg.isWon === true) {
+      document.body.style.backgroundColor = "red"
+    }
     shuffle();
   }, []);
 
   return (
     <div className="App">
-      <div className='contDiv'>
+      <div className="contDiv">
         <p>Find Pairs</p>
         <div className="boxCont">
           {arr.map((box, index) => (
             <Box
-              key={uuidv4()}
-              S={box.isSelected}
-              R={box.isRemoved}
+              // key={uuidv4()}
+              Selected={box.isSelected}
+              Removed={box.isRemoved}
               value={box.id}
               index={index}
               selected={[insert, setInsert]}
             ></Box>
           ))}
-
         </div>
       </div>
-
     </div>
   );
 }
