@@ -40,7 +40,7 @@ function App() {
     newTask.splice(index, 1);
     setTasks(newTask);
   };
-  
+
   // document.addEventListener("keydown", (e) => {
   //   if(e.key == "Enter") {
   //     add()
@@ -63,39 +63,39 @@ function App() {
         </div>
 
         {tasks.map((task, index) => {
-         return (!task.isCompleted &&
+          return (!task.isCompleted &&
 
-           <ToDo
-             text={task.text}
-             task={task}
-             index={index}
-             key={task.text + index}
-             isCompleted={task.isCompleted}
-             complete={complete}
-             remove={remove}
-           />
-         )
-          
+            <ToDo
+              text={task.text}
+              task={task}
+              index={index}
+              key={task.text + index}
+              isCompleted={task.isCompleted}
+              complete={complete}
+              remove={remove}
+            />
+          )
+
         })}
 
         <h1>Completed</h1>
-         {tasks.map((task, index) => {
-              return(task.isCompleted &&
-                <ToDo
-                text={task.text}
-                task={task}
-                index={index}
-                key={task.text + index}
-                isCompleted={task.isCompleted}
-                complete={complete} 
-                remove={remove}/>
-              )
-         })}
+        {tasks.map((task, index) => {
+          return (task.isCompleted &&
+            <ToDo
+              text={task.text}
+              task={task}
+              index={index}
+              key={task.text + index}
+              isCompleted={task.isCompleted}
+              complete={complete}
+              remove={remove} />
+          )
+        })}
         {/* </div> */}
       </div>
     </div>
   );
-  
+
 }
 
 export default App;
