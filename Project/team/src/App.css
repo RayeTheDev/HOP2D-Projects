@@ -1,9 +1,6 @@
 body {
   display: flex;
   justify-content: center;
-}
-.Container {
-  display: flex;
-  gap: 20px;
+
 }
 

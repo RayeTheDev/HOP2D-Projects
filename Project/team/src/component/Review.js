@@ -1,4 +1,4 @@
-import "../App.css";
+import "./css/review.module.css"
 import { useState } from "react";
 import { FiStar } from "react-icons/fi";
 

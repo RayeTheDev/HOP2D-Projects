@@ -1,3 +1,4 @@
+import "./css/news.module.css"
 export const News = (props) => {
   return (
     <div className="nContainer">

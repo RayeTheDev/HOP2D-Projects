@@ -1,0 +1,26 @@
+.hContainer {
+  position: absolute;
+  width: 100vw;
+  /* top: 0;
+    left: 0; */
+  /* padding-left: 150px; */
+  
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.textsContainer {
+  display: flex;
+  gap: 30px;
+  padding-top: 15px;
+}
+.img {
+vertical-align: top;
+}
+.texts {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  text-decoration: gray underline;
+  color: white
+}
