@@ -1,12 +1,53 @@
 .Container {
-    width: 100vw;
-    height: 100vh;
-    position: relative;
-    background-image: url(../../img/background.svg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    z-index: -1;
-    display: flex;
-    align-items: center;
-    /* background-size: 100% 100%; */
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  background-image: url(../../img/background.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+  /* background-size: 100% 100%; */
+}
+.innerContainer {
+  margin-left: 300px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid black; */
+}
+.title {
+  color: white;
+  font-family: "Work Sans", sans-serif;
+  font-size: 48px;
+}
+.texts {
+  color: white;
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  margin-top: 10px;
+}
+.form-control {
+  width: 100px;
+}
+.input {
+  display: flex;
+  margin-top: 50px;
+  gap: 20px;
+}
+input {
+  width: 316px;
+  height: 56px;
+  padding-left: 20px;
+  font-family: "Mulish", sans-serif;
+}
+button {
+  width: 161px;
+  height: 56px;
+  background-color: #0bbef2;
+  font-family: "Mulish", sans-serif;
+  border: none;
+  color: white;
+  border-radius: 5px;
 }

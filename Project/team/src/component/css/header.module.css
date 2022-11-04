@@ -1,10 +1,10 @@
 .hContainer {
   position: absolute;
   width: 100vw;
-  /* top: 0;
-    left: 0; */
+  top: 0;
+  left: 0;
   /* padding-left: 150px; */
-  
+
   display: flex;
   align-items: center;
   justify-content: space-around;
@@ -13,14 +13,48 @@
 .textsContainer {
   display: flex;
   gap: 30px;
-  padding-top: 15px;
+  /* padding-top: 15px; */
 }
 .img {
-vertical-align: top;
+  vertical-align: top;
 }
 .texts {
   font-family: "Mulish", sans-serif;
   font-size: 18px;
   text-decoration: gray underline;
-  color: white
+  color: white;
+  margin-top: 20px;
+}
+.change {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  text-decoration: gray underline;
+
+  margin-top: 20px;
+  color: #6d7d8b;
+}
+.getButton {
+  width: 128px;
+  height: 56px;
+  opacity: 50%;
+  font-size: 18px;
+  font-family: "Mulish", sans-serif;
+  color: white;
+  background: none;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid white;
+}
+
+.changeButton {
+  width: 128px;
+  height: 56px;
+  font-size: 18px;
+  font-family: "Mulish", sans-serif;
+  color: blue;
+  background: #4da0fd;
+  opacity: 42%;
+  margin-top: 4px;
+  border-radius: 6px;
+  border: 1px solid blue;
 }

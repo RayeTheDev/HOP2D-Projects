@@ -1,6 +1,6 @@
-import "./css/review.module.css"
+import "./css/review.css"
 import { useState } from "react";
-import { FiStar } from "react-icons/fi";
+
 
 const Od = (props) => {
   const [star1, setStar1] = useState(false);

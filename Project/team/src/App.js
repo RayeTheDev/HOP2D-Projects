@@ -6,21 +6,23 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import { Review, News, Team, Header } from "./component";
+import { Review, News, Team, Header, Products, Services } from "./component";
 import rProfileImg from "./img/Ellipse.svg";
 import nHeadImg from "./img/Head.svg";
 import logo from "./img/logo.svg";
+import blackLogo from "./img/team.svg";
 import "./component/css/team.module.css";
 
 function App() {
   return (
+
     <BrowserRouter>
-      <Header image={logo} />
+      <Header image={logo} image2={blackLogo} />
       <Routes>
         <Route path="/" element={<Team />}></Route>
-        {/* <Route path="./products" element={<Products />}></Route>
-        <Route path="./services" element={<Services />}></Route>
-        <Route path="./contact" element={<Contact />}></Route>
+        <Route path="/products" element={<Products />}></Route>
+        <Route path="/services" element={<Services />}></Route>
+        {/* <Route path="./contact" element={<Contact />}></Route>
         <Route path="./login" element={<LogIn />}></Route>
         <Route path="./getaccess" element={<GetAccess />}></Route> */}
       </Routes>
@@ -38,7 +40,7 @@ function App() {
         text5="2nd January, 2022"
         image={nHeadImg}
         image2={rProfileImg}
-      
+
       /> */}
     </BrowserRouter>
   );
