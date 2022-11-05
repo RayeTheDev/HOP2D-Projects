@@ -6,7 +6,18 @@ import {
   Link,
   useParams,
 } from "react-router-dom";
-import { Review, News, Team, Header, Products, Services } from "./component";
+import {
+  Review,
+  News,
+  Team,
+  Header,
+  Products,
+  Services,
+  Contact,
+  Login,
+  GetAccess,
+  Blogs
+} from "./component";
 import rProfileImg from "./img/Ellipse.svg";
 import nHeadImg from "./img/Head.svg";
 import logo from "./img/logo.svg";
@@ -15,17 +26,20 @@ import "./component/css/team.module.css";
 
 function App() {
   return (
-
     <BrowserRouter>
-      <Header image={logo} image2={blackLogo} />
-      <Routes>
-        <Route path="/" element={<Team />}></Route>
-        <Route path="/products" element={<Products />}></Route>
-        <Route path="/services" element={<Services />}></Route>
-        {/* <Route path="./contact" element={<Contact />}></Route>
-        <Route path="./login" element={<LogIn />}></Route>
-        <Route path="./getaccess" element={<GetAccess />}></Route> */}
-      </Routes>
+      <div className="App">
+        <Header image={logo} image2={blackLogo} />
+        <Routes>
+          <Route path="/" element={<Team />}></Route>
+          <Route path="/blogs" element={<Blogs />}></Route>
+          <Route path="/products" element={<Products />}></Route>
+          <Route path="/services" element={<Services />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/getaccess" element={<GetAccess />}></Route>
+        </Routes>
+      </div>
+
       {/* <Review star={5}
         text=" Give everyone you work with—inside and outside your emoji, keep
         conversations focused in channels, and simplify all your communication
@@ -38,7 +52,7 @@ function App() {
         text3="Jane Cooper"
         text4="|"
         text5="2nd January, 2022"
-        image={nHeadImg}
+        image={nHeadImg}  
         image2={rProfileImg}
 
       /> */}

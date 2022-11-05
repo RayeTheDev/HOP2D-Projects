@@ -8,6 +8,7 @@
   z-index: -1;
   display: flex;
   align-items: center;
+  scroll-behavior: smooth;
   /* background-size: 100% 100%; */
 }
 .innerContainer {
@@ -15,7 +16,7 @@
   width: 30%;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid black; */
+
 }
 .title {
   color: white;
@@ -50,4 +51,61 @@ button {
   border: none;
   color: white;
   border-radius: 5px;
+}
+.ContainerSecond {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  z-index: -1;
+  display: flex;
+  align-items: center;
+}
+
+.inner2Container {
+  margin-left: 300px;
+  width: 30%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+.titleSecond {
+  color: black;
+  font-family: "Work Sans", sans-serif;
+  font-size: 48px;
+  font-weight: bold;
+  line-height: 1.4;
+}
+.textSecond {
+  color: #182d40;
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+
+  line-height: 1.7;
+}
+.bottomCont {
+  gap: 50px;
+}
+.bottomSecond {
+  color: #4da0fd;
+  font-family: "Mulish", sans-serif;
+  font-size: 16px;
+  font-weight: bold;
+  text-decoration: underline;
+}
+.arrow {
+  font-weight: bold;
+  color: #4da0fd;
+}
+.imgCont {
+  position: relative;
+}
+.teamhubImg {
+  width: 1179px;
+  height: 705px;
+}
+.miniCardImg {
+  position: absolute;
+  top: 9.3%;
+  left: 12%;
 }

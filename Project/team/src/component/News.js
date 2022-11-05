@@ -1,4 +1,4 @@
-import "./css/news.module.css"
+import "./css/news.css"
 export const News = (props) => {
   return (
     <div className="nContainer">

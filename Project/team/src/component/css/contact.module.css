@@ -1,0 +1,16 @@
+.Container {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: -1;
+  }
+  
+  .middle {
+    font-size: 100px;
+    font-family: "Mulish", sans-serif;
+    font-weight: bold;
+  }
+  
