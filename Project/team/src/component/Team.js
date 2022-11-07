@@ -36,10 +36,10 @@ export const Team = (props) => {
             Your Hub for <br /> teamwork
           </div>
           <div className={styles.textSecond}>
-            Give everyone you work with—inside and outside your <br />
+            Give everyone you work with—inside and outside your
             company—a more productive way to stay in sync.
-            <br /> Respond faster with emoji, keep conversations focused <br />{" "}
-            in channels, and simplify all your communication into <br />
+            Respond faster with emoji, keep conversations focused
+            in channels, and simplify all your communication into
             one place.
           </div>
           <div className={styles.bottomCont}>
