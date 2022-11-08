@@ -78,7 +78,7 @@ export const Review = (props) => {
       </div>
       <div className="rProfileContainer">
         <img src={props.image} className="rProfileImg" />
-        <span className="rProfileName">Amy Klassen</span>
+        <span className="rProfileName">{props.name}</span>
       </div>
     </div>
   );

@@ -59,6 +59,7 @@ button {
   z-index: -1;
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 .inner2Container {
@@ -99,6 +100,7 @@ button {
 }
 .imgCont {
   position: relative;
+
 }
 .teamhubImg {
   width: 1179px;
@@ -108,4 +110,51 @@ button {
   position: absolute;
   top: 9.3%;
   left: 12%;
+}
+
+.inner3Container {
+  width: 30%;
+  gap: 20px;
+  display: flex;
+  flex-direction: column;
+
+}
+.maskImg {
+  width: 658px;
+  height: 600px;
+}
+.imgCont2 {
+  display: flex;
+  justify-content: flex-start;
+}
+.botTitle {
+  font-size: 60px;
+  font-family: "Mulish", sans-serif;
+  font-weight: bold;
+}
+
+.titleCont {
+  display: flex;
+  justify-content: center;
+}
+.ContainerBottom {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.cardCont {
+  overflow: scroll;
+  gap: 5%;
+  display: flex;  
+  width: 100%;
+
+  padding-left: 10%;
+  flex-direction: row;
+
+  align-items: center;
+  height: 500px;
+
 }
