@@ -10,7 +10,7 @@ import rProfileImg from "../img/Ellipse.svg";
 import nHeadImg from "../img/Head.svg";
 
 
-const img=[rProfileImg, nHeadImg]
+const img = [rProfileImg, nHeadImg]
 
 // import Form from 'react-bootstrap/Form';
 // import InputGroup from 'react-bootstrap/InputGroup';
@@ -104,12 +104,12 @@ export const Team = (props) => {
 
       <div className={styles.ContainerBottom}>
         <div className={styles.titleCont}>
-           <span className={styles.botTitle}>What people say about us</span>
+          <span className={styles.botTitle}>What people say about us</span>
         </div>
         <div className={styles.cardCont}>
           {Card.map((data, index) => {
-            return(
-              <Review key={data + index} text={data.text} image={img[data.image]} name={data.name}/>
+            return (
+              <Review key={data + index} text={data.text} image={img[data.image]} name={data.name} />
             )
           })}
 

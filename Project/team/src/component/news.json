@@ -5,8 +5,8 @@
     "text3": "Jane Cooper",
     "text4": "|",
     "text5": "2nd January, 2022",
-    "image": 1,
-    "image2": 2
+    "image": 0,
+    "image2": 1
   },
   {
     "text1": " Data-Driven Design is Killing Our Instincts",
@@ -14,8 +14,8 @@
     "text3": "Jane Cooper",
     "text4": "|",
     "text5": "2nd January, 2022",
-    "image": "../img/Head.svg",
-    "image2": "../img/Ellipse.svg"
+    "image": 0,
+    "image2": 1
   },
   {
     "text1": " Data-Driven Design is Killing Our Instincts",
@@ -23,8 +23,8 @@
     "text3": "Jane Cooper",
     "text4": "|",
     "text5": "2nd January, 2022",
-    "image": "../img/Head.svg",
-    "image2": "../img/Ellipse.svg"
+    "image": 0,
+    "image2": 1
   },
   {
     "text1": " Data-Driven Design is Killing Our Instincts",
@@ -32,7 +32,25 @@
     "text3": "Jane Cooper",
     "text4": "|",
     "text5": "2nd January, 2022",
-    "image": "../img/Head.svg",
-    "image2": "../img/Ellipse.svg"
+    "image": 0,
+    "image2": 1
+  },
+  {
+    "text1": " Data-Driven Design is Killing Our Instincts",
+    "text2": "Our latest updates and blogs about managing your team",
+    "text3": "Jane Cooper",
+    "text4": "|",
+    "text5": "2nd January, 2022",
+    "image": 0,
+    "image2": 1
+  },
+  {
+    "text1": " Data-Driven Design is Killing Our Instincts",
+    "text2": "Our latest updates and blogs about managing your team",
+    "text3": "Jane Cooper",
+    "text4": "|",
+    "text5": "2nd January, 2022",
+    "image": 0,
+    "image2": 1
   }
 ]
