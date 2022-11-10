@@ -1,6 +1,7 @@
-import "./css/review.css"
+import "./css/review.css";
 import { useState } from "react";
-
+import { useContext } from "react";
+import { ThemeContext } from "../App";
 
 const Od = (props) => {
   const [star1, setStar1] = useState(false);
@@ -8,11 +9,11 @@ const Od = (props) => {
   const [star3, setStar3] = useState(false);
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
-  console.log(props.num);
+  
   return (
     <>
       <span
-        className={star1 === true ? "fa fa-star checked" : "fa fa-star"}
+        className={props.num >= 1 ? "fa fa-star checked" : "fa fa-star"}
         onClick={() => (
           setStar1(true),
           setStar5(false),
@@ -22,7 +23,7 @@ const Od = (props) => {
         )}
       ></span>
       <span
-        className={star2 === true ? "fa fa-star checked" : "fa fa-star"}
+        className={props.num >= 2 ? "fa fa-star checked" : "fa fa-star"}
         onClick={() => (
           setStar2(true),
           setStar1(true),
@@ -32,7 +33,7 @@ const Od = (props) => {
         )}
       ></span>
       <span
-        className={star3 === true ? "fa fa-star checked" : "fa fa-star"}
+        className={props.num >= 3 ? "fa fa-star checked" : "fa fa-star"}
         onClick={() => (
           setStar3(true),
           setStar2(true),
@@ -42,7 +43,7 @@ const Od = (props) => {
         )}
       ></span>
       <span
-        className={star4 === true ? "fa fa-star checked" : "fa fa-star"}
+        className={props.num >= 4 ? "fa fa-star checked" : "fa fa-star"}
         onClick={() => (
           setStar4(true),
           setStar3(true),
@@ -52,7 +53,7 @@ const Od = (props) => {
         )}
       ></span>
       <span
-        className={star5 === true ? "fa fa-star checked" : "fa fa-star"}
+        className={props.num >= 5 ? "fa fa-star checked" : "fa fa-star"}
         onClick={() => (
           setStar5(true),
           setStar4(true),
@@ -66,19 +67,28 @@ const Od = (props) => {
 };
 
 export const Review = (props) => {
+  const { theme, changeDarkTheme } = useContext(ThemeContext);
   return (
-    <div className="rContainer">
+    <div className={theme.pallate.dark ? "rContainer rBorder" : "rContainer"}>
       <div>
         <div className="rStarContainer">
           <Od num={props.star}></Od>
         </div>
         <div className="rTextContainer">
-          <p className="rText">{props.text}</p>
+          <p className={theme.pallate.dark ? "rText rWhite" : "rText"}>
+            {props.text}
+          </p>
         </div>
       </div>
       <div className="rProfileContainer">
         <img src={props.image} className="rProfileImg" />
-        <span className="rProfileName">{props.name}</span>
+        <span
+          className={
+            theme.pallate.dark ? "rProfileName rWhite" : "rProfileName"
+          }
+        >
+          {props.name}
+        </span>
       </div>
     </div>
   );

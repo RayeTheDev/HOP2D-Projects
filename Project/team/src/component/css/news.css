@@ -34,6 +34,9 @@
   font-size: 14px;
   opacity: 80%;
 }
+.nTextWhite {
+  color: white
+}
 
 .nTextContainer2 {
   width: 310px;

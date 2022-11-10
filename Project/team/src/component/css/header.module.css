@@ -1,17 +1,33 @@
 .hContainer {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   justify-content: space-around;
+  transition: 500ms;
+  
+}
+
+.hContainerBg {
+  position: fixed;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: #101820FF;
+  padding-bottom: 14px;
+  transition: 500ms;
+
 }
 
 .textsContainer {
   display: flex;
   gap: 30px;
-  /* padding-top: 15px; */
+  padding-top: 7px;
 }
 .img {
   vertical-align: top;
@@ -61,4 +77,8 @@
 }
 .changeButton:hover {
   opacity: 80%;
+}
+.Form {
+  display: flex;
+  align-items: center;
 }

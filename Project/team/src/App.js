@@ -1,11 +1,5 @@
 import "./App.css";
-import {
-  BrowserRouter,
-  Routes,
-  Route,
-  Link,
-  useParams,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {
   Review,
   News,
@@ -16,47 +10,43 @@ import {
   Contact,
   Login,
   GetAccess,
-  Blogs
+  Blogs,
 } from "./component";
-import rProfileImg from "./img/Ellipse.svg";
-import nHeadImg from "./img/Head.svg";
+import { createContext, useState } from "react";
 import logo from "./img/logo.svg";
 import blackLogo from "./img/team.svg";
 import "./component/css/team.module.css";
 
+
+export const ThemeContext = createContext({});
 function App() {
+  const [theme, setTheme] = useState({
+    pallate: {
+      dark: false,
+    },
+  });
+
+  const changeDarkTheme = () => {
+    setTheme({ ...theme, pallate: { dark: !theme.pallate.dark } });
+  };
+
   return (
-    <BrowserRouter>
-      <div className="App">
-        <Header image={logo} image2={blackLogo} />
-        <Routes>
-          <Route path="/" element={<Team />}></Route>
-          <Route path="/blogs" element={<Blogs />}></Route>
-          <Route path="/products" element={<Products />}></Route>
-          <Route path="/services" element={<Services />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/getaccess" element={<GetAccess />}></Route>
-        </Routes>
-      </div>
-
-      {/* <Review star={5}
-        text=" Give everyone you work with—inside and outside your emoji, keep
-        conversations focused in channels, and simplify all your communication
-        into one place."
-        image={rProfileImg}
-      />
-      <News
-        text1="  Data-Driven Design is Killing Our Instincts"
-        text2="Our latest updates and blogs about managing your team"
-        text3="Jane Cooper"
-        text4="|"
-        text5="2nd January, 2022"
-        image={nHeadImg}  
-        image2={rProfileImg}
-
-      /> */}
-    </BrowserRouter>
+    <ThemeContext.Provider value={{ theme, changeDarkTheme, data: "string" }}>
+      <BrowserRouter>
+        <div className="App">
+          <Header image={logo} image2={blackLogo} />
+          <Routes>
+            <Route path="/" element={<Team />}></Route>
+            <Route path="/blogs" element={<Blogs />}></Route>
+            <Route path="/products" element={<Products />}></Route>
+            <Route path="/services" element={<Services />}></Route>
+            <Route path="/contact" element={<Contact />}></Route>
+            <Route path="/login" element={<Login />}></Route>
+            <Route path="/getaccess" element={<GetAccess />}></Route>
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </ThemeContext.Provider>
   );
 }
 export default App;

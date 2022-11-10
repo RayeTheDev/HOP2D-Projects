@@ -4,47 +4,76 @@ import meetings from "../img/meetings.svg";
 import miniCard from "../img/miniCard.svg";
 import mask from "../img/mask.svg";
 import mask2 from "../img/mask2.svg";
-import Card from './card.json'
+import Button from "react-bootstrap/Button";
+import Container from "react-bootstrap/Container";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Card from "./card.json";
 import { Review } from "./Review";
 import rProfileImg from "../img/Ellipse.svg";
 import nHeadImg from "../img/Head.svg";
+import { useContext } from "react";
+import { ThemeContext } from "../App";
 
-
-const img = [rProfileImg, nHeadImg]
+const img = [rProfileImg, nHeadImg];
 
 // import Form from 'react-bootstrap/Form';
 // import InputGroup from 'react-bootstrap/InputGroup';
 // import Button from 'react-bootstrap/Button';
 
 export const Team = (props) => {
+  const { theme, changeDarkTheme } = useContext(ThemeContext);
   return (
     <>
       <div className={styles.Container}>
-        <div className={styles.innerContainer}>
-          <span className={styles.title}>
-            Instant collaborations
+        <Container>
+          <div className={styles.innerContainer}>
+            <span className={styles.title}>
+              Instant collaborations
+              <br />
+              for remote teams
+            </span>
+            <span className={styles.texts}>
+              All in one for your remote team chats,
+              <br />
+              collaboration and track projects
+            </span>
             <br />
-            for remote teams
-          </span>
-          <span className={styles.texts}>
-            All in one for your remote team chats,
-            <br />
-            collaboration and track projects
-          </span>
-          <br />
-          <div className={styles.input}>
-            <input type="text" placeholder="Email" />
-            <button>Get Early Access</button>
+            <div className={styles.inputCont}>
+              <input type="text" placeholder="Email" />
+              {/* <button>Get Early Access</button> */}
+              <Button className={styles.button} variant="info">
+                Get Early Access
+              </Button>
+            </div>
           </div>
-        </div>
+        </Container>
       </div>
 
-      <div className={styles.ContainerSecond}>
+      <div
+        className={
+          theme.pallate.dark
+            ? `${styles.ContainerSecond} ${styles.dark}`
+            : styles.ContainerSecond
+        }
+      >
         <div className={styles.inner2Container}>
-          <div className={styles.titleSecond}>
+          <div
+            className={
+              theme.pallate.dark
+                ? `${styles.titleSecond} ${styles.textWhite}`
+                : `${styles.titleSecond} ${styles.textDefault}`
+            }
+          >
             Your Hub for <br /> teamwork
           </div>
-          <div className={styles.textSecond}>
+          <div
+            className={
+              theme.pallate.dark
+                ? `${styles.textSecond} ${styles.textWhite}`
+                : `${styles.textSecond} ${styles.textDefault}`
+            }
+          >
             Give everyone you work with—inside and outside your company—a more
             productive way to stay in sync. Respond faster with emoji, keep
             conversations focused in channels, and simplify all your
@@ -62,13 +91,33 @@ export const Team = (props) => {
         </div>
       </div>
 
-      <div className={styles.ContainerSecond}>
+      <div
+        className={
+          theme.pallate.dark
+            ? `${styles.ContainerSecond} ${styles.dark}`
+            : styles.ContainerSecond
+        }
+      >
         <div className={styles.imgCont2}>
           <img src={mask} className={styles.maskImg} />
         </div>
         <div className={styles.inner3Container}>
-          <div className={styles.titleSecond}>Simple task management</div>
-          <div className={styles.textSecond}>
+          <div
+            className={
+              theme.pallate.dark
+                ? `${styles.titleSecond} ${styles.textWhite}`
+                : `${styles.titleSecond} ${styles.textDefault}`
+            }
+          >
+            Simple task management
+          </div>
+          <div
+            className={
+              theme.pallate.dark
+                ? `${styles.textSecond} ${styles.textWhite}`
+                : `${styles.textSecond} ${styles.textDefault}`
+            }
+          >
             Give everyone you work with—inside and outside your company—a more
             productive way to stay in sync. Respond faster with emoji, keep
             conversations focused in channels, and simplify all your
@@ -81,12 +130,30 @@ export const Team = (props) => {
         </div>
       </div>
 
-      <div className={styles.ContainerSecond}>
+      <div
+        className={
+          theme.pallate.dark
+            ? `${styles.ContainerSecond} ${styles.dark}`
+            : styles.ContainerSecond
+        }
+      >
         <div className={styles.inner3Container}>
-          <div className={styles.titleSecond}>
+          <div
+            className={
+              theme.pallate.dark
+                ? `${styles.titleSecond} ${styles.textWhite}`
+                : `${styles.titleSecond} ${styles.textDefault}`
+            }
+          >
             Scheduling that actually works
           </div>
-          <div className={styles.textSecond}>
+          <div
+            className={
+              theme.pallate.dark
+                ? `${styles.textSecond} ${styles.textWhite}`
+                : `${styles.textSecond} ${styles.textDefault}`
+            }
+          >
             Give everyone you work with—inside and outside your company—a more
             productive way to stay in sync. Respond faster with emoji, keep
             conversations focused in channels, and simplify all your
@@ -102,17 +169,36 @@ export const Team = (props) => {
         </div>
       </div>
 
-      <div className={styles.ContainerBottom}>
+      <div
+        className={
+          theme.pallate.dark
+            ? `${styles.ContainerBottom} ${styles.dark}`
+            : styles.ContainerBottom
+        }
+      >
         <div className={styles.titleCont}>
-          <span className={styles.botTitle}>What people say about us</span>
+          <span
+            className={
+              theme.pallate.dark
+                ? `${styles.titleSecond} ${styles.textWhite}`
+                : `${styles.titleSecond} ${styles.textDefault}`
+            }
+          >
+            What people say about us
+          </span>
         </div>
         <div className={styles.cardCont}>
           {Card.map((data, index) => {
             return (
-              <Review key={data + index} text={data.text} image={img[data.image]} name={data.name} />
-            )
+              <Review
+                key={data + index}
+                text={data.text}
+                image={img[data.image]}
+                name={data.name}
+                star={data.star}
+              />
+            );
           })}
-
         </div>
       </div>
     </>

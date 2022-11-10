@@ -4,16 +4,18 @@
   position: relative;
   background-image: url(../../img/background.svg);
   background-repeat: no-repeat;
+  background-position: 100%;
   background-size: cover;
+
   z-index: -1;
   display: flex;
   align-items: center;
   scroll-behavior: smooth;
-  /* background-size: 100% 100%; */
+  
 }
 .innerContainer {
-  margin-left: 300px;
-  width: 30%;
+  /* margin-left: 300px; */
+  /* width: 30%; */
   display: flex;
   flex-direction: column;
 
@@ -32,7 +34,7 @@
 .form-control {
   width: 100px;
 }
-.input {
+.inputCont {
   display: flex;
   margin-top: 50px;
   gap: 20px;
@@ -43,7 +45,7 @@ input {
   padding-left: 20px;
   font-family: "Mulish", sans-serif;
 }
-button {
+/* button {
   width: 161px;
   height: 56px;
   background-color: #0bbef2;
@@ -51,6 +53,15 @@ button {
   border: none;
   color: white;
   border-radius: 5px;
+} */
+.input {
+  width: 10px;
+  height: 50px;
+}
+.button {
+  color: white;
+  font-weight: bold;
+  font-family: "Mulish", sans-serif;
 }
 .ContainerSecond {
   width: 100vw;
@@ -60,8 +71,19 @@ button {
   display: flex;
   align-items: center;
   justify-content: space-around;
+  transition: 500ms;
 }
 
+.dark {
+  background-color: black;
+  transition: 500ms;
+}
+.textWhite {
+  color: white
+}
+.textDefault {
+ color: #182d40;
+}
 .inner2Container {
   margin-left: 300px;
   width: 30%;
@@ -71,14 +93,13 @@ button {
 
 }
 .titleSecond {
-  color: black;
   font-family: "Work Sans", sans-serif;
   font-size: 48px;
   font-weight: bold;
   line-height: 1.4;
 }
 .textSecond {
-  color: #182d40;
+ 
   font-family: "Mulish", sans-serif;
   font-size: 18px;
 
@@ -143,7 +164,8 @@ button {
   display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-evenly;
+  /* justify-content: center; */
 }
 .cardCont {
   overflow: scroll;

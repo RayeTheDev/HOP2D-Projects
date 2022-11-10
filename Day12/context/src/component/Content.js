@@ -15,7 +15,7 @@ export const Content = () => {
     <div className="Container">
       <label class="switch">
         <input type="checkbox" onClick={changeDarkTheme }/>
-        <span class="slider round"></span>
+        <span class="slider round"></span>  
       </label>
       <h1 style={{ color: theme.pallate.dark ? "white" : "black" }}>Hello</h1>
     </div>

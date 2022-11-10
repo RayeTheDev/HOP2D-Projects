@@ -34,7 +34,12 @@
   margin: 0;
   line-height: 2;
 }
-
+.rWhite {
+  color: white;
+}
+.rBorder {
+  border: 1px solid white;
+}
 .rProfileContainer {
   display: flex;
   /* margin-top: 60px; */
