@@ -5,6 +5,7 @@ import { useLocation } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useContext } from "react";
 import { ThemeContext } from "../App.js";
+import { GoThreeBars } from 'react-icons/go'
 
 export const Header = (props) => {
   let elem = document.getElementById("header");
@@ -16,26 +17,6 @@ export const Header = (props) => {
   const [bg, setBg] = useState(false);
 
 
-  // const handleScroll = () => {
-  //   setPos(rect.current.getBoundingClientRect().y)
-  //   console.log(pos);
-  //   if (!rect.current) return;
-  //   if (rect.current.getBoundingClientRect().y === -10) {
-  //     setBg(false);
-  //   } else {
-      
-  //     setBg(true);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   window.addEventListener("scroll", handleScroll);
-
-  //   return () => {
-  //     window.removeEventListener("scroll", () => handleScroll);
-  //   };
-  // }, []);
-
   useEffect(() => {
     if (location.pathname !== "/") {
       setCss(true);
@@ -46,7 +27,7 @@ export const Header = (props) => {
 
   function setFix() {
     console.log(window.scrollY)
-    if(window.scrollY <= 338) {
+    if (window.scrollY <= 338) {
       setBg(false);
     } else {
       setBg(true);
@@ -54,7 +35,7 @@ export const Header = (props) => {
   }
   window.addEventListener("scroll", setFix)
   return (
-    <div  className={bg ? styles.hContainerBg : styles.hContainer}>
+    <div className={bg ? styles.hContainerBg : styles.hContainer}>
       <Link to="/">
         <img className={styles.img} src={css ? props.image2 : props.image} />
       </Link>
@@ -87,7 +68,9 @@ export const Header = (props) => {
             Get Access
           </button>
         </Link>
+
       </div>
+      <GoThreeBars className={css ? `${styles.bar3} ${styles.barChange}` : styles.bar3} />
     </div>
   );
 };

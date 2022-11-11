@@ -14,15 +14,15 @@ export const Blogs = () => {
 
   return (
     <div
-      className={ theme.pallate.dark ? styles.ContainerDark : styles.Container}
+      className={theme.pallate.dark ? styles.ContainerDark : styles.Container}
     >
       <div className={styles.titleCont}>
         <span className={theme.pallate.dark
-                ? `${styles.title} ${styles.textWhite}`
-                : `${styles.title} ${styles.titleDefault}`}> Blog Posts</span>
+          ? `${styles.title} ${styles.textWhite}`
+          : `${styles.title} ${styles.titleDefault}`}> Blog Posts</span>
         <span className={theme.pallate.dark
-                ? `${styles.text} ${styles.textWhite}`
-                : `${styles.text} ${styles.textDefault}`}>
+          ? `${styles.text} ${styles.textWhite}`
+          : `${styles.text} ${styles.textDefault}`}>
           Our latest updates and blogs about managing your team
         </span>
       </div>

@@ -7,7 +7,7 @@
   align-items: center;
   justify-content: space-around;
   transition: 500ms;
-  
+  z-index: 10;
 }
 
 .hContainerBg {
@@ -18,10 +18,10 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
-  background-color: #101820FF;
+  background-color: #101820ff;
   padding-bottom: 14px;
   transition: 500ms;
-
+  z-index: 10;
 }
 
 .textsContainer {
@@ -81,4 +81,53 @@
 .Form {
   display: flex;
   align-items: center;
+  padding-top: 4px;
+}
+.bar3 {
+  font-size: 35px;
+  color: white;
+  display: none;
+}
+.barChange {
+  color: #6d7d8b;
+}
+
+@media only screen and (max-width: 992px) {
+  .hContainer {
+    width: 100%;
+  }
+  .hContainerBg {
+    width: 100%;
+  }
+  .texts {
+    font-size: 16px;
+  }
+  .textsContainer {
+    gap: 15px;
+  }
+  .getButton {
+    width: 100px;
+    height: 49px;
+    font-size: 16px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .hContainer {
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 40px;
+  }
+  .hContainerBg {
+    justify-content: space-between;
+    padding-left: 40px;
+    padding-right: 20px;
+  }
+  .textsContainer {
+    display: none;
+  }
+  .bar3 {
+    display: flex;
+    margin-top: 10px;
+  }
 }

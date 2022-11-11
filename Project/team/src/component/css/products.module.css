@@ -7,9 +7,14 @@
   justify-content: center;
   z-index: -1;
 }
-
+.Dark {
+  background-color: black;
+}
 .middle {
   font-size: 100px;
   font-family: "Mulish", sans-serif;
   font-weight: bold;
+}
+.textWhite {
+  color: white;
 }

@@ -41,7 +41,7 @@ export const Team = (props) => {
             <br />
             <div className={styles.inputCont}>
               <input type="text" placeholder="Email" />
-              {/* <button>Get Early Access</button> */}
+
               <Button className={styles.button} variant="info">
                 Get Early Access
               </Button>
@@ -57,6 +57,7 @@ export const Team = (props) => {
             : styles.ContainerSecond
         }
       >
+
         <div className={styles.inner2Container}>
           <div
             className={
@@ -65,7 +66,7 @@ export const Team = (props) => {
                 : `${styles.titleSecond} ${styles.textDefault}`
             }
           >
-            Your Hub for <br /> teamwork
+            Your Hub for teamwork
           </div>
           <div
             className={
@@ -84,11 +85,13 @@ export const Team = (props) => {
             <BsArrowRight className={styles.arrow} />
           </div>
         </div>
+
         <div className={styles.imgCont}>
           <img src={miniCard} className={styles.miniCardImg} />
           <img src={meetings} className={styles.teamhubImg} />
-          {/* <img src={teamhub}/> */}
+
         </div>
+
       </div>
 
       <div
@@ -98,6 +101,7 @@ export const Team = (props) => {
             : styles.ContainerSecond
         }
       >
+
         <div className={styles.imgCont2}>
           <img src={mask} className={styles.maskImg} />
         </div>
@@ -128,6 +132,7 @@ export const Team = (props) => {
             <BsArrowRight className={styles.arrow} />
           </div>
         </div>
+
       </div>
 
       <div
@@ -137,6 +142,7 @@ export const Team = (props) => {
             : styles.ContainerSecond
         }
       >
+
         <div className={styles.inner3Container}>
           <div
             className={
