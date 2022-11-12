@@ -145,15 +145,55 @@ input {
   justify-content: space-evenly;
 }
 .cardCont {
-  overflow: scroll;
-  gap: 5%;
+  overflow: hidden;
   display: flex;
-  width: 100%;
-  padding-left: 10%;
-  flex-direction: row;
+  width: 100vw;
+  /* padding-left: 10%; */
+  padding-top: 5%;
+  flex-direction: column;
   align-items: center;
   height: 500px;
 }
+.cards {
+  width: 100%;
+  display: flex;  
+  gap: 5%;
+}
+.footerCont {
+  width: 100vw;
+  height: 27vw;
+  background-color: #182d40;
+  display: flex;
+  justify-content: space-between;
+}
+
+.socialCont {
+  display: flex;
+  flex-direction: column;
+  gap:20px
+}
+.logo {
+  width: 100px;
+}
+.textCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 60%;
+}
+.textDiv {
+  gap: 10px;
+}
+.icons {
+  font-size: 30px;
+  color: white;
+}
+.footerText {
+  font-size: 20px;
+  font-family: 'Mulish', sans-serif;
+  color: white;
+}
+
 
 /* Media querry */
 
@@ -267,11 +307,11 @@ input {
   input {
     width: 250px;
     height: 45px;
-    font-size: 16px;
+    font-size: 13px;
   }
   .button {
     height: 45px;
-    font-size: 16px;
+    font-size: 13px;
   }
   .imgCont {
     display: none;

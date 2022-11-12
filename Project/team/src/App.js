@@ -11,6 +11,7 @@ import {
   Login,
   GetAccess,
   Blogs,
+  Footer
 } from "./component";
 import { createContext, useState } from "react";
 import logo from "./img/logo.svg";
@@ -44,6 +45,8 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/getaccess" element={<GetAccess />}></Route>
           </Routes>
+
+          <Footer />
         </div>
       </BrowserRouter>
     </ThemeContext.Provider>

@@ -130,4 +130,17 @@
     display: flex;
     margin-top: 10px;
   }
+  .img {
+    width: 100px;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .bar3 {
+   font-size: 30px;
+   margin-top: 12px;
+  }
+  .img {
+    width: 85px;
+  }
 }

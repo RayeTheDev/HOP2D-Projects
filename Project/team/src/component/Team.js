@@ -6,23 +6,55 @@ import mask from "../img/mask.svg";
 import mask2 from "../img/mask2.svg";
 import Button from "react-bootstrap/Button";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
 import Card from "./card.json";
 import { Review } from "./Review";
 import rProfileImg from "../img/Ellipse.svg";
 import nHeadImg from "../img/Head.svg";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { ThemeContext } from "../App";
-
+import Logo from "../img/logo.svg";
+import { BsInstagram } from "react-icons/bs";
+import { useState } from "react";
+import axios from 'axios'
 const img = [rProfileImg, nHeadImg];
-
-// import Form from 'react-bootstrap/Form';
-// import InputGroup from 'react-bootstrap/InputGroup';
-// import Button from 'react-bootstrap/Button';
 
 export const Team = (props) => {
   const { theme, changeDarkTheme } = useContext(ThemeContext);
+  const [pos, setPos] = useState(0);
+  const [ind, setInd] = useState(0);
+  const baseUrl =  'https://dummyapi.io/data/v1/';
+
+
+  useEffect(() => {
+    axios.get(baseUrl + 'user', {
+      headers: {
+        "app-id": " 636f2fc4e8d0ff392b3fc559",
+      }
+    })
+    .then((res) => {
+      console.log(res.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
+
+
+
+
+  const goRight = (index) => {
+    console.log(pos);
+    if (pos <= Card.length) {
+      setPos((prev) => prev + 1);
+    }
+  };
+  const goLeft = () => {
+    if(pos >= 0) {
+       setPos((prev) => prev - 1);
+    }
+   
+  };
+
   return (
     <>
       <div className={styles.Container}>
@@ -57,7 +89,6 @@ export const Team = (props) => {
             : styles.ContainerSecond
         }
       >
-
         <div className={styles.inner2Container}>
           <div
             className={
@@ -89,9 +120,7 @@ export const Team = (props) => {
         <div className={styles.imgCont}>
           <img src={miniCard} className={styles.miniCardImg} />
           <img src={meetings} className={styles.teamhubImg} />
-
         </div>
-
       </div>
 
       <div
@@ -101,7 +130,6 @@ export const Team = (props) => {
             : styles.ContainerSecond
         }
       >
-
         <div className={styles.imgCont2}>
           <img src={mask} className={styles.maskImg} />
         </div>
@@ -132,7 +160,6 @@ export const Team = (props) => {
             <BsArrowRight className={styles.arrow} />
           </div>
         </div>
-
       </div>
 
       <div
@@ -142,7 +169,6 @@ export const Team = (props) => {
             : styles.ContainerSecond
         }
       >
-
         <div className={styles.inner3Container}>
           <div
             className={
@@ -182,6 +208,7 @@ export const Team = (props) => {
             : styles.ContainerBottom
         }
       >
+        
         <div className={styles.titleCont}>
           <span
             className={
@@ -194,18 +221,33 @@ export const Team = (props) => {
           </span>
         </div>
         <div className={styles.cardCont}>
-          {Card.map((data, index) => {
-            return (
-              <Review
-                key={data + index}
-                text={data.text}
-                image={img[data.image]}
-                name={data.name}
-                star={data.star}
-              />
-            );
-          })}
+          <div
+            style={{
+              transform: `translateX(${-10 * pos}%)`,
+              transition: "300ms",
+            }}
+            className={styles.cards}
+          >
+            {Card.map((data, index) => {
+              return (
+                <Review
+                  index={index}
+                  key={data + index}
+                  text={data.text}
+                  image={img[data.image]}
+                  name={data.name}
+                  star={data.star}y
+                />
+              );
+            })}
+          </div>
         </div>
+        <div>
+           <Button onClick={goLeft}>Left</Button>
+        <Button onClick={goRight}>Right</Button>
+        </div>
+       
+
       </div>
     </>
   );

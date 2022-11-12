@@ -7,8 +7,8 @@
   flex-direction: column;
 }
 .nHeadImg {
-  width: 379px;
-  /* height: 147px; */
+  width: 100%;
+  height: 147px;
   border-top-left-radius: 34px;
   border-top-right-radius: 34px;
 }

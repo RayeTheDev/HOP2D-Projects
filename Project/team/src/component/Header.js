@@ -15,6 +15,7 @@ export const Header = (props) => {
   const [css, setCss] = useState(false);
   let location = useLocation();
   const [bg, setBg] = useState(false);
+  const [afterHeader, setAfterHeader] = useState(false)
 
 
   useEffect(() => {
@@ -26,18 +27,20 @@ export const Header = (props) => {
   }, [location]);
 
   function setFix() {
-    console.log(window.scrollY)
-    if (window.scrollY <= 338) {
+    // console.log(window.scrollY)
+    if (window.scrollY <= 0) {
       setBg(false);
+      setAfterHeader(false)
     } else {
       setBg(true);
+      setAfterHeader(true)
     }
   }
   window.addEventListener("scroll", setFix)
   return (
     <div className={bg ? styles.hContainerBg : styles.hContainer}>
       <Link to="/">
-        <img className={styles.img} src={css ? props.image2 : props.image} />
+        <img className={styles.img} src={css ?   props.image2 :  props.image} />
       </Link>
 
       <div className={styles.textsContainer}>
