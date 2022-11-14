@@ -1,11 +1,48 @@
+* {
+  font-family: "Mulish", sans-serif;
+}
+
 .Container {
-    width: 100%;
-    background-color: #182d40;
-    padding: 48px 0px;
+  width: 100%;
+  background-color: #182d40;
+  padding: 48px 0px;
+  z-index: 100;
+  /* position: absolute; */
+  /* bottom: 0; */
+  height: 50%;
 }
 
 .flexContainer {
-    display: flex;
-    justify-content: space-between;
-    color: white;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+}
+.img {
+  margin-bottom: 20px;
+}
+
+.secondaryColumn {
+  padding-top: 28px;
+}
+p:first-child {
+  margin-bottom: 26px;
+}
+
+input {
+  color: #182d40;
+}
+textarea:focus,
+input:focus {
+  outline: none;
+}
+::placeholder {
+  color: #4da0fd;
+}
+
+.lastRow {
+  padding-top: 20px;
+}
+
+.lastRow p {
+  font-size: 20px;
 }

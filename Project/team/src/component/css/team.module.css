@@ -156,7 +156,7 @@ input {
 }
 .cards {
   width: 100%;
-  display: flex;  
+  display: flex;
   gap: 5%;
 }
 .footerCont {
@@ -170,7 +170,7 @@ input {
 .socialCont {
   display: flex;
   flex-direction: column;
-  gap:20px
+  gap: 20px;
 }
 .logo {
   width: 100px;
@@ -190,10 +190,9 @@ input {
 }
 .footerText {
   font-size: 20px;
-  font-family: 'Mulish', sans-serif;
+  font-family: "Mulish", sans-serif;
   color: white;
 }
-
 
 /* Media querry */
 

@@ -46,7 +46,7 @@ function App() {
             <Route path="/getaccess" element={<GetAccess />}></Route>
           </Routes>
 
-          <Footer />
+          <Footer img={logo} />
         </div>
       </BrowserRouter>
     </ThemeContext.Provider>

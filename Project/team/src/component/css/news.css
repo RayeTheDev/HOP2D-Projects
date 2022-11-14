@@ -1,4 +1,5 @@
 .nContainer {
+  bottom: 0;
   width: 370px;
   height: 460px;
   border-radius: 34px;
@@ -35,7 +36,7 @@
   opacity: 80%;
 }
 .nTextWhite {
-  color: white
+  color: white;
 }
 
 .nTextContainer2 {

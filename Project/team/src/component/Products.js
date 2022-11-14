@@ -10,7 +10,6 @@ export const Products = () => {
     return (
         <div className={theme.pallate.dark ? `${styles.Container} ${styles.Dark}` : styles.Container}>
             <div className={theme.pallate.dark ? `${styles.middle} ${styles.textWhite}` : styles.middle}>PRODUCTS</div>
-
         </div>
     )
 }
