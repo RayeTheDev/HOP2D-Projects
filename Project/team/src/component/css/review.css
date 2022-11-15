@@ -53,6 +53,7 @@
 .rProfileImg {
   width: 56px;
   height: 56px;
+  border-radius: 30px;
 }
 .rProfileName {
   font-size: 18px;

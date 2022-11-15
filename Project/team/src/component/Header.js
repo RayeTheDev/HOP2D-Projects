@@ -5,18 +5,15 @@ import { useLocation } from "react-router-dom";
 import Form from "react-bootstrap/Form";
 import { useContext } from "react";
 import { ThemeContext } from "../App.js";
-import { GoThreeBars } from 'react-icons/go'
+import { GoThreeBars } from "react-icons/go";
+import { CiDark } from "react-icons/ci";
 
 export const Header = (props) => {
-  let elem = document.getElementById("header");
-  let rect = useRef(null);
 
   const { theme, changeDarkTheme } = useContext(ThemeContext);
   const [css, setCss] = useState(false);
   let location = useLocation();
   const [bg, setBg] = useState(false);
-  const [afterHeader, setAfterHeader] = useState(false)
-
 
   useEffect(() => {
     if (location.pathname !== "/") {
@@ -27,23 +24,22 @@ export const Header = (props) => {
   }, [location]);
 
   function setFix() {
-    // console.log(window.scrollY)
     if (window.scrollY <= 0) {
       setBg(false);
-      setAfterHeader(false)
     } else {
       setBg(true);
-      setAfterHeader(true)
     }
   }
-  window.addEventListener("scroll", setFix)
+  window.addEventListener("scroll", setFix);
+
   return (
     <div className={bg ? styles.hContainerBg : styles.hContainer}>
       <Link to="/">
-        <img className={styles.img} src={css ?   props.image2 :  props.image} />
+        <img className={styles.img} src={css ? props.image2 : props.image} />
       </Link>
 
       <div className={styles.textsContainer}>
+        <CiDark className={styles.darkIcon} />
         <Form className={styles.Form}>
           <Form.Check
             type="switch"
@@ -71,9 +67,10 @@ export const Header = (props) => {
             Get Access
           </button>
         </Link>
-
       </div>
-      <GoThreeBars className={css ? `${styles.bar3} ${styles.barChange}` : styles.bar3} />
+      <GoThreeBars
+        className={css ? `${styles.bar3} ${styles.barChange}` : styles.bar3}
+      />
     </div>
   );
 };

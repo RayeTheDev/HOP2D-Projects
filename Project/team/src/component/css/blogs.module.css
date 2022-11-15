@@ -1,11 +1,11 @@
 .Container {
   width: 100vw;
-  height: 100vh;
+  height: 200vh;
   display: flex;
-  position: relative;
+  /* position: relative;s */
   flex-direction: column;
   padding-top: 100px;
-  padding-left: 16%;
+  /* padding-left: 16%; */
   gap: 80px;
   transition: 500ms;
 }
@@ -17,7 +17,7 @@
   /* justify-content: center; */
   flex-direction: column;
   padding-top: 100px;
-  padding-left: 16%;
+  /* padding-left: 16%; */
   gap: 80px;
   background-color: black;
   transition: 500ms;
@@ -25,7 +25,6 @@
 .titleCont {
   display: flex;
   flex-direction: column;
-  /* margin-left: 16%; */
   gap: 10px;
 }
 .title {
@@ -55,6 +54,17 @@
 .blogsInnerCont {
   width: 1300px;
   display: flex;
+  padding-top: 40px;
   gap: 80px;
   flex-wrap: wrap;
+}
+
+.loader {
+  width: 100vw;
+  height: 50vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
 }

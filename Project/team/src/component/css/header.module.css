@@ -19,7 +19,7 @@
   align-items: center;
   justify-content: space-around;
   background-color: #101820ff;
-  padding-bottom: 14px;
+  padding-bottom: 13px;
   transition: 500ms;
   z-index: 10;
 }
@@ -27,23 +27,23 @@
 .textsContainer {
   display: flex;
   gap: 30px;
-  padding-top: 7px;
+  padding-top: 15px;
+  align-items: center;
 }
-.img {
+/* .img {
   vertical-align: top;
-}
+} */
 .texts {
   font-family: "Mulish", sans-serif;
   font-size: 18px;
   text-decoration: gray underline;
   color: white;
-  margin-top: 20px;
+
 }
 .change {
   font-family: "Mulish", sans-serif;
   font-size: 18px;
   text-decoration: gray underline;
-  margin-top: 20px;
   color: #6d7d8b;
 }
 .getButton {
@@ -54,7 +54,6 @@
   font-family: "Mulish", sans-serif;
   color: white;
   background: none;
-  margin-top: 6px;
   border-radius: 6px;
   border: 1px solid white;
 }
@@ -64,10 +63,10 @@
   height: 56px;
   font-size: 18px;
   font-family: "Mulish", sans-serif;
-  color: blue;
+  color: blue;  
   background: #4da0fd;
   opacity: 42%;
-  margin-top: 6px;
+  /* margin-top: 6px; */
   border-radius: 6px;
   border: 1px solid blue;
 }
@@ -91,6 +90,10 @@
 .barChange {
   color: #6d7d8b;
 }
+.darkIcon {
+  font-size: 30px;
+  color: white;
+  }
 
 @media only screen and (max-width: 992px) {
   .hContainer {

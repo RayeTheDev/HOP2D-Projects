@@ -23,7 +23,7 @@ export const News = (props) => {
           >fnidusfbosudhfoudshfsdfhdsouf</span>
           <span
             className={theme.pallate.dark ? "nText2 nTextWhite" : "nText2"}
-          >fiudsgfidsfvdsiyfbdisfbdis</span>
+          >fiudsgfidsfvdsiyfbdisfbdidsadasdasd dsadasdasds</span>
         </div>
       </div>
       <div className="nBottomContainer">

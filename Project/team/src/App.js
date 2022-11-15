@@ -37,7 +37,7 @@ function App() {
         <div className="App">
           <Header image={logo} image2={blackLogo} />
           <Routes>
-            <Route path="/" element={<Team />}></Route>
+            <Route path="/" element={<Team  />}></Route>
             <Route path="/blogs" element={<Blogs />}></Route>
             <Route path="/products" element={<Products />}></Route>
             <Route path="/services" element={<Services />}></Route>
@@ -45,7 +45,6 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/getaccess" element={<GetAccess />}></Route>
           </Routes>
-
           <Footer img={logo} />
         </div>
       </BrowserRouter>

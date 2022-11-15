@@ -9,12 +9,12 @@ export const Footer = (props) => {
 
                     <div>
                         <img className={styles.img} src={props.img}></img>
+                        <p>Instagram</p>
                         <p>Facebook</p>
+                        <p>Twitter</p>
+                        <p>Instagram</p>
                         <p>Facebook</p>
-                        <p>Facebook</p>
-                        <p>Facebook</p>
-                        <p>Facebook</p>
-                        <p>Facebook</p>
+                        <p>Twitter</p>
                     </div>
                     <div className={styles.secondaryColumn}>
                         <p>Use Cases</p>

@@ -9,6 +9,7 @@ const Od = (props) => {
   const [star3, setStar3] = useState(false);
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
+
   
   return (
     <>
@@ -67,6 +68,8 @@ const Od = (props) => {
 };
 
 export const Review = (props) => {
+
+  const {message, owner} = props
   const { theme, changeDarkTheme } = useContext(ThemeContext);
   return (
     <div className={theme.pallate.dark ? "rContainer rBorder" : "rContainer"}>
@@ -76,18 +79,18 @@ export const Review = (props) => {
         </div>
         <div className="rTextContainer">
           <p className={theme.pallate.dark ? "rText rWhite" : "rText"}>
-            {props.text}
+            {message}
           </p>
         </div>
       </div>
       <div className="rProfileContainer">
-        <img src={props.image} className="rProfileImg" />
+        <img src={owner.picture} className="rProfileImg" />
         <span
           className={
             theme.pallate.dark ? "rProfileName rWhite" : "rProfileName"
           }
         >
-          {props.name}
+          {owner.firstName + " " + owner.lastName}
         </span>
       </div>
     </div>

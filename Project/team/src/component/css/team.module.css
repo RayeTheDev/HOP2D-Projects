@@ -9,7 +9,6 @@
   z-index: -1;
   display: flex;
   align-items: center;
-  scroll-behavior: smooth;
 }
 .innerContainer {
   display: flex;
@@ -95,6 +94,15 @@ input {
   font-weight: bold;
   text-decoration: underline;
 }
+.buttonCont {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  justify-content: flex-end;
+  padding-right: 40px;
+}
+
+
 .arrow {
   font-weight: bold;
   color: #4da0fd;
@@ -148,8 +156,8 @@ input {
   overflow: hidden;
   display: flex;
   width: 100vw;
-  /* padding-left: 10%; */
-  padding-top: 5%;
+  padding-left: 20%;
+  padding-top: 3%;
   flex-direction: column;
   align-items: center;
   height: 500px;
@@ -296,6 +304,7 @@ input {
   }
 }
 @media only screen and (max-width: 570px) {
+  con
   .innerContainer {
     padding-left: 5%;
   }

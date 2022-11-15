@@ -21,18 +21,18 @@ const img = [rProfileImg, nHeadImg];
 export const Team = (props) => {
   const { theme, changeDarkTheme } = useContext(ThemeContext);
   const [pos, setPos] = useState(0);
-  const [ind, setInd] = useState(0);
   const baseUrl =  'https://dummyapi.io/data/v1/';
-
+  const [data, setData] = useState(null)
 
   useEffect(() => {
-    axios.get(baseUrl + 'user', {
+    axios.get(baseUrl + 'comment', {
       headers: {
         "app-id": " 636f2fc4e8d0ff392b3fc559",
       }
     })
     .then((res) => {
-      console.log(res.data)
+       setData(res.data.data)
+       console.log(res.data.data)
     })
     .catch((err) => {
       console.log(err)
@@ -41,16 +41,16 @@ export const Team = (props) => {
 
 
 
-
   const goRight = (index) => {
     console.log(pos);
-    if (pos <= Card.length) {
-      setPos((prev) => prev + 1);
+    console.log(data.length)
+    if (pos <= data.length  + 26) {
+      setPos((prev) => prev + 3);
     }
   };
   const goLeft = () => {
     if(pos >= 0) {
-       setPos((prev) => prev - 1);
+       setPos((prev) => prev - 3);
     }
    
   };
@@ -63,7 +63,7 @@ export const Team = (props) => {
             <span className={styles.title}>
               Instant collaborations
               <br />
-              for remote teams
+              for remote teams  
             </span>
             <span className={styles.texts}>
               All in one for your remote team chats,
@@ -73,7 +73,6 @@ export const Team = (props) => {
             <br />
             <div className={styles.inputCont}>
               <input type="text" placeholder="Email" />
-
               <Button className={styles.button} variant="info">
                 Get Early Access
               </Button>
@@ -228,21 +227,15 @@ export const Team = (props) => {
             }}
             className={styles.cards}
           >
-            {Card.map((data, index) => {
+            {data && data.map((item, index) => {
               return (
-                <Review
-                  index={index}
-                  key={data + index}
-                  text={data.text}
-                  image={img[data.image]}
-                  name={data.name}
-                  star={data.star}y
+                <Review {...item}
                 />
               );
             })}
           </div>
         </div>
-        <div>
+        <div className={styles.buttonCont}>
            <Button onClick={goLeft}>Left</Button>
         <Button onClick={goRight}>Right</Button>
         </div>
