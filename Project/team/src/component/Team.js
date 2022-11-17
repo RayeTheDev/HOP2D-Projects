@@ -142,7 +142,7 @@ export const Team = (props) => {
           >
             Simple task management
           </div>
-          <div
+          <div 
             className={
               theme.pallate.dark
                 ? `${styles.textSecond} ${styles.textWhite}`

@@ -24,11 +24,12 @@
 .secondaryColumn {
   padding-top: 28px;
 }
+
 p:first-child {
   margin-bottom: 26px;
 }
 
-input {
+.input {
   color: #182d40;
 }
 textarea:focus,
@@ -45,4 +46,54 @@ input:focus {
 
 .lastRow p {
   font-size: 20px;
+}
+
+@media only screen and (max-width: 992px) {
+  .Container {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+  }
+  .flexContainer {
+    gap: 20px;
+  }
+  p {
+    font-size: 15px;
+  }
+  .lastRow p {
+    font-size: 17px;
+  }
+  .input {
+    width: 180px;
+    height: 45px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  p {
+    font-size: 13px;
+  }
+  .lastRow p {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 720px) {
+  p {
+    font-size: 10px;
+  }
+  .lastRow p {
+    font-size: 14px;
+  }
+  .input {
+    font-size: 13px;
+    width: 150px;
+    height: 40px;
+  }
+  .secondaryColumn {
+    padding-top: 33px;
+  }
+  .lastRow {
+    padding-top: 29px;
+  }
 }

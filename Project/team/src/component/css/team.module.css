@@ -298,22 +298,25 @@ input {
   }
 }
 @media only screen and (max-width: 650px) {
+  
   .inner3Container {
-    width: 40%;
+    width: 40%; 
     margin-left: 5%;
   }
 }
 @media only screen and (max-width: 570px) {
-  con
+  .Container {
+    width: 100%;
+  }
   .innerContainer {
     padding-left: 5%;
   }
   .inner3Container {
-    width: 70%;
-    margin-left: 10%;
+    width: 80%;
+    padding-left: 5%;
   }
   input {
-    width: 250px;
+    width: 25 0px;
     height: 45px;
     font-size: 13px;
   }

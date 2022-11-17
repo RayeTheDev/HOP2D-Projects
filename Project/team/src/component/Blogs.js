@@ -15,20 +15,20 @@ import Button from "react-bootstrap/esm/Button";
 export const Blogs = () => {
   const baseUrl = "https://dummyapi.io/data/v1/";
   const [data, setData] = useState(null);
-  const [page, setPage] = useState(0)
-  const [limit, setLimit] = useState(0)
+  const [page, setPage] = useState(0);
+  const [limit, setLimit] = useState(9);
 
   const nextPage = () => {
-    setData(null)
-    setPage((prev) => prev + 1)
-  }
+    setData(null);
+    setPage((prev) => prev + 1);
+  };
 
   const prevPage = () => {
-    setData(null)
+    setData(null);
     setPage((prev) => {
-      if(prev > 0) return prev - 1
-    })
-  }
+      if (prev > 0) return prev - 1;
+    });
+  };
 
   useEffect(() => {
     axios
@@ -87,8 +87,10 @@ export const Blogs = () => {
             {data && data.map((item, index) => <News {...item} />)}
           </div>
         </div>
-        <Button onClick={prevPage}>Prev</Button>
-        <Button onClick={nextPage}>Next</Button>
+        <div className={styles.buttonCont}>
+          <Button onClick={prevPage}>Prev</Button>
+          <Button onClick={nextPage}>Next</Button>
+        </div>
       </Container>
     </div>
   );

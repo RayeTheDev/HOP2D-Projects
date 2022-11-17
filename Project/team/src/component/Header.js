@@ -7,13 +7,17 @@ import { useContext } from "react";
 import { ThemeContext } from "../App.js";
 import { GoThreeBars } from "react-icons/go";
 import { CiDark } from "react-icons/ci";
+import Dropdown from 'react-bootstrap/Dropdown';
 
 export const Header = (props) => {
-
   const { theme, changeDarkTheme } = useContext(ThemeContext);
   const [css, setCss] = useState(false);
   let location = useLocation();
   const [bg, setBg] = useState(false);
+
+
+
+
 
   useEffect(() => {
     if (location.pathname !== "/") {
@@ -35,7 +39,8 @@ export const Header = (props) => {
   return (
     <div className={bg ? styles.hContainerBg : styles.hContainer}>
       <Link to="/">
-        <img className={styles.img} src={css ? props.image2 : props.image} />
+        <img className={styles.img} src={css ? props.image2 : props.image}
+        />
       </Link>
 
       <div className={styles.textsContainer}>
@@ -68,9 +73,47 @@ export const Header = (props) => {
           </button>
         </Link>
       </div>
-      <GoThreeBars
-        className={css ? `${styles.bar3} ${styles.barChange}` : styles.bar3}
-      />
+      <Dropdown className={css ? `${styles.bar3} ${styles.barChange}` : styles.bar3}>
+ 
+      <Dropdown.Toggle variant="success" id="dropdown-basic">
+      <GoThreeBars/>
+      </Dropdown.Toggle>
+      <Dropdown.Menu>
+        <Dropdown.Item href="#/action-1">
+        <Link to="/blogs" className={ styles.change }>
+          Blogs
+        </Link>
+        </Dropdown.Item>
+        <Dropdown.Item href="#/action-2">
+        <Link to="/products" className={ styles.change }>
+          Products
+        </Link>
+        </Dropdown.Item>
+        <Dropdown.Item href="#/action-3">
+        <Link to="/services" className={ styles.change }>
+          Services
+        </Link>
+        </Dropdown.Item>
+
+        <Dropdown.Item href="#/action-3">
+        <Link to="/contact" className={ styles.change }>
+          Contact
+        </Link>
+        </Dropdown.Item>
+
+        <Dropdown.Item href="#/action-3">
+        <Link to="/login" className={ styles.change }>
+          Log In
+        </Link>
+        </Dropdown.Item>
+
+        <Dropdown.Item href="#/action-3">
+        <Link to="/getaccess" className={ styles.change }>
+          Get Access
+        </Link>
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
     </div>
   );
 };

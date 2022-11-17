@@ -45,7 +45,7 @@ export const Footer = (props) => {
                     </div>
                     <div className={styles.lastRow}>
                         <p>Subscribe to our newsletter</p>
-                        <input placeholder='Email'></input>
+                        <input className={styles.input}placeholder='Email'></input>
 
                     </div>
                 </div>
