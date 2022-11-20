@@ -10,7 +10,7 @@ const Od = (props) => {
   const [star4, setStar4] = useState(false);
   const [star5, setStar5] = useState(false);
 
-  
+
   return (
     <>
       <span
@@ -69,13 +69,13 @@ const Od = (props) => {
 
 export const Review = (props) => {
 
-  const {message, owner} = props
+  const { message, owner, tags } = props
   const { theme, changeDarkTheme } = useContext(ThemeContext);
   return (
     <div className={theme.pallate.dark ? "rContainer rBorder" : "rContainer"}>
       <div>
         <div className="rStarContainer">
-          <Od num={props.star}></Od>
+          <Od num={props.index}></Od>
         </div>
         <div className="rTextContainer">
           <p className={theme.pallate.dark ? "rText rWhite" : "rText"}>

@@ -10,30 +10,15 @@ import { CiDark } from "react-icons/ci";
 import Dropdown from 'react-bootstrap/Dropdown';
 
 export const Header = (props) => {
-  const { theme, changeDarkTheme } = useContext(ThemeContext);
-  const [css, setCss] = useState(false);
+  const { theme, changeDarkTheme, css, setCss, bg, setFix } = useContext(ThemeContext);
   let location = useLocation();
-  const [bg, setBg] = useState(false);
-
-
-
-
-
   useEffect(() => {
     if (location.pathname !== "/") {
       setCss(true);
     } else {
-      setCss(false);
+      setCss(false)
     }
   }, [location]);
-
-  function setFix() {
-    if (window.scrollY <= 0) {
-      setBg(false);
-    } else {
-      setBg(true);
-    }
-  }
   window.addEventListener("scroll", setFix);
 
   return (
@@ -74,46 +59,46 @@ export const Header = (props) => {
         </Link>
       </div>
       <Dropdown className={css ? `${styles.bar3} ${styles.barChange}` : styles.bar3}>
- 
-      <Dropdown.Toggle variant="success" id="dropdown-basic">
-      <GoThreeBars/>
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item href="#/action-1">
-        <Link to="/blogs" className={ styles.change }>
-          Blogs
-        </Link>
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-2">
-        <Link to="/products" className={ styles.change }>
-          Products
-        </Link>
-        </Dropdown.Item>
-        <Dropdown.Item href="#/action-3">
-        <Link to="/services" className={ styles.change }>
-          Services
-        </Link>
-        </Dropdown.Item>
 
-        <Dropdown.Item href="#/action-3">
-        <Link to="/contact" className={ styles.change }>
-          Contact
-        </Link>
-        </Dropdown.Item>
+        <Dropdown.Toggle variant="success" id="dropdown-basic">
+          <GoThreeBars />
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">
+            <Link to="/blogs" className={styles.change}>
+              Blogs
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-2">
+            <Link to="/products" className={styles.change}>
+              Products
+            </Link>
+          </Dropdown.Item>
+          <Dropdown.Item href="#/action-3">
+            <Link to="/services" className={styles.change}>
+              Services
+            </Link>
+          </Dropdown.Item>
 
-        <Dropdown.Item href="#/action-3">
-        <Link to="/login" className={ styles.change }>
-          Log In
-        </Link>
-        </Dropdown.Item>
+          <Dropdown.Item href="#/action-3">
+            <Link to="/contact" className={styles.change}>
+              Contact
+            </Link>
+          </Dropdown.Item>
 
-        <Dropdown.Item href="#/action-3">
-        <Link to="/getaccess" className={ styles.change }>
-          Get Access
-        </Link>
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+          <Dropdown.Item href="#/action-3">
+            <Link to="/login" className={styles.change}>
+              Log In
+            </Link>
+          </Dropdown.Item>
+
+          <Dropdown.Item href="#/action-3">
+            <Link to="/getaccess" className={styles.change}>
+              Get Access
+            </Link>
+          </Dropdown.Item>
+        </Dropdown.Menu>
+      </Dropdown>
     </div>
   );
 };

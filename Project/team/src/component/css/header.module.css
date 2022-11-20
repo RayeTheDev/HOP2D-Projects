@@ -38,7 +38,6 @@
   font-size: 18px;
   text-decoration: gray underline;
   color: white;
-
 }
 .change {
   font-family: "Mulish", sans-serif;
@@ -63,7 +62,7 @@
   height: 56px;
   font-size: 18px;
   font-family: "Mulish", sans-serif;
-  color: blue;  
+  color: blue;
   background: #4da0fd;
   opacity: 42%;
   /* margin-top: 6px; */
@@ -93,7 +92,7 @@
 .darkIcon {
   font-size: 30px;
   color: white;
-  }
+}
 
 @media only screen and (max-width: 992px) {
   .hContainer {
@@ -140,8 +139,8 @@
 
 @media only screen and (max-width: 570px) {
   .bar3 {
-   font-size: 30px;
-   margin-top: 12px;
+    font-size: 30px;
+    margin-top: 12px;
   }
   .img {
     width: 85px;

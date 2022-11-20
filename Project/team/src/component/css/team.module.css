@@ -47,7 +47,8 @@ input {
 }
 .ContainerSecond {
   width: 100vw;
-  height: 100vh;
+  /* height: 100vh; */
+  padding-top: 10%;
   position: relative;
   z-index: -1;
   display: flex;
@@ -102,7 +103,6 @@ input {
   padding-right: 40px;
 }
 
-
 .arrow {
   font-weight: bold;
   color: #4da0fd;
@@ -147,6 +147,7 @@ input {
 .ContainerBottom {
   width: 100vw;
   height: 100vh;
+
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -298,9 +299,8 @@ input {
   }
 }
 @media only screen and (max-width: 650px) {
-  
   .inner3Container {
-    width: 40%; 
+    width: 40%;
     margin-left: 5%;
   }
 }

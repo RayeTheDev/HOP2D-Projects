@@ -1,10 +1,11 @@
 .Container {
   width: 100vw;
-  height: 200vh;
+  /* height: 100vh; */
   display: flex;
   /* position: relative;s */
   flex-direction: column;
   padding-top: 100px;
+  padding-bottom: 56px;
   /* padding-left: 16%; */
   gap: 80px;
   transition: 500ms;
@@ -66,29 +67,53 @@
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
 }
 
 .buttonCont {
   width: 100%;
   margin-top: 80px;
   padding-right: 20px;
-  display: flex ;
+  display: flex;
   justify-content: flex-end;
-  gap:20px;
-
-
-
+  gap: 20px;
 }
 
-@media only screen and (max-height: 980px) {
+.grayButton {
+  background-color: #6d7d8b;
+  border: #6d7d8b;
+}
+
+@media only screen and (max-width: 1100px) {
   .Container {
-    height: 220vh;
+    padding-left: 4%;
+    display: flex;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 1000px) {
+  .Container {
+    padding-left: 4%;
+    display: flex;
+    align-items: center;
+  }
+}
+@media only screen and (max-width: 900px) {
+  .title {
+    font-size: 35px;
+  }
+  .text {
+    font-size: 18px;
   }
 }
 
-@media only screen and (max-height: 720px) {
+@media only screen and (max-width: 560px) {
   .Container {
-    height: 230vh;
+    padding-left: 6%;
+  }
+  .title {
+    font-size: 30px;
+  }
+  .text {
+    font-size: 15px;
   }
 }
