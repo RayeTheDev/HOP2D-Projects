@@ -19,14 +19,41 @@ import axios from 'axios'
 const img = [rProfileImg, nHeadImg];
 
 export const Team = (props) => {
-  const { theme, changeDarkTheme, goRight, goLeft, pos, data, setCss, css } = useContext(ThemeContext);
-  const baseUrl = 'https://dummyapi.io/data/v1/';
+  const { theme, changeDarkTheme } = useContext(ThemeContext);
+  const [pos, setPos] = useState(0);
+  const baseUrl =  'https://dummyapi.io/data/v1/';
+  const [data, setData] = useState(null)
+
   useEffect(() => {
-    window.scrollTo(0, 0)
-
+    axios.get(baseUrl + 'comment', {
+      headers: {
+        "app-id": " 636f2fc4e8d0ff392b3fc559",
+      }
+    })
+    .then((res) => {
+       setData(res.data.data)
+       console.log(res.data.data)
+    })
+    .catch((err) => {
+      console.log(err)
+    })
   }, [])
-  window.addEventListener("scroll", setCss(false));
 
+
+
+  const goRight = (index) => {
+    console.log(pos);
+    console.log(data.length)
+    if (pos <= data.length  + 26) {
+      setPos((prev) => prev + 3);
+    }
+  };
+  const goLeft = () => {
+    if(pos >= 0) {
+       setPos((prev) => prev - 3);
+    }
+   
+  };
 
   return (
     <>
@@ -36,7 +63,7 @@ export const Team = (props) => {
             <span className={styles.title}>
               Instant collaborations
               <br />
-              for remote teams
+              for remote teams  
             </span>
             <span className={styles.texts}>
               All in one for your remote team chats,
@@ -115,7 +142,7 @@ export const Team = (props) => {
           >
             Simple task management
           </div>
-          <div
+          <div 
             className={
               theme.pallate.dark
                 ? `${styles.textSecond} ${styles.textWhite}`
@@ -180,7 +207,7 @@ export const Team = (props) => {
             : styles.ContainerBottom
         }
       >
-
+        
         <div className={styles.titleCont}>
           <span
             className={
@@ -203,18 +230,15 @@ export const Team = (props) => {
             {data && data.map((item, index) => {
               return (
                 <Review {...item}
-                  index={index}
-                  key={index + item}
                 />
               );
             })}
           </div>
         </div>
         <div className={styles.buttonCont}>
-          <Button onClick={goLeft}>Left</Button>
-          <Button onClick={goRight}>Right</Button>
+           <Button onClick={goLeft}>Left</Button>
+        <Button onClick={goRight}>Right</Button>
         </div>
-
       </div>
     </>
   );
