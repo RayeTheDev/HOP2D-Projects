@@ -1,0 +1,62 @@
+.Container {
+  width: 85%;
+  height: 110px;
+  margin-left: 15%;
+  background-color: rgb(0, 0, 0);
+  display: flex;
+  position: fixed;
+  bottom: 0%;
+
+  gap: 40px;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.volume {
+  display: flex;
+}
+.volIcon {
+  font-size: 40px;
+  color: white;
+}
+input {
+  width: 120px;
+}
+.playIcon {
+  font-size: 40px;
+  color: white;
+}
+.albumCont {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.albumImg {
+  width: 60px;
+  height: 60px;
+}
+
+.songDetails {
+  display: flex;
+  flex-direction: column;
+}
+
+.songText {
+  font-size: 17px;
+  color: white;
+}
+.artistText {
+  font-size: 12px;
+  color: white;
+}
+.middleCont {
+  width: 40%;
+  gap: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+progress {
+  width: 100%;
+}

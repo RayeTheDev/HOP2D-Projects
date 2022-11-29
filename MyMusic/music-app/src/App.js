@@ -9,15 +9,15 @@ function App() {
 
   const [create, setCreate] = useState(false)
   const [data, setData] = useState([])
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await axios.get(
-  //       `https://6375fb74b5f0e1eb85fed196.mockapi.io/api/v1/users/3/playlists`
-  //     );
-  //     console.log(response.data);
-  //     setData(response.data);
-  //   })();
-  // }, []);
+  useEffect(() => {
+    (async () => {
+      const response = await axios.get(
+        `https://6375fb74b5f0e1eb85fed196.mockapi.io/api/v1/users/3/playlists`
+      );
+      console.log(response.data);
+      setData(response.data);
+    })();
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ create, setCreate }}>

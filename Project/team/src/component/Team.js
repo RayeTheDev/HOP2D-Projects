@@ -19,9 +19,9 @@ import axios from 'axios'
 const img = [rProfileImg, nHeadImg];
 
 export const Team = (props) => {
-  const { theme, changeDarkTheme } = useContext(ThemeContext);
+  const { theme, changeDarkTheme, css, setCss } = useContext(ThemeContext);
   const [pos, setPos] = useState(0);
-  const baseUrl =  'https://dummyapi.io/data/v1/';
+  const baseUrl = 'https://dummyapi.io/data/v1/';
   const [data, setData] = useState(null)
 
   useEffect(() => {
@@ -30,13 +30,13 @@ export const Team = (props) => {
         "app-id": " 636f2fc4e8d0ff392b3fc559",
       }
     })
-    .then((res) => {
-       setData(res.data.data)
-       console.log(res.data.data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+      .then((res) => {
+        setData(res.data.data)
+        console.log(res.data.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
   }, [])
 
 
@@ -44,16 +44,18 @@ export const Team = (props) => {
   const goRight = (index) => {
     console.log(pos);
     console.log(data.length)
-    if (pos <= data.length  + 26) {
+    if (pos <= data.length + 26) {
       setPos((prev) => prev + 3);
     }
   };
   const goLeft = () => {
-    if(pos >= 0) {
-       setPos((prev) => prev - 3);
+    if (pos >= 0) {
+      setPos((prev) => prev - 3);
     }
-   
+
   };
+
+  window.addEventListener("scroll", setCss(false));
 
   return (
     <>
@@ -63,7 +65,7 @@ export const Team = (props) => {
             <span className={styles.title}>
               Instant collaborations
               <br />
-              for remote teams  
+              for remote teams
             </span>
             <span className={styles.texts}>
               All in one for your remote team chats,
@@ -142,7 +144,7 @@ export const Team = (props) => {
           >
             Simple task management
           </div>
-          <div 
+          <div
             className={
               theme.pallate.dark
                 ? `${styles.textSecond} ${styles.textWhite}`
@@ -207,7 +209,7 @@ export const Team = (props) => {
             : styles.ContainerBottom
         }
       >
-        
+
         <div className={styles.titleCont}>
           <span
             className={
@@ -223,21 +225,21 @@ export const Team = (props) => {
           <div
             style={{
               transform: `translateX(${-10 * pos}%)`,
-              transition: "300ms",
+              transition: `300ms`
             }}
             className={styles.cards}
           >
             {data && data.map((item, index) => {
               return (
-                <Review {...item}
+                <Review {...item} index={index}
                 />
               );
             })}
           </div>
         </div>
         <div className={styles.buttonCont}>
-           <Button onClick={goLeft}>Left</Button>
-        <Button onClick={goRight}>Right</Button>
+          <Button onClick={goLeft}>Left</Button>
+          <Button onClick={goRight}>Right</Button>
         </div>
       </div>
     </>
