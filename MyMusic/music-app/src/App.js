@@ -3,12 +3,13 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-export const ThemeContext = createContext({})
+export const ThemeContext = createContext({});
 
 function App() {
+  const [create, setCreate] = useState(false);
+  const [data, setData] = useState([]);
 
-  const [create, setCreate] = useState(false)
-  const [data, setData] = useState([])
+  
   useEffect(() => {
     (async () => {
       const response = await axios.get(
@@ -17,7 +18,7 @@ function App() {
       console.log(response.data);
       setData(response.data);
     })();
-  }, []);
+  }, []);      
 
   return (
     <ThemeContext.Provider value={{ create, setCreate }}>
@@ -26,7 +27,10 @@ function App() {
           <NavBar />
           <Routes>
             <Route path="/" element={<Home />}></Route>
-            <Route path="/songs" element={<Songs title={data.listName} />}></Route>
+            <Route
+              path="/songs"
+              element={<Songs title={data.listName} />}
+            ></Route>
             <Route path="/search" element={<Search />}></Route>
           </Routes>
         </BrowserRouter>
