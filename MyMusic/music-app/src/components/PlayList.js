@@ -1,5 +1,5 @@
 import styles from "./assets/playlist.module.css";
-import { BiUpvote } from "react-icons/bi"
+import { BiUpvote } from "react-icons/bi";
 import { Link } from "react-router-dom";
 
 export const PlayList = (props) => {

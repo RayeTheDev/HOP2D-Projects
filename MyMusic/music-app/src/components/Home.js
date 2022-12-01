@@ -9,10 +9,9 @@ import { Link } from "react-router-dom";
 import { CreateList } from "./CreateList";
 import { ThemeContext } from "../App";
 
-
 export const Home = () => {
   const [data, setData] = useState([]);
-  const { create, setCreate } = useContext(ThemeContext)
+  const { create, setCreate } = useContext(ThemeContext);
 
   useEffect(() => {
     (async () => {
@@ -40,9 +39,7 @@ export const Home = () => {
   //   console.error(error);
   // });
 
-
   return (
-
     <div className={styles.Container}>
       <CreateList />
       <div className={styles.topCont}>
@@ -62,10 +59,15 @@ export const Home = () => {
         <div className={styles.playlistContainer}>
           {data.map((playlist, index) => {
             return (
-              <Link to='/songs'>
-                <PlayList key={index + playlist} image={playlist.userId.image} title={playlist.listName} Vote={playlist.totalVote} />
+              <Link to="/songs">
+                <PlayList
+                  key={index + playlist}
+                  image={playlist.userId.image}
+                  title={playlist.listName}
+                  Vote={playlist.totalVote}
+                />
               </Link>
-            )
+            );
           })}
         </div>
       </div>
