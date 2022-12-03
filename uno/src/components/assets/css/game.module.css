@@ -1,0 +1,150 @@
+.Container {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-image: url("https://images.alphacoders.com/116/1169862.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.player1Cont {
+  display: none;
+  position: absolute;
+  top: 10px;
+  left: 700px;
+  /* justify-content: center; */
+}
+.playerText {
+  font-size: 20px;
+  font-family: "Orbitron", sans-serif;
+  color: white;
+}
+.player1 {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-direction: column;
+
+}
+
+.turn {
+  --border-size: 0.3rem;
+  border: var(--border-size) solid transparent;
+
+  /* Paint an image in the border */
+  border-image: conic-gradient(
+      from var(--angle),
+      #d53e33 0deg 90deg,
+      #fbb300 90deg 180deg,
+      #377af5 180deg 270deg,
+      #399953 270deg 360deg
+    )
+    1 stretch;
+}
+@supports (background: paint(houdini)) {
+  @property --opacity {
+    syntax: "<number>";
+    initial-value: 0.5;
+    inherits: false;
+  }
+
+  @property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+  }
+
+  @keyframes opacityChange {
+    to {
+      --opacity: 1;
+    }
+  }
+
+  @keyframes rotate {
+    to {
+      --angle: 360deg;
+    }
+  }
+
+  .player1 {
+    animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+  }
+  .player2 {
+    animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+  }
+  .player3 {
+    animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+  }
+  .player4 {
+    animation: rotate 4s linear infinite, opacityChange 3s infinite alternate;
+  }
+}
+
+.card {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.player2Cont {
+  position: absolute;
+  /* border: 2px solid white; */
+  top: 300px;
+  left: 100px;
+  display: none;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.player3Cont {
+  position: absolute;
+  /* border: 2px solid white; */
+  top: 300px;
+  left: 1300px;
+  display: none;
+ 
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+.started {
+  display: flex !important;
+}
+.player2 {
+  display: flex;
+  /* border: 2px solid white; */
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+
+}
+.player4Cont {
+  position: absolute;
+  top: 640px;
+  left: 700px;
+  display: none;
+}
+
+.playSection {
+  position: absolute;
+  top: 400px;
+  left: 900px;
+  display: flex;
+}
+.sectorCards {
+  width: 100px;
+  height: 140px;
+}
+.gameStart {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+}
+.turnText {
+  display: none;
+  font-size: 20px;
+  color: white;
+  font-family: "Orbitron", sans-serif;
+}
