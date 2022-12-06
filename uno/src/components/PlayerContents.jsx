@@ -10,7 +10,7 @@ export const PlayerContent = (props) => {
   return (
     <>
       <img
-      click={props.img}
+        click={props.img}
         onClick={() => setClick(props.id)}
         className={styles.cardsImg}
         src={props.img}
