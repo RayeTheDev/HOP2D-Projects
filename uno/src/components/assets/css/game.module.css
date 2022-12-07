@@ -14,6 +14,7 @@
   position: absolute;
   top: 10px;
   left: 700px;
+  /* height: 40%; */
   /* justify-content: center; */
 }
 .playerText {
@@ -26,7 +27,7 @@
   gap: 10px;
   align-items: center;
   flex-direction: column;
-
+  height: 20%;
 }
 
 .turn {
@@ -104,7 +105,7 @@
   top: 300px;
   left: 1300px;
   display: none;
- 
+
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -117,7 +118,6 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
-
 }
 .player4Cont {
   position: absolute;
@@ -128,8 +128,9 @@
 
 .playSection {
   position: absolute;
+  gap: 40px;
   top: 400px;
-  left: 900px;
+  left: 760px;
   display: flex;
 }
 .sectorCards {
