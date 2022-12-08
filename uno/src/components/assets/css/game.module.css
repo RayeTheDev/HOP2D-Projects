@@ -8,7 +8,9 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.blur {
+  filter: blur(10px);
+}
 .player1Cont {
   display: none;
   position: absolute;
@@ -91,7 +93,6 @@
 
 .player2Cont {
   position: absolute;
-  /* border: 2px solid white; */
   top: 300px;
   left: 100px;
   display: none;
@@ -101,11 +102,9 @@
 }
 .player3Cont {
   position: absolute;
-  /* border: 2px solid white; */
   top: 300px;
   left: 1300px;
   display: none;
-
   margin-top: 30px;
   margin-bottom: 30px;
 }
@@ -114,7 +113,6 @@
 }
 .player2 {
   display: flex;
-  /* border: 2px solid white; */
   align-items: center;
   flex-direction: column;
   gap: 10px;
@@ -131,6 +129,9 @@
   gap: 40px;
   top: 400px;
   left: 760px;
+  display: none
+}
+.display {
   display: flex;
 }
 .sectorCards {
@@ -149,3 +150,4 @@
   color: white;
   font-family: "Orbitron", sans-serif;
 }
+

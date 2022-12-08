@@ -4,12 +4,9 @@ import { Game } from "./components";
 import { ThemeProvider } from "react-bootstrap";
 
 function App() {
-
   return (
     <>
-
       <Game />
-
     </>
   );
 }

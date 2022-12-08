@@ -5,6 +5,7 @@ import { PlayerContent } from "./PlayerContents";
 import { Button } from "react-bootstrap";
 import haha from "./assets/cards-front/0R.png";
 import { useRef } from "react";
+import { Win } from "./Win";
 export const ThemeContext = createContext({});
 const cards = [
   "./assets/cards-front/0R.png",
@@ -98,6 +99,17 @@ const cards = [
   "./assets/cards-front/W.png",
   "./assets/cards-front/W.png",
   "./assets/cards-front/W.png",
+
+  "./assets/cards-front/skipB.png",
+  "./assets/cards-front/skipG.png",
+  "./assets/cards-front/skipR.png",
+  "./assets/cards-front/skipY.png",
+
+  "./assets/cards-front/D2B.png",
+  "./assets/cards-front/D2Y.png",
+  "./assets/cards-front/D2G.png",
+  "./assets/cards-front/D2R.png",
+  "./assets/cards-front/D4W.png",
 ];
 const arr = cards.map((name) => require(`${name}`));
 function shuffle() {
@@ -134,119 +146,97 @@ export function Game() {
   const [p4Card, setP4Card] = useState([]);
 
   const [selectedCard, setSelectedCard] = useState();
+  let audit = useRef(0);
   const [turn, setTurn] = useState(1);
-  const [counter, setCounter] = useState(2);
+  const [counter, setCounter] = useState(0);
+  const [pWinner, setPWinner] = useState(null);
   const [limit, setLimit] = useState(1);
   const [start, setStart] = useState(false);
-  const [force, setForce] = useState(0);
+  const [won, setWon] = useState(false);
   let boardCard = useRef([]);
 
-  // useEffect(() => {
-  //   if (click == 1) {
-  //     setPlayer1(false);
-  //     setPlayer3(false);
-  //     setPlayer4(false);
-  //     setPlayer2(true);
-  //     setTurn(2);
-  //   } else if (click == 2) {
-  //     setPlayer1(false);
-  //     setPlayer2(false);
-  //     setPlayer4(false);
-  //     setPlayer3(true);
-  //     setTurn(3);
-  //   } else if (click == 3) {
-  //     setPlayer1(false);
-  //     setPlayer2(false);
-  //     setPlayer3(false);
-  //     setPlayer4(true);
-  //     setTurn(4);
-  //   } else if (click == 4) {
-  //     setPlayer1(true);
-  //     setPlayer2(false);
-  //     setPlayer3(false);
-  //     setPlayer4(false);
-  //     setTurn(1);
-  //   }
-  // }, [click]);
   function otherCards(player) {
-    if (turn == 1 && limit == 1) {
+    if (player1 && limit == 1) {
       p1Card.push(g[0]);
       g.shift();
       setP1Card([...p1Card]);
       setLimit(limit + 1);
     }
-    if (turn == 2 && limit == 1) {
+    if (player2 && limit == 1) {
       p2Card.push(g[0]);
       g.shift();
       setP2Card([...p2Card]);
       setLimit(limit + 1);
     }
-    if (turn == 3 && limit == 1) {
+    if (player3 && limit == 1) {
       p3Card.push(g[0]);
       g.shift();
       setP3Card([...p3Card]);
       setLimit(limit + 1);
     }
-    if (turn == 4 && limit == 1) {
+    if (player4 && limit == 1) {
       p4Card.push(g[0]);
       g.shift();
       setP4Card([...p4Card]);
       setLimit(limit + 1);
     }
   }
+
   useEffect(() => {
     const placedCard = boardCard.current[boardCard.current.length - 1];
 
     if (player1) {
       if (limit > 1) {
+        console.log(p1Card.length);
         p1Card.forEach((card) => {
           console.log(card.slice(14, 15) + " and " + placedCard.slice(14, 15));
           console.log(card.slice(15, 16) + " and " + placedCard.slice(15, 16));
           if (
-            card.slice(14, 15) !== placedCard.slice(14, 15) ||
-            card.slice(15, 16) !== placedCard.slice(15, 16)
+            card.slice(14, 15) == placedCard.slice(14, 15) ||
+            card.slice(15, 16) == placedCard.slice(15, 16)
           ) {
-            setCounter(counter + 1);
+            audit.current++; //i++
             console.log("orj bn");
           }
         });
-
-        console.log(counter);
-        if (counter) {
+        console.log(audit.current);
+        if (audit.current == 0) {
           setTimeout(() => {
             setPlayer2(true);
             setPlayer1(false);
             setPlayer3(false);
             setPlayer4(false);
-
+            setLimit(1);
             console.log("orson2");
           }, 1000);
         }
-        setCounter(0);
+        audit.current = 0;
       }
     }
+
     if (player2) {
       if (limit > 1) {
         p2Card.forEach((card) => {
           // console.log(card.slice(14, 15));
           if (
-            card.slice(14, 15) != placedCard.slice(14, 15) ||
-            card.slice(15, 16) != placedCard.slice(15, 16)
+            card.slice(14, 15) == placedCard.slice(14, 15) ||
+            card.slice(15, 16) == placedCard.slice(15, 16)
           ) {
-            setCounter(counter + 1);
+            audit.current++; //i++
           }
         });
 
-        if (counter == 5) {
+        if (audit.current == 0) {
           setTimeout(() => {
             setPlayer2(false);
             setPlayer1(false);
             setPlayer3(true);
             setPlayer4(false);
-            setCounter(0);
+            setLimit(1);
             console.log("orson2");
           }, 1000);
         }
+        audit.current = 0;
       }
     }
     if (player3) {
@@ -254,46 +244,86 @@ export function Game() {
         p3Card.forEach((card) => {
           // console.log(card.slice(14, 15));
           if (
-            card.slice(14, 15) != placedCard.slice(14, 15) ||
-            card.slice(15, 16) != placedCard.slice(15, 16)
+            card.slice(14, 15) == placedCard.slice(14, 15) ||
+            card.slice(15, 16) == placedCard.slice(15, 16)
           ) {
-            setCounter(counter + 1);
+            audit.current++; //i++
           }
         });
 
-        if (counter >= 5) {
+        if (audit.current == 0) {
           setTimeout(() => {
-            setTurn(4);
-            setCounter(0);
+            // setTurn(4);
+            setPlayer2(false);
+            setPlayer1(false);
+            setPlayer3(false);
+            setPlayer4(true);
+            setLimit(1);
             console.log("orson2");
           }, 1000);
         }
-        setLimit(0);
+        audit.current = 0;
       }
     }
+
     if (player4) {
       if (limit > 1) {
         p4Card.forEach((card) => {
-          // console.log(card.slice(14, 15));
           if (
             card.slice(14, 15) == placedCard.slice(14, 15) ||
             card.slice(15, 16) == placedCard.slice(15, 16)
           ) {
-            setCounter((prev) => prev + 1);
+            audit.current++; //i++
           }
         });
 
-        if (counter >= 5) {
+        if (audit.current == 0) {
           setTimeout(() => {
             setPlayer1(true);
-            setCounter(0);
+            setPlayer2(false);
+            setPlayer3(false);
+            setPlayer4(false);
+            setLimit(1);
             console.log("orson2");
           }, 1000);
         }
+        audit.current = 0;
+        // setLimit(1);
       }
     }
   }, [limit]);
-  console.log(counter);
+
+  function winner() {
+    if (player1) {
+      if (p1Card.length == 0) {
+        // alert('Player 1 Win')
+        setWon(true);
+        setPWinner(1);
+      }
+    }
+    if (player2) {
+      if (p2Card.length == 0) {
+        // alert('Player 2 Win')
+        setWon(true);
+        setPWinner(2);
+      }
+    }
+    if (player3) {
+      if (p3Card.length == 0) {
+        // alert('Player 3 Win')
+        setWon(true);
+        setPWinner(3);
+      }
+    }
+    if (player4) {
+      if (p4Card.length == 0) {
+        // alert('Player 4 Win')
+        setWon(true);
+        setPWinner(4);
+      }
+    }
+  }
+
   function Check(simg, index, id) {
     console.log(index);
     console.log(simg);
@@ -301,20 +331,23 @@ export function Game() {
 
     console.log(simg.slice(14, 15), g[20].slice(14, 15));
     if (player1 && id == 1) {
-      if (
-        simg.slice(14, 15) == placedCard.slice(14, 15) ||
-        simg.slice(15, 16) == placedCard.slice(15, 16)
-      ) {
-        p1Card.splice(index, 1);
-
-        setG([...g]);
-        boardCard.current.push(simg);
-        setPlayer1(false);
-        setPlayer3(false);
-        setPlayer4(false);
-        setPlayer2(true);
-        setTurn(2);
-        setLimit(1);
+      console.log(simg.length)
+      if (simg.length == 41) {
+        if (
+          simg.slice(14, 15) == placedCard.slice(14, 15) ||
+          simg.slice(15, 16) == placedCard.slice(15, 16)
+        ) {
+          p1Card.splice(index, 1);
+          setG([...g]);  
+          boardCard.current.push(simg);
+          setPlayer1(false);
+          setPlayer3(false);
+          setPlayer4(false);
+          setPlayer2(true);
+          setTurn(2);
+          setLimit(1);
+        }
+        winner();
       }
     }
     if (player2 && id == 2) {
@@ -333,6 +366,7 @@ export function Game() {
         setTurn(3);
         setLimit(1);
       }
+      winner();
     }
     if (player3) {
       if (
@@ -350,6 +384,7 @@ export function Game() {
         setTurn(4);
         setLimit(1);
       }
+      winner();
     }
     if (player4) {
       if (
@@ -367,11 +402,9 @@ export function Game() {
         setTurn(1);
         setLimit(1);
       }
+      winner();
     }
   }
-  // setG([...g]);
-
-  // console.log(haha)
 
   useEffect(() => {
     console.log(g);
@@ -400,19 +433,23 @@ export function Game() {
     boardCard.current.push(g[20]);
   }, []);
 
-  // console.log(g[20]);
-  // console.log(boardCard);
   return (
     <ThemeContext.Provider value={{ click, setClick, setSelectedCard, Check }}>
-      <div className={styles.Container}>
+      <div
+        className={
+          won ? `${styles.Container} ${styles.blur}` : styles.Container
+        }
+      >
         <div className={styles.gameStart}>
           <Button onClick={() => setStart(true)} variant="info">
             Start
           </Button>
+
           <span
             className={
               start ? `${styles.turnText} ${styles.started}` : styles.turnText
-            }>
+            }
+          >
             Player : {turn} turn{" "}
           </span>
         </div>
@@ -422,11 +459,13 @@ export function Game() {
             start
               ? `${styles.player1Cont} ${styles.started}`
               : styles.player1Cont
-          }>
+          }
+        >
           <div
             className={
               player1 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }>
+            }
+          >
             <span className={styles.playerText}>Player 1:</span>
             <div className={styles.card}>
               {p1Card.map((card, index) => {
@@ -448,11 +487,13 @@ export function Game() {
             start
               ? `${styles.player2Cont} ${styles.started}`
               : styles.player2Cont
-          }>
+          }
+        >
           <div
             className={
               player2 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 2</span>
             <div className={styles.card}>
               {p2Card.map((card, index) => {
@@ -462,7 +503,13 @@ export function Game() {
           </div>
         </div>
 
-        <div className={styles.playSection}>
+        <div
+          className={
+            start
+              ? `${styles.playSection} ${styles.display}`
+              : styles.playSection
+          }
+        >
           <img
             className={styles.sectorCards}
             src={backCard}
@@ -479,11 +526,13 @@ export function Game() {
             start
               ? `${styles.player3Cont} ${styles.started}`
               : styles.player3Cont
-          }>
+          }
+        >
           <div
             className={
               player3 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 3</span>
             <div className={styles.card}>
               {p3Card.map((card, index) => {
@@ -498,11 +547,13 @@ export function Game() {
             start
               ? `${styles.player4Cont} ${styles.started}`
               : styles.player4Cont
-          }>
+          }
+        >
           <div
             className={
               player4 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 4</span>
             <div className={styles.card}>
               {p4Card.map((card, index) => {
@@ -512,6 +563,8 @@ export function Game() {
           </div>
         </div>
       </div>
+
+      <Win winner={pWinner} won={won} />
     </ThemeContext.Provider>
   );
 }
