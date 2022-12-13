@@ -13,8 +13,9 @@ function App() {
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `https://6375fb74b5f0e1eb85fed196.mockapi.io/api/v1/users/3/playlists`
+        `http://localhost:8000`
       );
+      
       console.log(response.data);
       setData(response.data);
     })();

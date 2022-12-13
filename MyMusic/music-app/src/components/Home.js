@@ -16,11 +16,13 @@ export const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await axios.get(
-        `https://6375fb74b5f0e1eb85fed196.mockapi.io/api/v1/users/3/playlists`
+        `https://localhost:8000`
       );
+      
       console.log(response.data);
       setData(response.data);
     })();
+    
   }, []);
 
   // const options = {
@@ -63,7 +65,7 @@ export const Home = () => {
                 <PlayList
                   key={index + playlist}
                   image={playlist.userId.image}
-                  title={playlist.listName}
+                  title={playlist.name}
                   Vote={playlist.totalVote}
                 />
               </Link>
