@@ -111,6 +111,7 @@ const cards = [
   "./assets/cards-front/D2R.png",
   "./assets/cards-front/D4W.png",
 ];
+
 const arr = cards.map((name) => require(`${name}`));
 function shuffle() {
   let currentIndex = arr.length,
@@ -147,6 +148,7 @@ export function Game() {
 
   const [selectedCard, setSelectedCard] = useState();
   let audit = useRef(0);
+  let GG = useRef(0);
   const [turn, setTurn] = useState(1);
   const [counter, setCounter] = useState(0);
   const [pWinner, setPWinner] = useState(null);
@@ -156,6 +158,39 @@ export function Game() {
   const [takeCard, setTakeCard] = useState(false);
   let boardCard = useRef([]);
 
+  function p1Tools() {
+    setPlayer1(false);
+    setPlayer3(false);
+    setPlayer4(false);
+    setPlayer2(true);
+    setTurn(2);
+    setLimit(1);
+  }
+  function p2Tools() {
+    setPlayer1(false);
+    setPlayer2(false);
+    setPlayer4(false);
+    setPlayer3(true);
+    setTurn(3);
+    setLimit(1);
+  }
+
+  function p3Tools() {
+    setPlayer1(false);
+    setPlayer2(false);
+    setPlayer4(true);
+    setPlayer3(false);
+    setTurn(4);
+    setLimit(1);
+  }
+  function p4Tools() {
+    setPlayer1(true);
+    setPlayer2(false);
+    setPlayer4(false);
+    setPlayer3(false);
+    setTurn(1);
+    setLimit(1);
+  }
   function otherCards(player) {
     if (player1 && limit == 1) {
       p1Card.push(g[0]);
@@ -203,11 +238,7 @@ export function Game() {
         console.log(audit.current);
         if (audit.current == 0) {
           setTimeout(() => {
-            setPlayer2(true);
-            setPlayer1(false);
-            setPlayer3(false);
-            setPlayer4(false);
-            setLimit(1);
+           p1Tools()
             console.log("orson2");
           }, 1000);
         }
@@ -325,21 +356,101 @@ export function Game() {
     }
   }
 
+  useEffect(() => {
+    console.log(takeCard);
+    if (player1) {
+      if (takeCard) {
+        p1Card.forEach((card) => {
+          if (card.slice(14, 15) == boardCard.current.slice(14, 15)) {
+            GG.current++;
+          }
+        });
+        console.log("all matched takeCards: " + GG.current);
+        if (GG.current >= 0) {
+          for (let i = 0; i < 2; i++) {
+            p1Card.push(g[0]);
+            g.shift();
+            setG([...g]);
+          }
+        }
+        GG = 0;
+        setTakeCard(false);
+      }
+    }
+    if (player2) {
+      if (takeCard) {
+        p2Card.forEach((card) => {
+          if (card.slice(14, 15) == boardCard.current.slice(14, 15)) {
+            GG.current++;
+          }
+        });
+        console.log("all matched takeCards: " + GG.current);
+        if (GG.current >= 0) {
+          console.log("uhaj bna...");
+          setTimeout(() => {
+            for (let i = 0; i < 2; i++) {
+              p2Card.push(g[0]);
+              g.shift();
+              setG([...g]);
+            }
+          }, 1000);
+        }
+        GG = 0;
+        setTakeCard(false);
+      }
+    }
+    if (player3) {
+      if (takeCard) {
+        p3Card.forEach((card) => {
+          if (card.slice(14, 15) == boardCard.current.slice(14, 15)) {
+            GG.current++;
+          }
+        });
+        console.log("all matched takeCards: " + GG.current);
+        if (GG.current >= 0) {
+          for (let i = 0; i < 2; i++) {
+            p3Card.push(g[0]);
+            g.shift();
+            setG([...g]);
+          }
+        }
+        GG = 0;
+        setTakeCard(false);
+      }
+    }
+    if (player4) {
+      if (takeCard) {
+        p1Card.forEach((card) => {
+          if (card.slice(14, 15) == boardCard.current.slice(14, 15)) {
+            GG.current++;
+          }
+        });
+        console.log("all matched takeCards: " + GG.current);
+        if (GG.current >= 0) {
+          for (let i = 0; i < 2; i++) {
+            p4Card.push(g[0]);
+            g.shift();
+            setG([...g]);
+          }
+        }
+      }
+      GG = 0;
+      setTakeCard(false);
+    }
+  }, [SpecificCheck]);
+
   function SpecificCheck(card, placedCard, index) {
     console.log(card.slice(15, 16));
-    if (card.length == 42 && placedCard.length == 41) {
+    // +2 cards
+
+    if (placedCard.length == 41) {
       console.log(placedCard.slice(15, 16), card.slice(16, 17));
       if (card.slice(16, 17) == placedCard.slice(15, 16)) {
         setTakeCard(true);
+        console.log("2uhah");
         p1Card.splice(index, 1);
         setG([...g]);
         boardCard.current.push(card);
-        setPlayer1(false);
-        setPlayer3(false);
-        setPlayer4(false);
-        setPlayer2(true);
-        setTurn(2);
-        setLimit(1);
       }
     }
   }
@@ -348,8 +459,7 @@ export function Game() {
     console.log(simg);
     const placedCard = boardCard.current[boardCard.current.length - 1];
 
-    // console.log(simg.slice(14, 15), g[20].slice(14, 15));
-    if (player1 && id == 1) {
+    if (player1) {
       console.log(simg.length);
       // console.log(simg);
       if (simg.length == 41) {
@@ -360,71 +470,73 @@ export function Game() {
           p1Card.splice(index, 1);
           setG([...g]);
           boardCard.current.push(simg);
-          setPlayer1(false);
-          setPlayer3(false);
-          setPlayer4(false);
-          setPlayer2(true);
-          setTurn(2);
-          setLimit(1);
+          p1Tools();
+        }
+      } else if (simg.length == 42) {
+        SpecificCheck(simg, placedCard, index);
+        p1Tools();
+      } else if (placedCard.length == 42) {
+        if (simg.slice(15, 16) == placedCard.slice(16, 17)) {
+          p1Tools();
         }
       }
 
-      SpecificCheck(simg, placedCard, index);
       winner();
     }
-    if (player2 && id == 2) {
-      if (
-        simg.slice(14, 15) == placedCard.slice(14, 15) ||
-        simg.slice(15, 16) == placedCard.slice(15, 16)
-      ) {
-        p2Card.splice(index, 1);
+    if (player2) {
+      if (simg.length == 41) {
+        if (
+          simg.slice(14, 15) == placedCard.slice(14, 15) ||
+          simg.slice(15, 16) == placedCard.slice(15, 16)
+        ) {
+          p2Card.splice(index, 1);
 
-        boardCard.current.push(simg);
-        setG([...g]);
-        setPlayer1(false);
-        setPlayer2(false);
-        setPlayer4(false);
-        setPlayer3(true);
-        setTurn(3);
-        setLimit(1);
+          boardCard.current.push(simg);
+          setG([...g]);
+          p2Tools();
+        }
+      } else if (simg.length == 42) {
+        SpecificCheck(simg, placedCard, index);
+        p2Tools();
       }
+
       winner();
     }
     if (player3) {
-      if (
-        simg.slice(14, 15) == placedCard.slice(14, 15) ||
-        simg.slice(15, 16) == placedCard.slice(15, 16)
-      ) {
-        p3Card.splice(index, 1);
+      if (simg.length == 41) {
+        if (
+          simg.slice(14, 15) == placedCard.slice(14, 15) ||
+          simg.slice(15, 16) == placedCard.slice(15, 16)
+        ) {
+          p3Card.splice(index, 1);
 
-        setG([...g]);
-        boardCard.current.push(simg);
-        setPlayer1(false);
-        setPlayer2(false);
-        setPlayer4(true);
-        setPlayer3(false);
-        setTurn(4);
-        setLimit(1);
+          setG([...g]);
+          boardCard.current.push(simg);
+          p3Tools();
+        }
+      } else if (simg.length == 42) {
+        SpecificCheck(simg, placedCard, index);
+        p3Tools();
       }
+
       winner();
     }
     if (player4) {
-      if (
-        simg.slice(14, 15) == placedCard.slice(14, 15) ||
-        simg.slice(15, 16) == placedCard.slice(15, 16)
-      ) {
-        p4Card.splice(index, 1);
+      if (simg.length == 41) {
+        if (
+          simg.slice(14, 15) == placedCard.slice(14, 15) ||
+          simg.slice(15, 16) == placedCard.slice(15, 16)
+        ) {
+          p4Card.splice(index, 1);
 
-        setG([...g]);
-        boardCard.current.push(simg);
-        setPlayer1(true);
-        setPlayer2(false);
-        setPlayer4(false);
-        setPlayer3(false);
-        setTurn(1);
-        setLimit(1);
+          setG([...g]);
+          boardCard.current.push(simg);
+          p4Tools();
+        }
+      } else if (simg.length == 42) {
+        SpecificCheck(simg, placedCard, index);
+        p4Tools();
       }
-      winner();
     }
   }
 
@@ -459,7 +571,8 @@ export function Game() {
       <div
         className={
           won ? `${styles.Container} ${styles.blur}` : styles.Container
-        }>
+        }
+      >
         <div className={styles.gameStart}>
           <Button onClick={() => setStart(true)} variant="info">
             Start
@@ -468,7 +581,8 @@ export function Game() {
           <span
             className={
               start ? `${styles.turnText} ${styles.started}` : styles.turnText
-            }>
+            }
+          >
             Player : {turn} turn{" "}
           </span>
         </div>
@@ -478,11 +592,13 @@ export function Game() {
             start
               ? `${styles.player1Cont} ${styles.started}`
               : styles.player1Cont
-          }>
+          }
+        >
           <div
             className={
               player1 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }>
+            }
+          >
             <span className={styles.playerText}>Player 1:</span>
             <div className={styles.card}>
               {p1Card.map((card, index) => {
@@ -504,11 +620,13 @@ export function Game() {
             start
               ? `${styles.player2Cont} ${styles.started}`
               : styles.player2Cont
-          }>
+          }
+        >
           <div
             className={
               player2 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 2</span>
             <div className={styles.card}>
               {p2Card.map((card, index) => {
@@ -523,7 +641,8 @@ export function Game() {
             start
               ? `${styles.playSection} ${styles.display}`
               : styles.playSection
-          }>
+          }
+        >
           <img
             className={styles.sectorCards}
             src={backCard}
@@ -540,11 +659,13 @@ export function Game() {
             start
               ? `${styles.player3Cont} ${styles.started}`
               : styles.player3Cont
-          }>
+          }
+        >
           <div
             className={
               player3 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 3</span>
             <div className={styles.card}>
               {p3Card.map((card, index) => {
@@ -559,11 +680,13 @@ export function Game() {
             start
               ? `${styles.player4Cont} ${styles.started}`
               : styles.player4Cont
-          }>
+          }
+        >
           <div
             className={
               player4 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 4</span>
             <div className={styles.card}>
               {p4Card.map((card, index) => {

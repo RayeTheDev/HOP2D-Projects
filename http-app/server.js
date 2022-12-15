@@ -27,10 +27,7 @@ const User = [
     },
 ]
 app.get('/', (req, res) => {
-
-
     res.json(User)
-    // res.render("index")
 })
 
 
