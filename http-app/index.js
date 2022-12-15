@@ -1,4 +1,4 @@
-// import JSON from './main.json'
+
 const http = require("http"),
   fs = require("fs");
 var url = require("url");
@@ -71,7 +71,7 @@ if(queryObject == '/playlists') {
 }
 if(queryObject == '/users') {
     response.setHeader("Content-Type", "application/json");
-    response.end(JSON.stringify(user.name));
+    response.end(JSON.stringify(user));
 }
 });
 
