@@ -1,6 +1,6 @@
 .Container {
   width: 100vw;
-  height: 100vh;
+  height: 110vh;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -129,7 +129,7 @@
   gap: 40px;
   top: 400px;
   left: 760px;
-  display: none
+  display: none;
 }
 .display {
   display: flex;
@@ -150,4 +150,3 @@
   color: white;
   font-family: "Orbitron", sans-serif;
 }
-

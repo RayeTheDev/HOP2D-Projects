@@ -153,6 +153,7 @@ export function Game() {
   const [limit, setLimit] = useState(1);
   const [start, setStart] = useState(false);
   const [won, setWon] = useState(false);
+  const [takeCard, setTakeCard] = useState(false);
   let boardCard = useRef([]);
 
   function otherCards(player) {
@@ -324,21 +325,40 @@ export function Game() {
     }
   }
 
+  function SpecificCheck(card, placedCard, index) {
+    console.log(card.slice(15, 16));
+    if (card.length == 42 && placedCard.length == 41) {
+      console.log(placedCard.slice(15, 16), card.slice(16, 17));
+      if (card.slice(16, 17) == placedCard.slice(15, 16)) {
+        setTakeCard(true);
+        p1Card.splice(index, 1);
+        setG([...g]);
+        boardCard.current.push(card);
+        setPlayer1(false);
+        setPlayer3(false);
+        setPlayer4(false);
+        setPlayer2(true);
+        setTurn(2);
+        setLimit(1);
+      }
+    }
+  }
   function Check(simg, index, id) {
     console.log(index);
     console.log(simg);
     const placedCard = boardCard.current[boardCard.current.length - 1];
 
-    console.log(simg.slice(14, 15), g[20].slice(14, 15));
+    // console.log(simg.slice(14, 15), g[20].slice(14, 15));
     if (player1 && id == 1) {
-      console.log(simg.length)
+      console.log(simg.length);
+      // console.log(simg);
       if (simg.length == 41) {
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
           simg.slice(15, 16) == placedCard.slice(15, 16)
         ) {
           p1Card.splice(index, 1);
-          setG([...g]);  
+          setG([...g]);
           boardCard.current.push(simg);
           setPlayer1(false);
           setPlayer3(false);
@@ -347,8 +367,10 @@ export function Game() {
           setTurn(2);
           setLimit(1);
         }
-        winner();
       }
+
+      SpecificCheck(simg, placedCard, index);
+      winner();
     }
     if (player2 && id == 2) {
       if (
@@ -410,7 +432,6 @@ export function Game() {
     console.log(g);
     while (p1Card.length !== 5) {
       p1Card.push(g[0]);
-
       g.splice(0, 1);
     }
     while (p2Card.length !== 5) {
@@ -438,8 +459,7 @@ export function Game() {
       <div
         className={
           won ? `${styles.Container} ${styles.blur}` : styles.Container
-        }
-      >
+        }>
         <div className={styles.gameStart}>
           <Button onClick={() => setStart(true)} variant="info">
             Start
@@ -448,8 +468,7 @@ export function Game() {
           <span
             className={
               start ? `${styles.turnText} ${styles.started}` : styles.turnText
-            }
-          >
+            }>
             Player : {turn} turn{" "}
           </span>
         </div>
@@ -459,13 +478,11 @@ export function Game() {
             start
               ? `${styles.player1Cont} ${styles.started}`
               : styles.player1Cont
-          }
-        >
+          }>
           <div
             className={
               player1 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }
-          >
+            }>
             <span className={styles.playerText}>Player 1:</span>
             <div className={styles.card}>
               {p1Card.map((card, index) => {
@@ -487,13 +504,11 @@ export function Game() {
             start
               ? `${styles.player2Cont} ${styles.started}`
               : styles.player2Cont
-          }
-        >
+          }>
           <div
             className={
               player2 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }
-          >
+            }>
             <span className={styles.playerText}>Player: 2</span>
             <div className={styles.card}>
               {p2Card.map((card, index) => {
@@ -508,8 +523,7 @@ export function Game() {
             start
               ? `${styles.playSection} ${styles.display}`
               : styles.playSection
-          }
-        >
+          }>
           <img
             className={styles.sectorCards}
             src={backCard}
@@ -526,13 +540,11 @@ export function Game() {
             start
               ? `${styles.player3Cont} ${styles.started}`
               : styles.player3Cont
-          }
-        >
+          }>
           <div
             className={
               player3 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }
-          >
+            }>
             <span className={styles.playerText}>Player: 3</span>
             <div className={styles.card}>
               {p3Card.map((card, index) => {
@@ -547,13 +559,11 @@ export function Game() {
             start
               ? `${styles.player4Cont} ${styles.started}`
               : styles.player4Cont
-          }
-        >
+          }>
           <div
             className={
               player4 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }
-          >
+            }>
             <span className={styles.playerText}>Player: 4</span>
             <div className={styles.card}>
               {p4Card.map((card, index) => {
