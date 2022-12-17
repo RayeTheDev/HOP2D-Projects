@@ -1,6 +1,6 @@
 import styles from "./assets/home.module.css";
 import Cover from "./img/covers.jpeg";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Container, Button } from "react-bootstrap";
 import { PlayList } from "./PlayList";
 import axios from "axios";
@@ -10,20 +10,25 @@ import { CreateList } from "./CreateList";
 import { ThemeContext } from "../App";
 
 export const Home = () => {
+  const [nameI, setNameI] = useState();
+  const [emailI, setEmailI] = useState();
+  let name = useRef();
+  let email = useRef();
   const [data, setData] = useState([]);
   const { create, setCreate } = useContext(ThemeContext);
-
+  const baseUrl = "http://localhost:9000";
   useEffect(() => {
-    (async () => {
-      const response = await axios.get(
-        `https://localhost:8000`
-      );
-      
-      console.log(response.data);
-      setData(response.data);
-    })();
-    
-  }, []);
+    if (nameI != null && emailI != null) {
+      axios
+        .post(baseUrl + "/users", { name: nameI, email: emailI })
+        .then((res) => {
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [nameI, emailI]);
 
   // const options = {
   //   method: 'GET',
@@ -41,6 +46,12 @@ export const Home = () => {
   //   console.error(error);
   // });
 
+  const SetValue = () => {
+    setNameI(name.current.value);
+    setEmailI(email.current.value);
+    console.log(name.current.value);
+    console.log(email.current.value);
+  };
   return (
     <div className={styles.Container}>
       <CreateList />
@@ -55,7 +66,11 @@ export const Home = () => {
           {/* <Button className={styles.coverButton}>Sign up for free</Button> */}
         </div>
       </div>
-
+      <div>
+        <input ref={name} placeholder="Name" />
+        <input ref={email} placeholder="Email" />
+        <Button onClick={() => SetValue()}>Post</Button>
+      </div>
       <div className={styles.contentContainer}>
         <div className={styles.title}>Playlists</div>
         <div className={styles.playlistContainer}>

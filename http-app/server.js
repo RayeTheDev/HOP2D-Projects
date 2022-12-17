@@ -1,5 +1,6 @@
 const { default: axios } = require('axios')
-const express = require('express')
+const express = require('express'),
+        cors = require(cors);
 const app = express()
 
 app.set('view engine', 'ejs')
@@ -8,7 +9,11 @@ const User = [
     {
         name: "Turbold",
         age: '16',
-        sex: 'male'
+        sex: 'male',
+        playlist: {
+            name: "Dulmaa",
+            likes: 12,
+        }
     },
     {
         name: "Munkhuu",
@@ -26,6 +31,8 @@ const User = [
         sex: 'male'
     },
 ]
+
+app.use(cors())
 app.get('/', (req, res) => {
     res.json(User)
 })
