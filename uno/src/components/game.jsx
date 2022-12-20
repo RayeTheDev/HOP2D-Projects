@@ -95,21 +95,11 @@ const cards = [
   "./assets/cards-front/9Y.png",
   "./assets/cards-front/_Y.png",
   "./assets/cards-front/_Y.png",
-  "./assets/cards-front/W.png",
-  "./assets/cards-front/W.png",
-  "./assets/cards-front/W.png",
-  "./assets/cards-front/W.png",
-
-  "./assets/cards-front/skipB.png",
-  "./assets/cards-front/skipG.png",
-  "./assets/cards-front/skipR.png",
-  "./assets/cards-front/skipY.png",
 
   "./assets/cards-front/D2B.png",
   "./assets/cards-front/D2Y.png",
   "./assets/cards-front/D2G.png",
   "./assets/cards-front/D2R.png",
-  "./assets/cards-front/D4W.png",
 ];
 
 const arr = cards.map((name) => require(`${name}`));
@@ -189,6 +179,39 @@ export function Game() {
     setPlayer4(false);
     setPlayer3(false);
     setTurn(1);
+    setLimit(1);
+  }
+  function p1RTools() {
+    setPlayer1(false);
+    setPlayer3(false);
+    setPlayer4(true);
+    setPlayer2(false);
+    setTurn(4);
+    setLimit(1);
+  }
+  function p2RTools() {
+    setPlayer1(true);
+    setPlayer2(false);
+    setPlayer4(false);
+    setPlayer3(false);
+    setTurn(1);
+    setLimit(1);
+  }
+
+  function p3RTools() {
+    setPlayer1(false);
+    setPlayer2(true);
+    setPlayer4(false);
+    setPlayer3(false);
+    setTurn(2);
+    setLimit(1);
+  }
+  function p4RTools() {
+    setPlayer1(false);
+    setPlayer2(false);
+    setPlayer4(false);
+    setPlayer3(true);
+    setTurn(3);
     setLimit(1);
   }
   function otherCards(player) {
@@ -414,7 +437,7 @@ export function Game() {
             for (let i = 0; i < 2; i++) {
               p1Card.push(g[0]);
               g.shift();
-              setG([...g]);
+              setP1Card([p1Card]);
             }
           }, 1000);
         }
@@ -436,7 +459,7 @@ export function Game() {
             for (let i = 0; i < 2; i++) {
               p2Card.push(g[0]);
               g.shift();
-              setG([...g]);
+              setP2Card([...p2Card]);
             }
           }, 1000);
         }
@@ -457,7 +480,7 @@ export function Game() {
             for (let i = 0; i < 2; i++) {
               p3Card.push(g[0]);
               g.shift();
-              setG([...g]);
+              setP3Card([...p3Card]);
             }
           }, 1000);
         }
@@ -478,7 +501,7 @@ export function Game() {
             for (let i = 0; i < 2; i++) {
               p4Card.push(g[0]);
               g.shift();
-              setG([...g]);
+              setP4Card([...p4Card]);
             }
           }, 1000);
         }
@@ -491,14 +514,11 @@ export function Game() {
   function SpecificCheck(card, placedCard, index) {
     console.log(card.slice(15, 16));
     // +2 cards
-
     if (placedCard.length == 41) {
       console.log(placedCard.slice(15, 16), card.slice(16, 17));
       if (card.slice(16, 17) == placedCard.slice(15, 16)) {
         setTakeCard(true);
         console.log("2uhah");
-        p1Card.splice(index, 1);
-        setG([...g]);
         boardCard.current.push(card);
       }
     }
@@ -512,6 +532,13 @@ export function Game() {
       console.log(simg.length);
       // console.log(simg);
       if (simg.length == 41) {
+        if (simg.slice(14, 15) == "_") {
+          console.log("reverse");
+          p1Card.splice(index, 1);
+          setP1Card([...p1Card]);
+          boardCard.current.push(simg);
+          p1RTools();
+        }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
           simg.slice(15, 16) == placedCard.slice(15, 16)
@@ -531,6 +558,8 @@ export function Game() {
         }
       } else if (simg.length == 42) {
         SpecificCheck(simg, placedCard, index);
+        p1Card.splice(index, 1);
+        setP1Card([...p1Card]);
         p1Tools();
       }
 
@@ -538,12 +567,18 @@ export function Game() {
     }
     if (player2) {
       if (simg.length == 41) {
+        if (simg.slice(14, 15) == "_") {
+          console.log("reverse");
+          p2Card.splice(index, 1);
+          setP2Card([...p2Card]);
+          boardCard.current.push(simg);
+          p2RTools();
+        }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
           simg.slice(15, 16) == placedCard.slice(15, 16)
         ) {
           p2Card.splice(index, 1);
-
           boardCard.current.push(simg);
           setP2Card([...p2Card]);
           p2Tools();
@@ -558,6 +593,8 @@ export function Game() {
         }
       } else if (simg.length == 42) {
         SpecificCheck(simg, placedCard, index);
+        p2Card.splice(index, 1);
+        setP2Card([...p2Card]);
         p2Tools();
       }
 
@@ -565,6 +602,13 @@ export function Game() {
     }
     if (player3) {
       if (simg.length == 41) {
+        if (simg.slice(14, 15) == "_") {
+          console.log("reverse");
+          p3Card.splice(index, 1);
+          setP3Card([...p3Card]);
+          boardCard.current.push(simg);
+          p3RTools();
+        }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
           simg.slice(15, 16) == placedCard.slice(15, 16)
@@ -584,6 +628,8 @@ export function Game() {
         }
       } else if (simg.length == 42) {
         SpecificCheck(simg, placedCard, index);
+        p3Card.splice(index, 1);
+        setP3Card([...p3Card]);
         p3Tools();
       }
 
@@ -591,12 +637,18 @@ export function Game() {
     }
     if (player4) {
       if (simg.length == 41) {
+        if (simg.slice(14, 15) == "_") {
+          console.log("reverse");
+          p4Card.splice(index, 1);
+          setP4Card([...p4Card]);
+          boardCard.current.push(simg);
+          p4RTools();
+        }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
           simg.slice(15, 16) == placedCard.slice(15, 16)
         ) {
           p4Card.splice(index, 1);
-
           setP4Card([...p4Card]);
           boardCard.current.push(simg);
           p4Tools();
@@ -612,6 +664,8 @@ export function Game() {
         }
       } else if (simg.length == 42) {
         SpecificCheck(simg, placedCard, index);
+        p4Card.splice(index, 1);
+        setP4Card([...p4Card]);
         p4Tools();
       }
     }

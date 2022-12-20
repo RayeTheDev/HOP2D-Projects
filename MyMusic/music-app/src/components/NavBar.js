@@ -4,20 +4,27 @@ import { BsMusicNoteList, BsSearch } from "react-icons/bs";
 import { BiLibrary } from "react-icons/bi";
 import { AiFillHome, AiFillPlusCircle, AiFillHeart } from "react-icons/ai";
 import { Container, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { useContext } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { useContext, useEffect } from "react";
 import { ThemeContext } from "../App";
 
 export const NavBar = () => {
-  const { create, setCreate } = useContext(ThemeContext)
+  const { create, setCreate, setIsNavbar, isNavbar } = useContext(ThemeContext)
+  let location = useLocation()
 
+  useEffect(() => {
+    if (location.pathname == '/login' || location.pathname == '/signup') {
+      setIsNavbar(true)
+    } else {
+      setIsNavbar(false)
+    }
+  }, [location])
 
   return (
 
-    <div className={styles.Container}>
+    <div className={isNavbar ? `${styles.Container} ${styles.none}` : styles.Container}>
       <Container>
-        <div>
-        </div>
+
         <div className={styles.logoCont}>
           {/* <img className={styles.logoImg} src={Logo} /> */}
           <BsMusicNoteList className={styles.logo} />
@@ -51,11 +58,14 @@ export const NavBar = () => {
         </div>
 
         <div className={styles.bottomCont}>
-          <Button className={styles.buttonLogIn}>Log In</Button>{" "}
+          <Link to="/login" onClick={() => setIsNavbar(true)}>
+            <Button className={styles.buttonLogIn}>Log In</Button>{" "}
+          </Link>
+
           <Button className={styles.buttonSignUp}>Sign Up</Button>{" "}
         </div>
 
       </Container>
-    </div>
+    </div >
   );
 };

@@ -1,7 +1,8 @@
-import { NavBar, Home, Songs, Search } from "./components";
+import { NavBar, Home, Songs, Search, LogIn } from "./components";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
+
 
 export const ThemeContext = createContext({});
 
@@ -12,10 +13,13 @@ function App() {
   const [accessToken, setAccessToken] = useState("");
   const [playingTrack, setPlayingTrack] = useState();
   const [albums, setAlbums] = useState([]);
+  const [isNavbar, setIsNavbar] = useState(false)
+  const [artists, setArtists] = useState([])
   const [isPlaying, setIsPlaying] = useState(false);
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
   const audio = new Audio(albums.uri);
+
 
   useEffect(() => {
     //API Access Token
@@ -61,11 +65,19 @@ function App() {
       });
     console.log("Artist ID " + artistID);
 
+    var artist = await fetch(
+      "https://api.spotify.com/v1/search?q=" + searchInput + "&type=artist",
+      searchParameters
+    )
+      .then((response) => response.json())
+      .then((data) => setArtists(data.artists.items));
+    console.log("Artist ID " + artistID);
+
     var returnedAlbums = await fetch(
       "https://api.spotify.com/v1/artists/" +
-        artistID +
-        "/albums" +
-        "?include_groups=album&market=US&limit=50",
+      artistID +
+      "/albums" +
+      "?include_groups=album&market=US&limit=50",
       searchParameters
     )
       .then((response) => response.json())
@@ -75,17 +87,8 @@ function App() {
       });
   }
   console.log(albums);
+  console.log(artists)
 
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await axios.get(
-  //       `http://localhost:8000`
-  //     );
-
-  //     console.log(response.data);
-  //     setData(response.data);
-  //   })();
-  // }, []);
 
   return (
     <ThemeContext.Provider
@@ -102,7 +105,10 @@ function App() {
         setPlayingTrack,
         isPlaying,
         setIsPlaying,
-        search
+        search,
+        artists,
+        setIsNavbar,
+        isNavbar
       }}
     >
       <div className="App">
@@ -114,6 +120,7 @@ function App() {
               <Route path=":id" element={<Songs />}></Route>
             </Route>
             <Route path="/search" element={<Search />}></Route>
+            <Route path="/login" element={<LogIn />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

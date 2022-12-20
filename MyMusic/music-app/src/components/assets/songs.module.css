@@ -1,15 +1,52 @@
 .Container {
   width: 100vw;
-  height: 100vh;
-  padding-left: 20%;
-  background-color: #050505ee;
+  padding-left: 15%;
 }
 .topCont {
   width: 100%;
 }
 .songContainer {
-  width: 80%;
-  padding: 20px;
-  border: 1px solid black;
+  width: 90%;
+  margin-left: 25px;
+  padding: 10px;
+  /* border: 1px solid black; */
   color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: 20px;
+}
+.id {
+  font-size: 20px;
+  font-weight: bold;
+  text-align: start;
+}
+.song {
+  display: flex;
+  flex-direction: column;
+}
+.songName {
+  font-family: "Mulish", sans-serif;
+  font-size: 18px;
+  font-weight: bold;
+}
+/* img {
+  width: 50px;
+  height: 50px;
+} */
+.artist {
+  font-family: "Mulish", sans-serif;
+  font-size: 14px;
+  font-weight: 100;
+  opacity: 50%;
+}
+.duration {
+  position: absolute;
+  right: 10px;
+  font-family: "Mulish", sans-serif;
+  opacity: 60%;
+}
+
+.songContainer:hover {
+  background-color: rgb(29, 29, 29);
 }
