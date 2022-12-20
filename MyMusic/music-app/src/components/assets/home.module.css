@@ -11,6 +11,9 @@ body {
   /* grid-template-columns: 1fr 5fr; */
   overflow-x: hidden;
 }
+.blur {
+  
+}
 .topCont {
   width: 85vw;
   height: 70vh;
