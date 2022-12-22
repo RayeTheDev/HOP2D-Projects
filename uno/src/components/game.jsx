@@ -137,6 +137,7 @@ export function Game() {
   const [p4Card, setP4Card] = useState([]);
 
   const [selectedCard, setSelectedCard] = useState();
+  const [isReversed, setIsReversed] = useState(false);
   let audit = useRef(0);
   let GG = useRef(0);
   const [turn, setTurn] = useState(1);
@@ -274,6 +275,10 @@ export function Game() {
         console.log(audit.current);
         if (audit.current == 0) {
           setTimeout(() => {
+            if (isReversed) {
+              p1RTools();
+              return;
+            }
             p1Tools();
             console.log("orson2");
           }, 1000);
@@ -307,6 +312,10 @@ export function Game() {
 
         if (audit.current == 0) {
           setTimeout(() => {
+            if (isReversed) {
+              p2RTools();
+              return;
+            }
             p2Tools();
             console.log("orson2");
           }, 1000);
@@ -340,12 +349,11 @@ export function Game() {
 
         if (audit.current == 0) {
           setTimeout(() => {
-            // setTurn(4);
-            setPlayer2(false);
-            setPlayer1(false);
-            setPlayer3(false);
-            setPlayer4(true);
-            setLimit(1);
+            if (isReversed) {
+              p3RTools();
+              return;
+            }
+            p3Tools();
             console.log("orson2");
           }, 1000);
         }
@@ -528,16 +536,33 @@ export function Game() {
     console.log(simg);
     const placedCard = boardCard.current[boardCard.current.length - 1];
     console.log(placedCard.slice(16, 17));
+
     if (player1) {
       console.log(simg.length);
       // console.log(simg);
       if (simg.length == 41) {
         if (simg.slice(14, 15) == "_") {
-          console.log("reverse");
-          p1Card.splice(index, 1);
-          setP1Card([...p1Card]);
-          boardCard.current.push(simg);
-          p1RTools();
+          if (simg.slice(15, 16) == placedCard.slice(15, 16)) {
+            console.log("reverse");
+            p1Card.splice(index, 1);
+            setP1Card([...p1Card]);
+            boardCard.current.push(simg);
+            p1RTools();
+            setIsReversed(true);
+            return;
+          }
+        }
+        if (isReversed) {
+          if (
+            simg.slice(14, 15) == placedCard.slice(14, 15) ||
+            simg.slice(15, 16) == placedCard.slice(15, 16)
+          ) {
+            p1Card.splice(index, 1);
+            setP1Card([...p1Card]);
+            boardCard.current.push(simg);
+            p1RTools();
+            return;
+          }
         }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
@@ -568,11 +593,27 @@ export function Game() {
     if (player2) {
       if (simg.length == 41) {
         if (simg.slice(14, 15) == "_") {
-          console.log("reverse");
-          p2Card.splice(index, 1);
-          setP2Card([...p2Card]);
-          boardCard.current.push(simg);
-          p2RTools();
+          if (simg.slice(15, 16) == placedCard.slice(15, 16)) {
+            console.log("reverse");
+            p2Card.splice(index, 1);
+            setP2Card([...p2Card]);
+            boardCard.current.push(simg);
+            p2RTools();
+            setIsReversed(true);
+            return;
+          }
+        }
+        if (isReversed) {
+          if (
+            simg.slice(14, 15) == placedCard.slice(14, 15) ||
+            simg.slice(15, 16) == placedCard.slice(15, 16)
+          ) {
+            p2Card.splice(index, 1);
+            setP2Card([...p2Card]);
+            boardCard.current.push(simg);
+            p2RTools();
+            return;
+          }
         }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
@@ -603,11 +644,27 @@ export function Game() {
     if (player3) {
       if (simg.length == 41) {
         if (simg.slice(14, 15) == "_") {
-          console.log("reverse");
-          p3Card.splice(index, 1);
-          setP3Card([...p3Card]);
-          boardCard.current.push(simg);
-          p3RTools();
+          if (simg.slice(15, 16) == placedCard.slice(15, 16)) {
+            console.log("reverse");
+            p3Card.splice(index, 1);
+            setP3Card([...p3Card]);
+            boardCard.current.push(simg);
+            p3RTools();
+            setIsReversed(true);
+            return;
+          }
+        }
+        if (isReversed) {
+          if (
+            simg.slice(14, 15) == placedCard.slice(14, 15) ||
+            simg.slice(15, 16) == placedCard.slice(15, 16)
+          ) {
+            p3Card.splice(index, 1);
+            setP3Card([...p3Card]);
+            boardCard.current.push(simg);
+            p3RTools();
+            return;
+          }
         }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||
@@ -638,11 +695,27 @@ export function Game() {
     if (player4) {
       if (simg.length == 41) {
         if (simg.slice(14, 15) == "_") {
-          console.log("reverse");
-          p4Card.splice(index, 1);
-          setP4Card([...p4Card]);
-          boardCard.current.push(simg);
-          p4RTools();
+          if (simg.slice(15, 16) == placedCard.slice(15, 16)) {
+            console.log("reverse");
+            p4Card.splice(index, 1);
+            setP4Card([...p4Card]);
+            boardCard.current.push(simg);
+            p4RTools();
+            setIsReversed(true);
+            return;
+          }
+        }
+        if (isReversed) {
+          if (
+            simg.slice(14, 15) == placedCard.slice(14, 15) ||
+            simg.slice(15, 16) == placedCard.slice(15, 16)
+          ) {
+            p4Card.splice(index, 1);
+            setP4Card([...p4Card]);
+            boardCard.current.push(simg);
+            p4RTools();
+            return;
+          }
         }
         if (
           simg.slice(14, 15) == placedCard.slice(14, 15) ||

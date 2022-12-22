@@ -17,6 +17,7 @@ app.get("/cats", async (req, res) => {
   const data = await Cat.find({});
   res.send(data);
 });
+
 app.post("/cats", async (req, res) => {
   const body = req.body;
   const kitty = new Cat(body);
@@ -26,9 +27,10 @@ app.post("/cats", async (req, res) => {
 
 app.delete("/cat/:id", async (req, res) => {
   const id = req.params.id;
-  await Cat.deleteOne({_id: id})
+  await Cat.deleteOne({ _id: id })
   res.send("Deleted");
 });
+
 app.put("/cat/:id", async (req, res) => {
   const id = req.params.id;
   const cat = await Cat.findByIdAndUpdate(
