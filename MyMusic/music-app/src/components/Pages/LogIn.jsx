@@ -11,20 +11,20 @@ export const LogIn = () => {
   const [passwordI, setPasswordI] = useState();
   let name = useRef();
   let password = useRef();
-  const baseUrl = "http://localhost:9000";
+  const baseUrl = "http://localhost:8000";
 
-  useEffect(() => {
-    if (nameI != null && passwordI != null) {
-      axios
-        .post(baseUrl + "/users", { email: nameI, password: passwordI })
-        .then((res) => {
-          console.log(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
-    }
-  }, [nameI, passwordI]);
+  // useEffect(() => {
+  //   if (nameI != null && passwordI != null) {
+  //     axios
+  //       .post(baseUrl + "/users", { email: nameI, password: passwordI })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //       })
+  //       .catch((err) => {
+  //         console.log(err);
+  //       });
+  //   }
+  // }, [nameI, passwordI]);
 
   const SetValue = () => {
     setNameI(name.current.value);
@@ -71,9 +71,12 @@ export const LogIn = () => {
         <hr></hr>
         <div className={styles.section3}>
           <span className={styles.section3Text}>Don't have an account? </span>
-          <Button className={styles.but2} variant="light">
+          <Link style={{width: "100%"}} to="/signup">
+           <Button className={styles.but2} variant="light">
             SIGN UP FOR INVADER
           </Button>
+          </Link>
+         
         </div>
       </div>
       {/* </Container> */}

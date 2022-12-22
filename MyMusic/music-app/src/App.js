@@ -1,4 +1,4 @@
-import { NavBar, Home, Songs, Search, LogIn } from "./components";
+import { NavBar, Home, Songs, Search, LogIn, SignUp } from "./components";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -121,6 +121,7 @@ function App() {
             </Route>
             <Route path="/search" element={<Search />}></Route>
             <Route path="/login" element={<LogIn />}></Route>
+            <Route path="/signup" element={<SignUp />}></Route>
           </Routes>
         </BrowserRouter>
       </div>

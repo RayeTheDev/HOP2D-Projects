@@ -61,8 +61,10 @@ export const NavBar = () => {
           <Link to="/login" onClick={() => setIsNavbar(true)}>
             <Button className={styles.buttonLogIn}>Log In</Button>{" "}
           </Link>
-
+          <Link to="/signup">
           <Button className={styles.buttonSignUp}>Sign Up</Button>{" "}
+          </Link>
+          
         </div>
 
       </Container>

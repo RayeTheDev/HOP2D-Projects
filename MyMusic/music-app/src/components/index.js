@@ -4,3 +4,4 @@ export * from './PlayList'
 export * from './Pages/Songs'
 export * from "./Pages/Search"
 export * from "./Pages/LogIn"
+export * from './Pages/SignUp'
