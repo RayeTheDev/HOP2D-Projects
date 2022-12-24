@@ -6,13 +6,16 @@ const router = express.Router();
 
 app.use(cors());
 app.use(express.json());
+//Connecting My MongoDB
 connect();
 
 app.get("/", (req, res) => {
   res.send("Hello MongoDB!");
 });
 
+//Connecting Login Route
 app.use(require('./Routes/login'))
+
 app.listen(8000, () => {
   console.log("listen at: ", 8000);
 });

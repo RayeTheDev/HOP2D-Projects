@@ -9,7 +9,7 @@ exports.getUser = async (req, res) => {
 exports.createUser = async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    return res.status(422).json({ errors: errors.array() });
+    return res.status(422).json({ errors: errors.array()});
   }
   const body = req.body;
   const clerk = new User(body);

@@ -259,7 +259,7 @@ export function Game() {
               audit.current++;
               console.log("orj bn");
             } else if (card.length == 42) {
-              if (card.slice(15, 17) == placedCard.slice(15, 16)) {
+              if (card.slice(16, 17) == placedCard.slice(15, 16)) {
                 audit.current++; //i++
               }
             }
@@ -297,7 +297,7 @@ export function Game() {
             ) {
               audit.current++; //i++
             } else if (card.length == 42) {
-              if (card.slice(15, 17) == placedCard.slice(15, 16)) {
+              if (card.slice(16, 17) == placedCard.slice(15, 16)) {
                 audit.current++; //i++
               }
             }
@@ -334,7 +334,7 @@ export function Game() {
             ) {
               audit.current++; //i++
             } else if (card.length == 42) {
-              if (card.slice(15, 17) == placedCard.slice(15, 16)) {
+              if (card.slice(16, 17) == placedCard.slice(15, 16)) {
                 audit.current++; //i++
               }
             }
@@ -371,7 +371,7 @@ export function Game() {
             ) {
               audit.current++; //i++
             } else if (card.length == 42) {
-              if (card.slice(15, 17) == placedCard.slice(15, 16)) {
+              if (card.slice(16, 17) == placedCard.slice(15, 16)) {
                 audit.current++; //i++
               }
             }
@@ -386,11 +386,11 @@ export function Game() {
 
         if (audit.current == 0) {
           setTimeout(() => {
-            setPlayer1(true);
-            setPlayer2(false);
-            setPlayer3(false);
-            setPlayer4(false);
-            setLimit(1);
+            if (isReversed) {
+              p4RTools();
+              return;
+            }
+            p4Tools();
             console.log("orson2");
           }, 1000);
         }
@@ -445,7 +445,7 @@ export function Game() {
             for (let i = 0; i < 2; i++) {
               p1Card.push(g[0]);
               g.shift();
-              setP1Card([p1Card]);
+              setP1Card([...p1Card]);
             }
           }, 1000);
         }
@@ -548,7 +548,11 @@ export function Game() {
             setP1Card([...p1Card]);
             boardCard.current.push(simg);
             p1RTools();
-            setIsReversed(true);
+            if (isReversed) {
+              setIsReversed(false);
+            } else {
+              setIsReversed(true);
+            }
             return;
           }
         }
@@ -585,7 +589,11 @@ export function Game() {
         SpecificCheck(simg, placedCard, index);
         p1Card.splice(index, 1);
         setP1Card([...p1Card]);
-        p1Tools();
+        if (isReversed) {
+          p1RTools();
+        } else {
+          p1Tools();
+        }
       }
 
       winner();
@@ -599,7 +607,11 @@ export function Game() {
             setP2Card([...p2Card]);
             boardCard.current.push(simg);
             p2RTools();
-            setIsReversed(true);
+            if (isReversed) {
+              setIsReversed(false);
+            } else {
+              setIsReversed(true);
+            }
             return;
           }
         }
@@ -636,7 +648,11 @@ export function Game() {
         SpecificCheck(simg, placedCard, index);
         p2Card.splice(index, 1);
         setP2Card([...p2Card]);
-        p2Tools();
+        if (isReversed) {
+          p2RTools();
+        } else {
+          p2Tools();
+        }
       }
 
       winner();
@@ -650,7 +666,11 @@ export function Game() {
             setP3Card([...p3Card]);
             boardCard.current.push(simg);
             p3RTools();
-            setIsReversed(true);
+            if (isReversed) {
+              setIsReversed(false);
+            } else {
+              setIsReversed(true);
+            }
             return;
           }
         }
@@ -687,7 +707,11 @@ export function Game() {
         SpecificCheck(simg, placedCard, index);
         p3Card.splice(index, 1);
         setP3Card([...p3Card]);
-        p3Tools();
+        if (isReversed) {
+          p3RTools();
+        } else {
+          p3Tools();
+        }
       }
 
       winner();
@@ -701,7 +725,11 @@ export function Game() {
             setP4Card([...p4Card]);
             boardCard.current.push(simg);
             p4RTools();
-            setIsReversed(true);
+            if (isReversed) {
+              setIsReversed(false);
+            } else {
+              setIsReversed(true);
+            }
             return;
           }
         }
@@ -739,7 +767,11 @@ export function Game() {
         SpecificCheck(simg, placedCard, index);
         p4Card.splice(index, 1);
         setP4Card([...p4Card]);
-        p4Tools();
+        if (isReversed) {
+          p4RTools();
+        } else {
+          p4Tools();
+        }
       }
     }
   }
@@ -775,30 +807,44 @@ export function Game() {
       <div
         className={
           won ? `${styles.Container} ${styles.blur}` : styles.Container
-        }>
-        <div className={styles.gameStart}>
-          <Button onClick={() => setStart(true)} variant="info">
+        }
+      >
+        <div
+          className={
+            start ? `${styles.gameStart} ${styles.none}` : styles.gameStart
+          }
+        >
+          <div>
+            <img
+              className={styles.uno}
+              src="https://upload.wikimedia.org/wikipedia/commons/f/f9/UNO_Logo.svg"
+            ></img>
+
+          </div>
+          <Button className={styles.startBut} onClick={() => setStart(true)} variant="info">
             Start
           </Button>
-
-          <span
-            className={
-              start ? `${styles.turnText} ${styles.started}` : styles.turnText
-            }>
-            Player : {turn} turn{" "}
-          </span>
         </div>
+        <span
+          className={
+            start ? `${styles.turnText} ${styles.started}` : styles.turnText
+          }
+        >
+          Player : {turn} turn{" "}
+        </span>
 
         <div
           className={
             start
               ? `${styles.player1Cont} ${styles.started}`
               : styles.player1Cont
-          }>
+          }
+        >
           <div
             className={
               player1 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }>
+            }
+          >
             <span className={styles.playerText}>Player 1:</span>
             <div className={styles.card}>
               {p1Card.map((card, index) => {
@@ -820,11 +866,13 @@ export function Game() {
             start
               ? `${styles.player2Cont} ${styles.started}`
               : styles.player2Cont
-          }>
+          }
+        >
           <div
             className={
               player2 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 2</span>
             <div className={styles.card}>
               {p2Card.map((card, index) => {
@@ -839,7 +887,8 @@ export function Game() {
             start
               ? `${styles.playSection} ${styles.display}`
               : styles.playSection
-          }>
+          }
+        >
           <img
             className={styles.sectorCards}
             src={backCard}
@@ -856,11 +905,13 @@ export function Game() {
             start
               ? `${styles.player3Cont} ${styles.started}`
               : styles.player3Cont
-          }>
+          }
+        >
           <div
             className={
               player3 ? `${styles.player2} ${styles.turn}` : styles.player2
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 3</span>
             <div className={styles.card}>
               {p3Card.map((card, index) => {
@@ -875,11 +926,13 @@ export function Game() {
             start
               ? `${styles.player4Cont} ${styles.started}`
               : styles.player4Cont
-          }>
+          }
+        >
           <div
             className={
               player4 ? `${styles.player1} ${styles.turn}` : styles.player1
-            }>
+            }
+          >
             <span className={styles.playerText}>Player: 4</span>
             <div className={styles.card}>
               {p4Card.map((card, index) => {

@@ -15,7 +15,7 @@
   display: none;
   position: absolute;
   top: 10px;
-  left: 700px;
+  left: 600px;
   /* height: 40%; */
   /* justify-content: center; */
 }
@@ -29,7 +29,7 @@
   gap: 10px;
   align-items: center;
   flex-direction: column;
-  height: 20%;
+  width: 600px;
 }
 
 .turn {
@@ -103,7 +103,7 @@
 .player3Cont {
   position: absolute;
   top: 300px;
-  left: 1300px;
+  left: 1100px;
   display: none;
   margin-top: 30px;
   margin-bottom: 30px;
@@ -116,11 +116,12 @@
   align-items: center;
   flex-direction: column;
   gap: 10px;
+  width: 500px;
 }
 .player4Cont {
   position: absolute;
   top: 640px;
-  left: 700px;
+  left: 600px;
   display: none;
 }
 
@@ -141,12 +142,28 @@
 .gameStart {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   padding: 20px;
+  gap: 30px;
 }
 .turnText {
   display: none;
   font-size: 20px;
   color: white;
   font-family: "Orbitron", sans-serif;
+}
+.none {
+  display: none;
+}
+.uno {
+  width: 500px;
+  height: 200px;
+}
+.startBut {
+  width: 100px;
+  height: 50px;
+  color: white;
+  font-family: "Orbitron", sans-serif;
+  font-weight: bold;
 }
