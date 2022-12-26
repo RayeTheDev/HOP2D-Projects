@@ -6,7 +6,7 @@ export const PlayList = (props) => {
   return (
     <div className={styles.Container}>
       <img className={styles.img} src={props.image} />
-      <div className={styles.textCont}>hello {props.title}</div>
+      <div className={styles.textCont}> {props.title}</div>
       <div className={styles.voteCont}>
         <BiUpvote className={styles.icon} />
         <span className={styles.botText}>{props.Vote}</span>

@@ -1,20 +1,24 @@
 import { Button, Container } from "react-bootstrap";
 import styles from "../assets/signup.module.css";
 import { BsMusicNoteList } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../config/firebase";
+
 
 export const SignUp = () => {
   const [nameI, setNameI] = useState();
   const [passwordI, setPasswordI] = useState();
   const [data, setData] = useState()
   const [app, setApp] = useState(false)
+  const navigate = useNavigate()
   let name = useRef();
   let password = useRef();
-  const baseUrl = "http://localhost:8000";
+  const baseUrl = "http://localhost:8001";
 
   useEffect(() => {
     if (nameI != null && passwordI != null) {
@@ -29,7 +33,7 @@ export const SignUp = () => {
         });
     }
   }, [nameI, passwordI]);
-
+  
   const SetValue = () => {
     setNameI(name.current.value);
     setPasswordI(password.current.value);
@@ -37,15 +41,24 @@ export const SignUp = () => {
     console.log(password.current.value);
 
   };
- useEffect(() => {
-    if(data == "Success") {
-        setApp(true) 
-        window.location.replace('https://localhost:3000/login')   
-    }
- }, [SetValue])
 
 
-console.log(app)
+const onSubmit = async (e) => {
+  e.preventDefault()
+
+  await createUserWithEmailAndPassword(auth, nameI, passwordI)
+    .then((userCredential) => {
+      const user = userCredential.user
+      console.log(user)
+      navigate('./login')
+    })
+    .catch((error) => {
+      const errorCode = error.errorCodeconst
+      const errorMessage = error.message
+      console.log(errorCode, errorMessage)
+    })
+}
+  // console.log(app)
   console.log(data)
   return (
     <div className={styles.Container}>

@@ -3,7 +3,6 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-
 export const ThemeContext = createContext({});
 
 function App() {
@@ -13,13 +12,13 @@ function App() {
   const [accessToken, setAccessToken] = useState("");
   const [playingTrack, setPlayingTrack] = useState();
   const [albums, setAlbums] = useState([]);
-  const [isNavbar, setIsNavbar] = useState(false)
-  const [artists, setArtists] = useState([])
+  const [isNavbar, setIsNavbar] = useState(false);
+  const [artists, setArtists] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playlists, setPlaylists] = useState([]);
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
   const audio = new Audio(albums.uri);
-
 
   useEffect(() => {
     //API Access Token
@@ -41,6 +40,12 @@ function App() {
         setAccessToken(data.access_token);
         console.log(data.access_token);
       });
+
+    (async () => {
+      const res = await axios.get("http://localhost:8000/playlists");
+      console.log(res.data);
+      setPlaylists(res.data);
+    })();
   }, []);
 
   //Search
@@ -75,9 +80,9 @@ function App() {
 
     var returnedAlbums = await fetch(
       "https://api.spotify.com/v1/artists/" +
-      artistID +
-      "/albums" +
-      "?include_groups=album&market=US&limit=50",
+        artistID +
+        "/albums" +
+        "?include_groups=album&market=US&limit=50",
       searchParameters
     )
       .then((response) => response.json())
@@ -87,8 +92,7 @@ function App() {
       });
   }
   console.log(albums);
-  console.log(artists)
-
+  console.log(artists);
 
   return (
     <ThemeContext.Provider
@@ -108,7 +112,9 @@ function App() {
         search,
         artists,
         setIsNavbar,
-        isNavbar
+        isNavbar,
+        playlists,
+        setPlaylists,
       }}
     >
       <div className="App">

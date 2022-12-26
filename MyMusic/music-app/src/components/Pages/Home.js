@@ -1,7 +1,7 @@
 import styles from "../assets/home.module.css";
 import Cover from "../img/covers.jpeg";
 import { useState, useEffect, useContext, useRef } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container, Button, Spinner } from "react-bootstrap";
 import { PlayList } from "../PlayList";
 import axios from "axios";
 import PlayListImg from "../img/rapcav.jpeg";
@@ -10,12 +10,15 @@ import { CreateList } from "../CreateList";
 import { ThemeContext } from "../../App";
 
 export const Home = () => {
-  const [data, setData] = useState([]);
-  const { create, setCreate } = useContext(ThemeContext);
 
+  
+  const [data, setData] = useState([]);
+  const { create, setCreate, playlists} = useContext(ThemeContext);
+
+  console.log(playlists);
   return (
     <>
-      <div className={ styles.Container}>
+      <div className={styles.Container}>
         <div className={styles.topCont}>
           {/* <img className={styles.coverImg} src={Cover}></img>s */}
           <div className={styles.coverTextCont}>
@@ -31,14 +34,15 @@ export const Home = () => {
         <div className={styles.contentContainer}>
           <div className={styles.title}>Playlists</div>
           <div className={styles.playlistContainer}>
-            {data.map((playlist, index) => {
+            {!playlists && (<Spinner/>)}
+            {playlists && playlists.map((playlist, index) => {
+               
               return (
                 <Link to="/songs">
                   <PlayList
                     key={index + playlist}
-                    image={playlist.userId.image}
-                    title={playlist.name}
-                    Vote={playlist.totalVote}
+                    // image={playlist.userId.image}
+                    title={playlist.title}
                   />
                 </Link>
               );
