@@ -1,12 +1,15 @@
 const express = require("express"),
   cors = require("cors");
-const { createPlaylist, getPlaylist } = require("../controller/playlistController");
+const { createPlaylist, getPlaylists, addToPlaylist, getPlaylist } = require("../controller/playlistController");
 const router = express.Router();
+const { check, validationResult } = require("express-validator");
+
 
 router
   .post("/playlists", createPlaylist)
-  .get("/playlists", getPlaylist)
-  .put("/user/:id", () => { })
-  .delete("/user/:id", () => { })
+  .get("/playlists", getPlaylists)
+  .get("/playlist/:id", getPlaylist)
+  .put("/playlist/:id", addToPlaylist)
+  .delete("/playlist/:id", () => { })
 
 exports.playlistRoutes = router;

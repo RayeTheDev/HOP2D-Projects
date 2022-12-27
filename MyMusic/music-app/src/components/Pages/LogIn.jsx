@@ -13,25 +13,6 @@ export const LogIn = () => {
   let password = useRef();
   const baseUrl = "http://localhost:8000";
 
-  // useEffect(() => {
-  //   if (nameI != null && passwordI != null) {
-  //     axios
-  //       .post(baseUrl + "/users", { email: nameI, password: passwordI })
-  //       .then((res) => {
-  //         console.log(res.data);
-  //       })
-  //       .catch((err) => {
-  //         console.log(err);
-  //       });
-  //   }
-  // }, [nameI, passwordI]);
-
-  const SetValue = () => {
-    setNameI(name.current.value);
-    setPasswordI(password.current.value);
-    console.log(name.current.value);
-    console.log(password.current.value);
-  };
 
   return (
     <div className={styles.Container}>
@@ -62,7 +43,7 @@ export const LogIn = () => {
           </div>
 
           <Button
-            onClick={() => SetValue()}
+            // onClick={() => SetValue()}
             className={styles.but}
             variant="warning">
             LOG IN

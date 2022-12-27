@@ -2,7 +2,7 @@ import { NavBar, Home, Songs, Search, LogIn, SignUp } from "./components";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-
+import { AuthProvider } from "./components/contexts/AuthContext";
 
 export const ThemeContext = createContext({});
 
@@ -13,13 +13,13 @@ function App() {
   const [accessToken, setAccessToken] = useState("");
   const [playingTrack, setPlayingTrack] = useState();
   const [albums, setAlbums] = useState([]);
-  const [isNavbar, setIsNavbar] = useState(false)
-  const [artists, setArtists] = useState([])
+  const [isNavbar, setIsNavbar] = useState(false);
+  const [artists, setArtists] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [playlists, setPlaylists] = useState([]);
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
   const audio = new Audio(albums.uri);
-
 
   useEffect(() => {
     //API Access Token
@@ -41,6 +41,12 @@ function App() {
         setAccessToken(data.access_token);
         console.log(data.access_token);
       });
+
+    (async () => {
+      const res = await axios.get("http://localhost:8000/playlists");
+      console.log(res.data);
+      setPlaylists(res.data);
+    })();
   }, []);
 
   //Search
@@ -87,8 +93,7 @@ function App() {
       });
   }
   console.log(albums);
-  console.log(artists)
-
+  console.log(artists);
 
   return (
     <ThemeContext.Provider
@@ -108,23 +113,27 @@ function App() {
         search,
         artists,
         setIsNavbar,
-        isNavbar
+        isNavbar,
+        playlists,
+        setPlaylists,
       }}
     >
-      <div className="App">
-        <BrowserRouter>
-          <NavBar />
-          <Routes>
-            <Route path="/" element={<Home />}></Route>
-            <Route path="/albums">
-              <Route path=":id" element={<Songs />}></Route>
-            </Route>
-            <Route path="/search" element={<Search />}></Route>
-            <Route path="/login" element={<LogIn />}></Route>
-            <Route path="/signup" element={<SignUp />}></Route>
-          </Routes>
-        </BrowserRouter>
-      </div>
+      <AuthProvider>
+        <div className="App">
+          <BrowserRouter>
+            <NavBar />
+            <Routes>
+              <Route path="/" element={<Home />}></Route>
+              <Route path="/albums">
+                <Route path=":id" element={<Songs />}></Route>
+              </Route>
+              <Route path="/search" element={<Search />}></Route>
+              <Route path="/login" element={<LogIn />}></Route>
+              <Route path="/signup" element={<SignUp />}></Route>
+            </Routes>
+          </BrowserRouter>
+        </div>
+      </AuthProvider>
     </ThemeContext.Provider>
   );
 }

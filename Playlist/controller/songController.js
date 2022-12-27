@@ -16,3 +16,8 @@ exports.getSong = async (req, res) => {
   const result = await Song.find({});
   res.send(result);
 };
+exports.addToPlaylist = async (req, res) => {
+  const playlistId = req.query.playlistId
+  const songId = req.params.id
+
+}
