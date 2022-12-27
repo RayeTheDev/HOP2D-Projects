@@ -4,7 +4,7 @@ const { createSong, getSong } = require("../controller/songController");
 const router = express.Router();
 
 router
-  .post("/songs", createSong )
+  .post("/songs", createSong)
   .get("/songs", getSong)
   .put("/song/:id",() => {})
   .delete("/song/:id", () => {})

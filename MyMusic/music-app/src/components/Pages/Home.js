@@ -8,17 +8,22 @@ import PlayListImg from "../img/rapcav.jpeg";
 import { Link } from "react-router-dom";
 import { CreateList } from "../CreateList";
 import { ThemeContext } from "../../App";
+import { useAuth } from "../contexts/AuthContext";
 
 export const Home = () => {
 
   
   const [data, setData] = useState([]);
   const { create, setCreate, playlists} = useContext(ThemeContext);
+  const { currentUser} = useAuth()
+
 
   console.log(playlists);
+  console.log()
   return (
     <>
-      <div className={styles.Container}>
+      <div className={create ? `${styles.Container} ${styles.blur}`: styles.Container}>
+        { currentUser && currentUser.email}
         <div className={styles.topCont}>
           {/* <img className={styles.coverImg} src={Cover}></img>s */}
           <div className={styles.coverTextCont}>
@@ -36,21 +41,20 @@ export const Home = () => {
           <div className={styles.playlistContainer}>
             {!playlists && (<Spinner/>)}
             {playlists && playlists.map((playlist, index) => {
-               
+               console.log(playlist)
               return (
-                <Link to="/songs">
+                <Link to={`/playlists/${playlist._id}`}>
                   <PlayList
                     key={index + playlist}
                     // image={playlist.userId.image}
                     title={playlist.title}
                   />
-                </Link>
+                 </Link>
               );
             })}
           </div>
         </div>
       </div>
-
       <CreateList />
     </>
   );

@@ -127,6 +127,9 @@ function App() {
               <Route path="/albums">
                 <Route path=":id" element={<Songs />}></Route>
               </Route>
+              <Route path="/playlists">
+                <Route path=":id" element={<Songs />}></Route>
+              </Route>
               <Route path="/search" element={<Search />}></Route>
               <Route path="/login" element={<LogIn />}></Route>
               <Route path="/signup" element={<SignUp />}></Route>

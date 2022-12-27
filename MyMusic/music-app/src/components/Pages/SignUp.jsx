@@ -8,13 +8,14 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { auth } from "../../config/firebase";
 import { useAuth } from "../contexts/AuthContext";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 export const SignUp = () => {
-  const [nameI, setNameI] = useState();
-  const [passwordI, setPasswordI] = useState();
+  const [emailI, setEmailI] = useState("");
+  const [passwordI, setPasswordI] = useState("");
   const [error, setError] = useState("");
   const [app, setApp] = useState(false);
-  const { signup, currentUser } = useAuth;
+  const { signup, currentUser } = useAuth();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   let nameRef = useRef();
@@ -47,34 +48,29 @@ export const SignUp = () => {
   //   }
   // }, [nameI, passwordI]);
 
-  // const SetValue = () => {
-  //   setNameI(name.current.value);
-  //   setPasswordI(password.current.value);
-  //   console.log(name.current.value);
-  //   console.log(password.current.value);
-  // };
+  const onSubmit = (e) => {
+    e.preventDefault();
 
-  // const onSubmit = async (e) => {
-  //   e.preventDefault();
+    createUserWithEmailAndPassword(auth, emailI, passwordI)
+      .then((userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        navigate("/login");
+      })
 
-  //   await createUserWithEmailAndPassword(auth, nameI, passwordI)
-  //     .then((userCredential) => {
-  //       const user = userCredential.user;
-  //       console.log(user);
-  //       navigate("./login");
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.errorCode;
-  //       const errorMessage = error.message;
-  //       console.log(errorCode, errorMessage);
-  //     });
-  // };
-  // console.log(currentUser.email);
+      .catch((error) => {
+        const errorCode = error.errorCode;
+        const errorMessage = error.message;
+        console.log(errorCode, errorMessage);
+      });
+  };
+  console.log(currentUser);
+
   return (
     <div className={styles.Container}>
       {" "}
       {/* <ToastContainer /> */}
-      {error && toast.error(Error)}
+      {error && toast.error("DONT MATCH")}
       <Link to="/">
         <div className={styles.logoCont}>
           <BsMusicNoteList className={styles.logo} />
@@ -82,7 +78,8 @@ export const SignUp = () => {
         </div>
       </Link>
       {currentUser && currentUser.email}
-      <Form onSubmit={handleSubmit} className={styles.borderContainer}>
+      {/* {currentUser && currentUser.password} */}
+      <Form className={styles.borderContainer}>
         <div className={styles.topCont}>
           <span>Sign Up</span>
         </div>
@@ -90,19 +87,26 @@ export const SignUp = () => {
           <span className={styles.section1Texts}>Email address</span>
           <input
             placeholder="Your email "
-            ref={nameRef}
-            className={styles.inp}></input>
+            value={emailI}
+            onChange={(e) => setEmailI(e.target.value)}
+            required
+            className={styles.inp}
+          ></input>
         </div>
         <div className={styles.section1}>
           <span className={styles.section1Texts}>Password</span>
           <input
+            type="password"
             placeholder="Your password"
-            ref={passwordRef}
-            className={styles.inp}></input>
+            required
+            onChange={(e) => setPasswordI(e.target.value)}
+            value={passwordI}
+            className={styles.inp}
+          ></input>
         </div>
 
         <div className={styles.section2}>
-          <Button disabled={loading} className={styles.but} variant="warning">
+          <Button onClick={onSubmit} className={styles.but} variant="warning">
             SIGN UP
           </Button>
         </div>

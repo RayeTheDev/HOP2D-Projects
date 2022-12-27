@@ -8,7 +8,6 @@ const playlistSchema = new Schema({
   createdAt: { type: Date, default: Date.now()},
   updateAt: { type: Date, default: Date.now()},
   isPrivate: { type: Boolean,default: false},
-
   songs: [{type: Schema.Types.ObjectId, ref: "Song"}]
 });
 

@@ -80,7 +80,7 @@ export const Songs = (props) => {
   console.log(dur);
   return (
     <div className={styles.Container}>
-      {songs.map((song, index) => {
+      {songs && songs.map((song, index) => {
         return (
           <div
             className={styles.songContainer}

@@ -9,6 +9,7 @@ export const CreateList = () => {
     useContext(ThemeContext);
   let playlistName = useRef();
   const [pName, setPName] = useState();
+  const [des, setDes] = useState("");
 
   // console.log(create);
   const baseUrl = "http://localhost:8000";
@@ -17,9 +18,14 @@ export const CreateList = () => {
     const title = playlistName.current.value;
     if (title)
       axios
-        .post(baseUrl + "/playlists", { title })
+        .post(baseUrl + "/playlists", {
+          title: title,
+          description: des,
+          isPrivate: false,
+        })
         .then((res) => {
           setPlaylists([...playlists, res.data]);
+          setCreate(false);
           // console.log(res.data);
         })
         .catch((error) => {
@@ -50,6 +56,8 @@ export const CreateList = () => {
           <div>
             <span className={styles.infoText}>Description:</span>
             <input
+              onChange={(e) => setDes(e.target.value)}
+              value={des}
               placeholder="Add an optional description"
               className={styles.inpD}
             ></input>

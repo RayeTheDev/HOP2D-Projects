@@ -12,7 +12,7 @@ body {
   overflow-x: hidden;
 }
 .blur {
-  
+  filter: blur(10px);
 }
 .topCont {
   width: 85vw;
