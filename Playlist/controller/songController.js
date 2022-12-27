@@ -7,11 +7,11 @@ exports.createSong = async (req, res) => {
 };
 exports.getSong = async (req, res) => {
   const playlistId = req.query.playlistId;
-  
+
   if (playlistId) {
-    const result = await Song.find({playlistId});
+    const result = await Song.find({ playlistId });
     res.send(result);
-    return 
+    return
   }
   const result = await Song.find({});
   res.send(result);

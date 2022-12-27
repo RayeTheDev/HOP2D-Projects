@@ -6,7 +6,7 @@ const router = express.Router();
 router
   .post("/playlists", createPlaylist)
   .get("/playlists", getPlaylist)
-  .put("/user/:id",() => {})
-  .delete("/user/:id", () => {})
+  .put("/user/:id", () => { })
+  .delete("/user/:id", () => { })
 
 exports.playlistRoutes = router;
