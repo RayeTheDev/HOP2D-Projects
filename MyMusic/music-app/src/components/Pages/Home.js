@@ -25,15 +25,15 @@ export const Home = () => {
       <div className={create ? `${styles.Container} ${styles.blur}` : styles.Container}>
         
         <div className={styles.topCont}>
-          {/* <img className={styles.coverImg} src={Cover}></img>s */}
-          <div className={styles.coverTextCont}>
+
+          {/* <div className={styles.coverTextCont}>
             <span className={styles.coverTitle}>Connect on Invader</span>
             <p className={styles.coverText}>
               Discover, stream, and share a constantly expanding mix of music
               from emerging and major artists around the world.
             </p>
-            {/* <Button className={styles.coverButton}>Sign up for free</Button> */}
-          </div>
+
+          </div> */}
         </div>
 
         <div className={styles.contentContainer}>
