@@ -7,11 +7,12 @@ import { Container, Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../App";
+import { useAuth } from "./contexts/AuthContext";
 
 export const NavBar = () => {
   const { create, setCreate, setIsNavbar, isNavbar } = useContext(ThemeContext)
   let location = useLocation()
-
+  const { currentUser, isLogIn } = useAuth();
   useEffect(() => {
     if (location.pathname == '/login' || location.pathname == '/signup') {
       setIsNavbar(true)
@@ -19,7 +20,7 @@ export const NavBar = () => {
       setIsNavbar(false)
     }
   }, [location])
-
+  console.log(isLogIn)
   return (
 
     <div className={isNavbar ? `${styles.Container} ${styles.none}` : styles.Container}>
@@ -57,14 +58,14 @@ export const NavBar = () => {
           </div>
         </div>
 
-        <div className={styles.bottomCont}>
+        <div className={currentUser ? `${styles.bottomCont} ${styles.none}` : styles.bottomCont}>
           <Link to="/login" onClick={() => setIsNavbar(true)}>
             <Button className={styles.buttonLogIn}>Log In</Button>{" "}
           </Link>
           <Link to="/signup">
-          <Button className={styles.buttonSignUp}>Sign Up</Button>{" "}
+            <Button className={styles.buttonSignUp}>Sign Up</Button>{" "}
           </Link>
-          
+
         </div>
 
       </Container>

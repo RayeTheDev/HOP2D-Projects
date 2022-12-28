@@ -9,7 +9,7 @@
   padding-top: 30px;
 }
 .none {
-  display: none;
+  display: none !important;
 }
 /* .logoImg {
     width: 170px;

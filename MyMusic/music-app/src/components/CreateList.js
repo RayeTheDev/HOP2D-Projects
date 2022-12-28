@@ -3,7 +3,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import { ThemeContext } from "../App";
 import styles from "./assets/createlist.module.css";
-
+import { MdOutlineDisabledByDefault } from 'react-icons/md'
 export const CreateList = () => {
   const { create, setCreate, playlists, setPlaylists } =
     useContext(ThemeContext);
@@ -40,13 +40,13 @@ export const CreateList = () => {
     >
       <div className={styles.headSector}>
         <span className={styles.title}>Create Playlist</span>
-        <span>Exit</span>
+        <MdOutlineDisabledByDefault onClick={() => setCreate(false)} className={styles.disable} />
       </div>
       <div className={styles.midSector}>
         <button variant="light" className={styles.imgInp}></button>
         <div className={styles.infoSector}>
           <div>
-            <span className={styles.infoText}>Name:</span>
+            <label className={styles.infoText}>Name:</label>
             <input
               ref={playlistName}
               placeholder="My Playlist #1"
@@ -54,15 +54,16 @@ export const CreateList = () => {
             ></input>
           </div>
           <div>
-            <span className={styles.infoText}>Description:</span>
+            <label className={styles.infoText}>Description:</label>
             <input
+
               onChange={(e) => setDes(e.target.value)}
               value={des}
               placeholder="Add an optional description"
               className={styles.inpD}
             ></input>
           </div>
-          <Button onClick={createPlaylist} variant="light">
+          <Button onClick={createPlaylist} className={styles.saveButton} variant="light">
             Create
           </Button>
         </div>

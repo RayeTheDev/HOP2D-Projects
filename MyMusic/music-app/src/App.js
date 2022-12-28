@@ -1,4 +1,4 @@
-import { NavBar, Home, Songs, Search, LogIn, SignUp } from "./components";
+import { NavBar, Home, Songs, Search, LogIn, SignUp, Profile } from "./components";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -122,6 +122,7 @@ function App() {
         <div className="App">
           <BrowserRouter>
             <NavBar />
+            < Profile />
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/albums">

@@ -5,44 +5,44 @@ import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useRef } from "react";
 import axios from "axios";
 import { useState } from "react";
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useAuth } from "../contexts/AuthContext";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export const LogIn = () => {
   const [emailI, setEmailI] = useState("");
   const [passwordI, setPasswordI] = useState("");
   const navigate = useNavigate();
-  const { currentUser } = useAuth();
+  const { currentUser, setIsLogIn } = useAuth();
   const [error, setError] = useState("");
 
   const baseUrl = "http://localhost:8000";
 
   const onSubmit = (e) => {
     e.preventDefault();
-    const auth = getAuth()
+    const auth = getAuth();
     signInWithEmailAndPassword(auth, emailI, passwordI)
-    .then((userCredential) => {
-      const user = userCredential.user;
-      navigate("/");
-    })
-    .catch((error) => {
-      const errorCode = error.code;
-       setError(error.message)
-    });
+      .then((userCredential) => {
+        const user = userCredential.user;
+        navigate("/");
+        setIsLogIn(true);
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        setError(error.message);
+      });
     console.log(currentUser.password);
-    // if (emailI == currentUser.email) {
-    //   navigate("/");
-    //   console.log("Op");
-    // } else {
-    //   setError("Failed to login");
-    // }
   };
 
   return (
     <div className={styles.Container}>
-      {error &&  <Alert variant="danger">{error}</Alert>}
+      {error && toast.error(error)}
       <ToastContainer /> {/* <Container> */}{" "}
       <Link to="/">
         <div className={styles.logoCont}>
@@ -58,8 +58,7 @@ export const LogIn = () => {
           <input
             onChange={(e) => setEmailI(e.target.value)}
             value={emailI}
-            className={styles.inp}
-          ></input>
+            className={styles.inp}></input>
         </div>
         <div className={styles.section1}>
           <span className={styles.section1Texts}>Password</span>
@@ -67,8 +66,7 @@ export const LogIn = () => {
             onChange={(e) => setPasswordI(e.target.value)}
             value={passwordI}
             className={styles.inp}
-            type="password"
-          ></input>
+            type="password"></input>
         </div>
         <span className={styles.section2Texts}>Forget your password? </span>
         <div className={styles.section2}>

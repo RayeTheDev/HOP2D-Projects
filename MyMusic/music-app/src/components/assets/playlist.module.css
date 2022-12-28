@@ -10,6 +10,7 @@
 .img {
   width: 213px;
   height: 200px;
+  border-radius: 0;
 }
 .textCont {
   max-width: 200px;
@@ -43,7 +44,7 @@
 }
 .deleteCont {
   position: absolute;
-  bottom :24px;
+  bottom: 24px;
   right: 23px;
 }
 .icon:hover {

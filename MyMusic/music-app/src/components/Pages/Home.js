@@ -12,18 +12,18 @@ import { useAuth } from "../contexts/AuthContext";
 
 export const Home = () => {
 
-  
+
   const [data, setData] = useState([]);
-  const { create, setCreate, playlists} = useContext(ThemeContext);
-  const { currentUser} = useAuth()
+  const { create, setCreate, playlists } = useContext(ThemeContext);
+  const { currentUser } = useAuth()
 
 
   console.log(playlists);
   console.log()
   return (
     <>
-      <div className={create ? `${styles.Container} ${styles.blur}`: styles.Container}>
-        { currentUser && currentUser.email}
+      <div className={create ? `${styles.Container} ${styles.blur}` : styles.Container}>
+        
         <div className={styles.topCont}>
           {/* <img className={styles.coverImg} src={Cover}></img>s */}
           <div className={styles.coverTextCont}>
@@ -39,9 +39,9 @@ export const Home = () => {
         <div className={styles.contentContainer}>
           <div className={styles.title}>Playlists</div>
           <div className={styles.playlistContainer}>
-            {!playlists && (<Spinner/>)}
+            {!playlists && (<Spinner />)}
             {playlists && playlists.map((playlist, index) => {
-               console.log(playlist)
+              console.log(playlist)
               return (
                 <Link to={`/playlists/${playlist._id}`}>
                   <PlayList
@@ -49,7 +49,7 @@ export const Home = () => {
                     // image={playlist.userId.image}
                     title={playlist.title}
                   />
-                 </Link>
+                </Link>
               );
             })}
           </div>
