@@ -1,5 +1,9 @@
 body {
-  background: linear-gradient(to right, #434343 0%, black 100%);
+  background: linear-gradient(
+    109.6deg,
+    rgba(0, 0, 0, 0.93) 11.2%,
+    rgb(63, 61, 61) 78.9%
+  );
 }
 
 .Container {
@@ -20,7 +24,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background-image: url('https://graphicshell.com/wp-content/uploads/2021/10/Merry-Christmas-Pine-leaves.jpg');
+  background-image: url("https://graphicshell.com/wp-content/uploads/2021/10/Merry-Christmas-Pine-leaves.jpg");
   background-size: cover;
   background-position: 100%;
   background-repeat: no-repeat;
@@ -58,10 +62,10 @@ body {
 .contentContainer {
   display: flex;
   flex-direction: column;
-  width: 85vw;
+  width: 87vw;
   padding-top: 30px;
-  padding-left: 80px;
-  padding-right: 30px;
+  padding-left: 60px;
+  padding-right: 9px;
   padding-bottom: 20px;
 }
 .title {

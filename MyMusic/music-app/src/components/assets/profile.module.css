@@ -6,6 +6,7 @@
   padding-bottom: 4px;
   border-radius: 20px;
   cursor: pointer;
+  z-index: 1111;
 }
 .profile {
   display: flex;

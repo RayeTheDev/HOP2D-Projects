@@ -1,11 +1,11 @@
 const { Schema, Types, model } = require("mongoose");
-const { isEmail } = require("validator");
+const { isEmail, isString } = require("validator");
 
 const playlistSchema = new Schema({
   title: {
     type: String,
     required: true,
-    validate: [isEmail, "Please enter correct value"],
+    // validate: [isString, "Please enter correct value"],
     unique: true,
   },
   description: String,

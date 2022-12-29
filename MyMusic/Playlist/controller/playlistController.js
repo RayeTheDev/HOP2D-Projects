@@ -34,7 +34,7 @@ exports.getPlaylist = async (req, res) => {
 };
 exports.deletePlaylist = async (req, res) => {
   const id = req.params.id;
-  await Playlist.deleteOne({ _id: id });
+  await Playlist.findByIdAndDelete({ _id: id });
   res.send("Deleted");
 };
 exports.addToPlaylist = async (req, res) => {

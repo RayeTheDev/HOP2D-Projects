@@ -5,17 +5,19 @@ import { Container, Button, Spinner } from "react-bootstrap";
 import { PlayList } from "../PlayList";
 import axios from "axios";
 import PlayListImg from "../img/rapcav.jpeg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { CreateList } from "../CreateList";
 import { ThemeContext } from "../../App";
 import { useAuth } from "../contexts/AuthContext";
 
 export const Home = () => {
 
-
   const [data, setData] = useState([]);
   const { create, setCreate, playlists } = useContext(ThemeContext);
   const { currentUser } = useAuth()
+  
+
+
 
 
   console.log(playlists);
@@ -23,7 +25,7 @@ export const Home = () => {
   return (
     <>
       <div className={create ? `${styles.Container} ${styles.blur}` : styles.Container}>
-        
+
         <div className={styles.topCont}>
 
           {/* <div className={styles.coverTextCont}>

@@ -50,3 +50,6 @@
 .songContainer:hover {
   background-color: rgb(29, 29, 29);
 }
+.delete {
+  font-size: 30px;
+}

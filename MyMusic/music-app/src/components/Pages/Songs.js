@@ -1,6 +1,8 @@
+import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { ThemeContext } from "../../App";
+import { AiFillDelete } from "react-icons/ai";
 import styles from "../assets/songs.module.css";
 import { Player } from "../Player";
 
@@ -15,6 +17,21 @@ export const Songs = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [index, setIndex] = useState();
   const { id } = useParams("");
+  const Navigate = useNavigate()
+
+  console.log(id)
+  const Delete = () => {
+    axios
+      .delete(`http://localhost:8000/playlist/${id}`, {
+      })
+      .then((res) => {
+        console.log('deleted');
+        Navigate('/')
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
 
   const audioElem = useRef();
 
@@ -80,6 +97,8 @@ export const Songs = (props) => {
   console.log(dur);
   return (
     <div className={styles.Container}>
+
+      <AiFillDelete onClick={Delete} className={styles.delete} />
       {songs && songs.map((song, index) => {
         return (
           <div
