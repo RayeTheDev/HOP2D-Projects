@@ -1,15 +1,14 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-
+import { ThemeContext } from "../../App";
 import { AiFillDelete } from "react-icons/ai";
 import styles from "../assets/songs.module.css";
 import { Player } from "../Player";
-import { MainContext } from "../contexts/MainProvider";
 
-export const Songs = (props) => {
-  const { accessToken, playlistSong } = useContext(MainContext);
-  const [songs, setSongs] = useState([]);
+export const SongsPlaylist = () => {
+  const { accessToken } = useContext(ThemeContext);
+  const [songs, setSongs] = useState();
   const [selectedSong, setSelectedSong] = useState(null);
   const [dur, setDur] = useState();
   const [p, setP] = useState(false);
@@ -18,32 +17,35 @@ export const Songs = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [index, setIndex] = useState();
   const { id } = useParams("");
-  const Navigate = useNavigate()
-
+  const Navigate = useNavigate();
 
   useEffect(() => {
     axios
-    .get(`http://localhost:8000/playlist/${id}`, {
-    })
-    .then((res) => {
-      console.log('deleted');
+      .get(`http://localhost:8000/playlist/${id}`, {})
+      .then((res) => {
+        // console.log(res.data.songs);
+        setSongs(res.data.songs);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }, [])
-  console.log(id)
+  console.log(id);
+  const Delete = () => {
+    axios
+      .delete(`http://localhost:8000/playlist/${id}`, {})
+      .then((res) => {
+        console.log("deleted");
+        Navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
-
-
-  
   const audioElem = useRef();
 
-  useEffect(() => {
-    generateSongs();
-    console.log(accessToken);
-  }, []);
   useEffect(() => {
     if (selectedSong != null) {
       if (isPlaying) {
@@ -54,30 +56,6 @@ export const Songs = (props) => {
     }
   }, [isPlaying, selectedSong]);
 
-  async function generateSongs() {
-
-    var searchParameters = {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + accessToken,
-      },
-    };
-
-    fetch(
-      "https://api.spotify.com/v1/albums/" + `${id}` + "/tracks" + "?market=us",
-      searchParameters
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        console.log("song: ", data.items);
-        setSongs(data.items);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
-
   const onPlaying = () => {
     const duration = audioElem.current.duration;
     const ct = audioElem.current.currentTime;
@@ -85,9 +63,8 @@ export const Songs = (props) => {
     setDur((ct / duration) * 100);
     setLength(duration);
   };
-  console.log(song_data);
   const ms = 54000000;
-  console.log(new Date(ms).toISOString().slice(11, 19)); // 👉️ 15:00:00
+
   function padTo2Digits(num) {
     return num.toString().padStart(2, "0");
   }
@@ -100,37 +77,44 @@ export const Songs = (props) => {
     return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`;
   }
 
-  console.log(dur);
+  console.log(songs);
   return (
     <div className={styles.Container}>
 
-      {/* <AiFillDelete onClick={Delete} className={styles.delete} /> */}
-      {songs && songs.map((song, index) => {
-        return (
-          <div
-            className={styles.songContainer}
-            onClick={() => {
-              setIndex(index);
-              setP(true);
-              setSong_data(song);
-              setSelectedSong(song.preview_url);
-              setIsPlaying(true);
-              // audioElem.current.play()
-            }}
-          >
-            {/* <img src={song.image} /> */}
-            <span className={styles.id}>{index + 1}</span>
-            <div className={styles.song}>
-              <span className={styles.songName}>{song.name}</span>
-              <span className={styles.artist}>{song.artists[0].name}</span>
+        <div className={styles.topCont}>
+            <img></img>
+        </div>
+
+
+
+
+      <AiFillDelete onClick={Delete} className={styles.delete} />
+      {songs &&
+        songs.map((song, index) => {
+          return (
+            <div
+              className={styles.songContainer}
+              onClick={() => {
+                setIndex(index);
+                setP(true);
+                setSong_data(song);
+                setSelectedSong(song.preview_url);
+                setIsPlaying(true);
+              }}
+            >
+              {/* <img src={song.image} /> */}
+              <span className={styles.id}>{index + 1}</span>
+              <div className={styles.song}>
+                <span className={styles.songName}>{song.name}</span>
+                <span className={styles.artist}>{song.artist}</span>
+              </div>
+              <span className={styles.duration}>
+                {convertMsToTime(song.duration_ms)}
+              </span>
+              <Player />
             </div>
-            <span className={styles.duration}>
-              {convertMsToTime(song.duration_ms)}
-            </span>
-            <Player />
-          </div>
-        );
-      })}
+          );
+        })}
 
       <>
         <audio src={selectedSong} ref={audioElem} onTimeUpdate={onPlaying} />

@@ -1,12 +1,13 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
-import { ThemeContext } from "../App";
 import styles from "./assets/createlist.module.css";
 import { MdOutlineDisabledByDefault } from 'react-icons/md'
+import { MainContext } from "./contexts/MainProvider";
+
 export const CreateList = () => {
   const { create, setCreate, playlists, setPlaylists } =
-    useContext(ThemeContext);
+    useContext(MainContext);
   let playlistName = useRef();
   const [pName, setPName] = useState();
   const [des, setDes] = useState("");

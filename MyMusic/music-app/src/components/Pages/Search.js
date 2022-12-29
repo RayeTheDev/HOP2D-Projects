@@ -13,8 +13,8 @@ import { useState, useEffect, createContext, useContext } from "react";
 import { Player } from "../Player";
 import { AlbumSearchResult } from "../AlbumSearchResult";
 import axios from "axios";
-import { ThemeContext } from "../../App";
 import { Artist } from "../Artist";
+import { MainContext } from "../contexts/MainProvider";
 
 export const Search = () => {
   const {
@@ -27,7 +27,7 @@ export const Search = () => {
     isPlaying,
     search,
     artists
-  } = useContext(ThemeContext);
+  } = useContext(MainContext);
   function chooseTrack(album) {
     setPlayingTrack(album);
     setSearchInput("");

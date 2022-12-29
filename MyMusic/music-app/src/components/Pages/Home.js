@@ -7,27 +7,24 @@ import axios from "axios";
 import PlayListImg from "../img/rapcav.jpeg";
 import { Link, useParams } from "react-router-dom";
 import { CreateList } from "../CreateList";
-import { ThemeContext } from "../../App";
+import { MainContext } from "../contexts/MainProvider";
 import { useAuth } from "../contexts/AuthContext";
 
 export const Home = () => {
-
   const [data, setData] = useState([]);
-  const { create, setCreate, playlists } = useContext(ThemeContext);
-  const { currentUser } = useAuth()
-  
-
-
-
+  const { create, setCreate, playlists, playlistSong, setPlaylistSong } =
+    useContext(MainContext);
+  const { currentUser } = useAuth();
 
   console.log(playlists);
-  console.log()
   return (
     <>
-      <div className={create ? `${styles.Container} ${styles.blur}` : styles.Container}>
-
+      <div
+        className={
+          create ? `${styles.Container} ${styles.blur}` : styles.Container
+        }
+      >
         <div className={styles.topCont}>
-
           {/* <div className={styles.coverTextCont}>
             <span className={styles.coverTitle}>Connect on Invader</span>
             <p className={styles.coverText}>
@@ -41,19 +38,21 @@ export const Home = () => {
         <div className={styles.contentContainer}>
           <div className={styles.title}>Playlists</div>
           <div className={styles.playlistContainer}>
-            {!playlists && (<Spinner />)}
-            {playlists && playlists.map((playlist, index) => {
-              console.log(playlist)
-              return (
-                <Link to={`/playlists/${playlist._id}`}>
-                  <PlayList
-                    key={index + playlist}
-                    // image={playlist.userId.image}
-                    title={playlist.title}
-                  />
-                </Link>
-              );
-            })}
+            {!playlists && <Spinner />}
+            {playlists &&
+              playlists.map((playlist, index) => {
+                console.log(playlist);
+                return (
+                  <Link to={`/playlist/${playlist._id}`}>
+                    <PlayList
+                      onClick={() => setPlaylistSong(true)}
+                      key={index + playlist}
+                      // image={playlist.userId.image}
+                      title={playlist.title}
+                    />
+                  </Link>
+                );
+              })}
           </div>
         </div>
       </div>

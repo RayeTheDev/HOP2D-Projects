@@ -1,17 +1,18 @@
 .Container {
-  width: 150px;
-  height: 220px;
+  width: 200px;
+  height: 290px;
   background-color: rgba(0, 0, 0, 0.274);
-  padding-left: 15px;
+  padding-left: 25px;
   /* padding-right: 5px; */
   padding-top: 10px;
   position: relative;
+  background-repeat: no-repeat;
   border-radius: 10px;
 }
 
 .img {
-  width: 120px;
-  height: 100px;
+  width: 150px;
+  height: 150px;
   border-radius: 0;
 }
 .textCont {
@@ -56,9 +57,7 @@
   font-size: 23px;
 }
 .Container:hover {
-  background: radial-gradient(
-    circle at 24.1% 68.8%,
-    rgb(50, 50, 50) 0%,
-    rgb(0, 0, 0) 99.4%
-  );
+  background-color: rgb(37, 37, 37);
+
 }
+  

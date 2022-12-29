@@ -13,9 +13,7 @@ export const PlayList = (props) => {
         <BiUpvote className={styles.icon} />
         <span className={styles.botText}>{props.Vote}</span>
       </div>
-      <div className={styles.deleteCont}>
-        <AiFillDelete  className={styles.delete} />
-      </div>
+    
     </div>
   );
 };

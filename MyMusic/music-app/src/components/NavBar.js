@@ -8,9 +8,10 @@ import { Link, useLocation } from "react-router-dom";
 import { useContext, useEffect } from "react";
 import { ThemeContext } from "../App";
 import { useAuth } from "./contexts/AuthContext";
+import { MainContext } from "./contexts/MainProvider";
 
 export const NavBar = () => {
-  const { create, setCreate, setIsNavbar, isNavbar } = useContext(ThemeContext)
+  const { create, setCreate, setIsNavbar, isNavbar } = useContext(MainContext)
   let location = useLocation()
   const { currentUser, isLogIn } = useAuth();
   useEffect(() => {
@@ -21,6 +22,10 @@ export const NavBar = () => {
     }
   }, [location])
   console.log(isLogIn)
+
+
+
+
   return (
 
     <div className={isNavbar ? `${styles.Container} ${styles.none}` : styles.Container}>

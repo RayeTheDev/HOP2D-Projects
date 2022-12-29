@@ -6,3 +6,4 @@ export * from "./Pages/Search"
 export * from "./Pages/LogIn"
 export * from './Pages/SignUp'
 export * from './Profile'
+export * from './Pages/SongsPlaylist'

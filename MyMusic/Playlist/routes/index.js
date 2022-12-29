@@ -1,5 +1,7 @@
-const { playlistRoutes } = require('./playlistRoutes')
-exports.playlistRoutes = playlistRoutes
+const { playlistRoutes } = require("./playlistRoutes");
+const { songRoutes } = require("./songRoutes");
+const { userRoutes } = require("./userRoutes");
+const { artistRoutes } = require("./artistRoutes");
 
-const { songRoutes } = require('./songRoutes')
-exports.songRoutes = songRoutes
+
+module.exports = { playlistRoutes, songRoutes, userRoutes, artistRoutes}
