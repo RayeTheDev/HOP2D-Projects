@@ -1,5 +1,5 @@
 body {
-  background: rgb(21, 21, 21);
+  background: rgb(20, 20, 20);
 }
 
 .Container {
@@ -11,8 +11,8 @@ body {
   /* display: grid; */
   /* grid-template-rows: 2fr 5fr 3fr 4fr; */
   overflow-x: hidden;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 1));
-  background-color: rgb(32, 87, 100);
+  /* background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+  background-color: rgb(32, 87, 100); */
 }
 .blur {
   filter: blur(10px);

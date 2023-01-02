@@ -26,8 +26,8 @@ export const Home = () => {
           create ? `${styles.Container} ${styles.blur}` : styles.Container
         }
       >
-        <div className={styles.topCont}>
-          {/* 
+        {/* <div className={styles.topCont}>
+          
           <div className={styles.coverTextCont}>
             <span className={styles.coverTitle}> Connect on Invader</span>
             <p className={styles.coverText}>d
@@ -35,9 +35,9 @@ export const Home = () => {
               from emerging and major artists around the world.
             </p>
 
-          </div> */}
+          </div>
           <img className={styles.coverImg} src="https://digwallpapers.com/wallpapers/full/3/b/e/15985-3840x2160-music-background-photo-desktop-4k.jpg"></img>
-        </div>
+        </div> */}
 
         <div className={styles.contentContainer}>
           <div className={styles.title}>Playlists</div>
