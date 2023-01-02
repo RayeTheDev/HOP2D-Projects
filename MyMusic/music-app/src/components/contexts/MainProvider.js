@@ -3,7 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 export const MainContext = createContext();
 
-export const MainProvider = ({children}) => {
+export const MainProvider = ({ children }) => {
   const [create, setCreate] = useState(false);
   const [data, setData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
@@ -14,7 +14,9 @@ export const MainProvider = ({children}) => {
   const [artists, setArtists] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playlists, setPlaylists] = useState([]);
+  const [playlistName, setPlaylistName] = useState()
   const [playlistSong, setPlaylistSong] = useState(false);
+  const [displayProfile, setDisplayProfile] = useState(true)
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
   const audio = new Audio(albums.uri);
@@ -40,6 +42,10 @@ export const MainProvider = ({children}) => {
     setPlaylists,
     setPlaylistSong,
     playlistSong,
+    playlistName,
+    setPlaylistName,
+    displayProfile,
+    setDisplayProfile
   };
 
   useEffect(() => {
@@ -102,9 +108,9 @@ export const MainProvider = ({children}) => {
 
     var returnedAlbums = await fetch(
       "https://api.spotify.com/v1/artists/" +
-        artistID +
-        "/albums" +
-        "?include_groups=album&market=US&limit=50",
+      artistID +
+      "/albums" +
+      "?include_groups=album&market=US&limit=50",
       searchParameters
     )
       .then((response) => response.json())
@@ -116,7 +122,7 @@ export const MainProvider = ({children}) => {
 
   return (
     <MainContext.Provider value={value}>
-        {children}
+      {children}
     </MainContext.Provider>
   )
 };

@@ -16,7 +16,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RecaptchaVerifier } from "firebase/auth";
 
-
 export const LogIn = () => {
   const [emailI, setEmailI] = useState("");
   const [passwordI, setPasswordI] = useState("");
@@ -41,8 +40,6 @@ export const LogIn = () => {
       });
     console.log(currentUser.password);
   };
-
-
 
   return (
     <div className={styles.Container}>

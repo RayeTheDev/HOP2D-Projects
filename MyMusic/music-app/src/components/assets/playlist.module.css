@@ -2,7 +2,7 @@
   width: 200px;
   height: 290px;
   background-color: rgba(0, 0, 0, 0.274);
-  padding-left: 25px;
+  padding-left: 15px;
   /* padding-right: 5px; */
   padding-top: 10px;
   position: relative;
@@ -11,9 +11,9 @@
 }
 
 .img {
-  width: 150px;
+  width: 170px;
   height: 150px;
-  border-radius: 0;
+  border-radius: 0px;
 }
 .textCont {
   max-width: 200px;
@@ -58,6 +58,4 @@
 }
 .Container:hover {
   background-color: rgb(37, 37, 37);
-
 }
-  

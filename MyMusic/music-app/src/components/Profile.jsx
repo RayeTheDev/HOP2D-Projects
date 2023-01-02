@@ -2,10 +2,24 @@ import { Dropdown } from "react-bootstrap";
 import styles from "./assets/profile.module.css";
 import { useAuth } from "./contexts/AuthContext";
 import { getAuth, signOut } from "firebase/auth";
+import { useLocation } from "react-router";
+import { useContext } from "react";
+import { MainContext } from "./contexts/MainProvider";
+import { useEffect } from "react";
 
 export const Profile = () => {
   const { currentUser } = useAuth();
+  const { setDisplayProfile, displayProfile } = useContext(MainContext);
   const auth = getAuth();
+  let location = useLocation();
+  useEffect(() => {
+    if (location.pathname == "/login" || location.pathname == "/search") {
+      setDisplayProfile(false);
+    } else {
+      setDisplayProfile(true);
+    }
+  }, [location]);
+
   const SignOut = () => {
     signOut(auth)
       .then(() => {
@@ -16,12 +30,14 @@ export const Profile = () => {
         console.log(error);
       });
   };
-
+  console.log(displayProfile);
   return (
     <Dropdown style={{ borderRadius: "30px" }}>
       <div
         className={
-          currentUser ? styles.container : `${styles.container} ${styles.none}`
+          currentUser && displayProfile
+            ? styles.container
+            : `${styles.container} ${styles.none}`
         }>
         <Dropdown.Toggle className={styles.profile}>
           <img

@@ -54,6 +54,7 @@ export const SignUp = () => {
     createUserWithEmailAndPassword(auth, emailI, passwordI)
       .then((userCredential) => {
         const user = userCredential.user;
+        
         console.log(user);
         navigate("/login");
       })

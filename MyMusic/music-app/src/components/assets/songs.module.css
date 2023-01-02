@@ -1,11 +1,26 @@
 .Container {
   width: 100vw;
+  height: 100vh;
+  /* display: grid; */
   padding-left: 15%;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 1));
+  background-color: rgb(32, 87, 100);
 }
 .topCont {
   width: 100%;
-  height: 20%;
-  background-color: white;
+  height: 40%;
+  /* background-color: white; */
+  display: flex;
+  padding-top: 80px;
+  padding-left: 30px;
+  padding-bottom: 30px;
+}
+.line {
+  border: 1px solid black;
+  /* width: 90%; */
+}
+.mainCont {
+  width: 100vw;
 }
 .songContainer {
   width: 90%;
@@ -48,10 +63,39 @@
   font-family: "Mulish", sans-serif;
   opacity: 60%;
 }
-
+.threeDot {
+  font-size: 25px;
+  color: white;
+  /* margin-left: 30px; */
+}
 .songContainer:hover {
-  background-color: rgb(29, 29, 29);
+  background-color: rgba(10, 10, 10, 0.267);
 }
 .delete {
   font-size: 30px;
+}
+.dropdown {
+  margin-left: 30px;
+  width: 0px;
+}
+.pImg {
+  width: 200px;
+  height: 200px;
+  border-radius: 0px;
+}
+.infoCont {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 20px;
+}
+.playlistTitle {
+  font-size: 60px;
+  color: white;
+  font-family: "Mulish", sans-serif;
+}
+.playlistTexts {
+  font-size: 15px;
+  color: white;
+  font-family: "Mulish", sans-serif;
 }
