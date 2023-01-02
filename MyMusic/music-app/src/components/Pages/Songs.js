@@ -1,7 +1,6 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-
 import { AiFillDelete } from "react-icons/ai";
 import styles from "../assets/songs.module.css";
 import { Player } from "../Player";

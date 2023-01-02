@@ -20,11 +20,12 @@
   /* width: 90%; */
 }
 .mainCont {
-  width: 100vw;
+  width: 85%;
+  padding-left: 30px;
 }
 .songContainer {
-  width: 90%;
-  margin-left: 25px;
+  width: 100%;
+  /* margin-left: 25px; */
   padding: 10px;
   /* border: 1px solid black; */
   color: white;

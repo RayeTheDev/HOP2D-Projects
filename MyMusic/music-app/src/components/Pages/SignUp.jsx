@@ -54,31 +54,44 @@ export const SignUp = () => {
     createUserWithEmailAndPassword(auth, emailI, passwordI)
       .then((userCredential) => {
         const user = userCredential.user;
-        
+
         console.log(user);
-        navigate("/login");
+       
+        axios
+          .post(`http://localhost:8000/users`, {
+            email: emailI,
+            password: passwordI,
+          })
+          .then((res) => {
+            console.log(res.data);
+             navigate("/login");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
 
       .catch((error) => {
         const errorCode = error.errorCode;
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
+        toast.error("Please enter valid email address or password")
       });
   };
-  console.log(currentUser);
+  // console.log(currentUser);
 
   return (
     <div className={styles.Container}>
       {" "}
-      {/* <ToastContainer /> */}
-      {error && toast.error("DONT MATCH")}
+      <ToastContainer />
+ 
       <Link to="/">
         <div className={styles.logoCont}>
           <BsMusicNoteList className={styles.logo} />
           <span className={styles.logoText}>Invader</span>
         </div>
       </Link>
-      {currentUser && currentUser.email}
+
       {/* {currentUser && currentUser.password} */}
       <Form className={styles.borderContainer}>
         <div className={styles.topCont}>

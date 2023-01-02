@@ -10,6 +10,8 @@ import { ThemeContext } from "../App";
 import { useAuth } from "./contexts/AuthContext";
 import { MainContext } from "./contexts/MainProvider";
 
+
+
 export const NavBar = () => {
   const { create, setCreate, setIsNavbar, isNavbar } = useContext(MainContext)
   let location = useLocation()
@@ -22,7 +24,6 @@ export const NavBar = () => {
     }
   }, [location])
   console.log(isLogIn)
-
 
 
 

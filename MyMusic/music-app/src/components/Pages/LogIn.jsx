@@ -1,4 +1,4 @@
-import { Alert, Button, Container, ToastContainer } from "react-bootstrap";
+import { Alert, Button, Container } from "react-bootstrap";
 import styles from "../assets/login.module.css";
 import { BsMusicNoteList } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,7 +12,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { useAuth } from "../contexts/AuthContext";
-import { toast } from "react-toastify";
+import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { RecaptchaVerifier } from "firebase/auth";
 
@@ -28,22 +28,34 @@ export const LogIn = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, emailI, passwordI)
-      .then((userCredential) => {
-        const user = userCredential.user;
-        navigate("/");
-        setIsLogIn(true);
+
+    axios
+      .post(`http://localhost:8000/login`, {
+        email: emailI,
+        password: passwordI,
+      })
+      .then((res) => {
+        console.log(res.data);
+        signInWithEmailAndPassword(auth, emailI, passwordI)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            navigate("/");
+            setIsLogIn(true);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            setError(error.message);
+          });
+        console.log(currentUser.password);
       })
       .catch((error) => {
-        const errorCode = error.code;
-        setError(error.message);
+        toast.error("Invalid username or password");
       });
-    console.log(currentUser.password);
   };
 
   return (
     <div className={styles.Container}>
-      {error && toast.error(error)}
+      {/* {error && toast.error(error)} */}
       <ToastContainer /> {/* <Container> */}{" "}
       <Link to="/">
         <div className={styles.logoCont}>
@@ -59,7 +71,8 @@ export const LogIn = () => {
           <input
             onChange={(e) => setEmailI(e.target.value)}
             value={emailI}
-            className={styles.inp}></input>
+            className={styles.inp}
+          ></input>
         </div>
         <div className={styles.section1}>
           <span className={styles.section1Texts}>Password</span>
@@ -67,7 +80,8 @@ export const LogIn = () => {
             onChange={(e) => setPasswordI(e.target.value)}
             value={passwordI}
             className={styles.inp}
-            type="password"></input>
+            type="password"
+          ></input>
         </div>
         <span className={styles.section2Texts}>Forget your password? </span>
         <div className={styles.section2}>

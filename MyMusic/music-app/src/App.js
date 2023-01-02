@@ -1,4 +1,13 @@
-import { NavBar, Home, Songs, Search, LogIn, SignUp, Profile, SongsPlaylist } from "./components";
+import {
+  NavBar,
+  Home,
+  Songs,
+  Search,
+  LogIn,
+  SignUp,
+  Profile,
+  SongsPlaylist,
+} from "./components";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -8,17 +17,13 @@ import { MainProvider } from "./components/contexts/MainProvider";
 export const ThemeContext = createContext({});
 
 function App() {
-
-
-
   return (
     <MainProvider>
-    
       <AuthProvider>
         <div className="App">
           <BrowserRouter>
             <NavBar />
-            < Profile />
+            <Profile />
             <Routes>
               <Route path="/" element={<Home />}></Route>
               <Route path="/albums">
@@ -34,7 +39,7 @@ function App() {
           </BrowserRouter>
         </div>
       </AuthProvider>
-      </MainProvider>
+    </MainProvider>
   );
 }
 
