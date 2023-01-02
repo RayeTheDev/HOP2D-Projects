@@ -11,7 +11,7 @@ const playlistSchema = new Schema({
   description: { type: String, required: false },
   createdAt: { type: Date, default: Date.now() },
   isPrivate: { type: Boolean, default: false },
-  creator: { type: Schema.Types.ObjectId, required: true, ref: "User" },
+  creator: { type: Schema.Types.ObjectId,  ref: "User" },
   songs: [{ type: Schema.Types.ObjectId, ref: "Song" }],
 });
 

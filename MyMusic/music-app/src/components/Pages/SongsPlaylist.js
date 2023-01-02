@@ -37,9 +37,10 @@ export const SongsPlaylist = () => {
       });
 
 
+
   }, []);
 
-  console.log(id);
+  // console.log(id);
   const Delete = () => {
     axios
       .delete(`http://localhost:8000/playlist/${id}`, {})

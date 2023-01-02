@@ -11,7 +11,7 @@ export const CreateSong = () => {
     let songName = useRef();
     const [pName, setPName] = useState();
     const baseUrl = "http://localhost:8000";
-
+    const [songId, setSongId] = useState()
     const createSong = () => {
         const name = songName.current.value;
         if (name)
@@ -27,6 +27,19 @@ export const CreateSong = () => {
                 .catch((error) => {
                     console.log(error);
                 });
+
+
+
+        // axios
+        //     .put(`http://localhost:8000/playlist/${id}`, { id: })
+        //     .then((res) => {
+        //         // console.log(res.data.songs);
+        //         setSongs(res.data.songs);
+        //     })
+        //     .catch((error) => {
+        //         console.log(error);
+        //     });
+
     };
     return (
         <div
