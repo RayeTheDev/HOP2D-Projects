@@ -1,33 +1,38 @@
 import axios from "axios";
 import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router";
-import { AiFillDelete } from "react-icons/ai";
+import { AiFillDelete, AiOutlineArrowLeft } from "react-icons/ai";
 import styles from "../assets/songs.module.css";
 import { Player } from "../Player";
 import { MainContext } from "../contexts/MainProvider";
 import { useAuth } from "../contexts/AuthContext";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
-import { Dropdown, Spinner } from 'react-bootstrap'
+import { Dropdown, Spinner } from "react-bootstrap";
 import { CreateSong } from "../CreateSong";
+import { BiArrowBack } from "react-icons/bi";
 
 export const SongsPlaylist = () => {
-  const { accessToken, playlistName, create, setCreate, setPlaylistName } = useContext(MainContext);
-  const { currentUser } = useAuth()
+  const { accessToken, playlistName, create, setCreate, setPlaylistName } =
+    useContext(MainContext);
+  const { currentUser } = useAuth();
   const [songs, setSongs] = useState();
   const [selectedSong, setSelectedSong] = useState(null);
   const [dur, setDur] = useState();
   const [p, setP] = useState(false);
   const [song_data, setSong_data] = useState();
   const [length, setLength] = useState();
-  const [randomColors, setRandomColors] = useState(["red", "blue", "green"])
+  const [randomColors, setRandomColors] = useState(["red", "blue", "green"]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [index, setIndex] = useState();
   const { id } = useParams("");
   const Navigate = useNavigate();
 
   useEffect(() => {
-    const data = window.localStorage.getItem('APP_PLAYLIST');
-    console.log(data)
+    const data = window.localStorage.getItem("APP_PLAYLIST");
+    console.log(data);
+
+
+
     if (data !== null) setPlaylistName(JSON.parse(data));
     axios
       .get(`http://localhost:8000/playlist/${id}`, {})
@@ -38,7 +43,6 @@ export const SongsPlaylist = () => {
       .catch((error) => {
         console.log(error);
       });
-
   }, []);
 
   // console.log(id);
@@ -93,17 +97,22 @@ export const SongsPlaylist = () => {
     <>
       <CreateSong />
       <div className={styles.Container}>
-
         <div className={styles.topCont}>
-          <div style={{ display: 'flex' }}>
-            <img className={styles.pImg} src="https://d2rd7etdn93tqb.cloudfront.net/wp-content/uploads/2022/03/spotify-playlist-cover-orange-headphones-032322.jpg"></img>
+          <BiArrowBack className={styles.backArrow} />
+          <div style={{ display: "flex" }}>
+            <img
+              className={styles.pImg}
+              src="https://d2rd7etdn93tqb.cloudfront.net/wp-content/uploads/2022/03/spotify-playlist-cover-orange-headphones-032322.jpg"
+            ></img>
             <div className={styles.infoCont}>
               <span className={styles.playlistTexts}>Playlist</span>
               <span className={styles.playlistTitle}>{playlistName}</span>
               <span className={styles.playlistTexts}>Description</span>
               <div>
-                <span className={styles.playlistTexts}>{!currentUser && <Spinner />}{currentUser && currentUser.email}, 1 Songs</span>
-
+                <span className={styles.playlistTexts}>
+                  {!currentUser && <Spinner />}
+                  {currentUser && currentUser.email}, 1 Songs
+                </span>
               </div>
             </div>
           </div>
@@ -114,22 +123,33 @@ export const SongsPlaylist = () => {
             </Dropdown.Toggle>
 
             <Dropdown.Menu>
-              <Dropdown.Item onClick={() => setCreate(true)}>Add Songs</Dropdown.Item>
-              <Dropdown.Item onClick={Delete} href="#/action-2">Delete</Dropdown.Item>
-
+              <Dropdown.Item onClick={() => setCreate(true)}>
+                Add Songs
+              </Dropdown.Item>
+              <Dropdown.Item onClick={Delete} href="#/action-2">
+                Delete
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>
 
-
         {/* <AiFillDelete onClick={Delete} className={styles.delete} /> */}
         {/* <hr className={styles.line}></hr> */}
         <div className={styles.mainCont}>
+          <div className={styles.listInfo}>
+            <div className={styles.info1}>
+              <span className={styles.listText}>#</span>
+              <span className={`${styles.listText} ${styles.txt}`}>Title</span>
+            </div>
+            <span className={styles.listText}>Duration</span>
+          </div>
+          <hr className={styles.line}></hr>
           {songs &&
             songs.map((song, index) => {
-              console.log(song)
+              console.log(song);
               return (
                 <div
+                  key={song + index}
                   className={styles.songContainer}
                   onClick={() => {
                     setIndex(index);
@@ -139,21 +159,25 @@ export const SongsPlaylist = () => {
                     setIsPlaying(true);
                   }}
                 >
-                  {/* <img src={song.image} /> */}
                   <span className={styles.id}>{index + 1}</span>
+                  <img
+                    className={styles.musicImg}
+                    src="https://i.scdn.co/image/ab67616d00004851f5aba3392389512e824d7b2a"
+                  />
+
                   <div className={styles.song}>
                     <span className={styles.songName}>{song.name}</span>
-                    <span className={styles.artist}>{song.artist}</span>
+                    <span className={styles.artist}>Artist name</span>
                   </div>
                   <span className={styles.duration}>
-                    {convertMsToTime(song.duration_ms)}
+                    {/* {convertMsToTime(song.duration_ms)} */}
+                    00:0{song.duration}
                   </span>
                   <Player />
                 </div>
               );
             })}
         </div>
-
 
         {/* <>
         <audio src={selectedSong} ref={audioElem} onTimeUpdate={onPlaying} />
@@ -176,6 +200,5 @@ export const SongsPlaylist = () => {
       </> */}
       </div>
     </>
-
   );
 };

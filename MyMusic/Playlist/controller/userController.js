@@ -32,6 +32,8 @@ exports.getUsers = async (req, res) => {
   const result = await User.find({});
   res.send(result);
 };
+
+
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -46,6 +48,8 @@ exports.loginUser = async (req, res) => {
     res.status(401).json({ message: "User not found" });
   }
 };
+
+
 exports.getUser = async (req, res) => {
   const id = req.params.id;
   const result = await User.findById({ _id: id }).populate("playlists");

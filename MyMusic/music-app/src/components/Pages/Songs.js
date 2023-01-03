@@ -6,6 +6,8 @@ import styles from "../assets/songs.module.css";
 import { Player } from "../Player";
 import { MainContext } from "../contexts/MainProvider";
 
+import { PlayerSecond } from "../PlayerSecond";
+
 export const Songs = (props) => {
   const { accessToken, playlistSong } = useContext(MainContext);
   const [songs, setSongs] = useState([]);
@@ -17,28 +19,25 @@ export const Songs = (props) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [index, setIndex] = useState();
   const { id } = useParams("");
-  const Navigate = useNavigate()
-
+  const Navigate = useNavigate();
 
   const audioElem = useRef();
 
   useEffect(() => {
     generateSongs();
     console.log(accessToken);
-
   }, []);
-  useEffect(() => {
-    if (selectedSong != null) {
-      if (isPlaying) {
-        audioElem.current.play();
-      } else {
-        audioElem.current.pause();
-      }
-    }
-  }, [isPlaying, selectedSong]);
+  // useEffect(() => {
+  //   if (selectedSong != null) {
+  //     if (isPlaying) {
+  //       audioElem.current.play();
+  //     } else {
+  //       audioElem.current.pause();
+  //     }
+  //   }
+  // }, [isPlaying, selectedSong]);
 
   async function generateSongs() {
-
     var searchParameters = {
       method: "GET",
       headers: {
@@ -86,37 +85,38 @@ export const Songs = (props) => {
   console.log(dur);
   return (
     <div className={styles.Container}>
-
       {/* <AiFillDelete onClick={Delete} className={styles.delete} /> */}
-      {songs && songs.map((song, index) => {
-        return (
-          <div
-            className={styles.songContainer}
-            onClick={() => {
-              setIndex(index);
-              setP(true);
-              setSong_data(song);
-              setSelectedSong(song.preview_url);
-              setIsPlaying(true);
-              // audioElem.current.play()
-            }}
-          >
-            {/* <img src={song.image} /> */}
-            <span className={styles.id}>{index + 1}</span>
-            <div className={styles.song}>
-              <span className={styles.songName}>{song.name}</span>
-              <span className={styles.artist}>{song.artists[0].name}</span>
+      {songs &&
+        songs.map((song, index) => {
+          return (
+            <div
+              className={styles.songContainer}
+              onClick={() => {
+                setIndex(index);
+                setP(true);
+                setSong_data(song);
+                setSelectedSong(song.preview_url);
+                setIsPlaying(true);
+                console.log("haha");
+                // audioElem.current.play()
+              }}
+            >
+              {/* <img src={song.image} /> */}
+              <span className={styles.id}>{index + 1}</span>
+              <div className={styles.song}>
+                <span className={styles.songName}>{song.name}</span>
+                <span className={styles.artist}>{song.artists[0].name}</span>
+              </div>
+              <span className={styles.duration}>
+                {convertMsToTime(song.duration_ms)}
+              </span>
+              <Player />
             </div>
-            <span className={styles.duration}>
-              {convertMsToTime(song.duration_ms)}
-            </span>
-            <Player />
-          </div>
-        );
-      })}
+          );
+        })}
 
       <>
-        <audio src={selectedSong} ref={audioElem} onTimeUpdate={onPlaying} />
+        {/* <audio src={selectedSong} ref={audioElem} onTimeUpdate={onPlaying} />
         <Player
           songs={songs}
           setSongs={setSongs}
@@ -131,8 +131,8 @@ export const Songs = (props) => {
           p={p}
           setSongData={setSong_data}
           songData={song_data}
-          length={Math.trunc(length)}
-        />
+          length={Math.trunc(length)} */}
+        <PlayerSecond src={selectedSong}  songData={song_data}  isPlaying = {p}/>
       </>
     </div>
   );

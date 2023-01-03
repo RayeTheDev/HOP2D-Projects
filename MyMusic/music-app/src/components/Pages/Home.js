@@ -12,28 +12,32 @@ import { useAuth } from "../contexts/AuthContext";
 
 export const Home = () => {
   const [data, setData] = useState([]);
-  const { create, setCreate, playlists, setPlaylists, playlistSong, setPlaylistSong, setPlaylistName } =
-    useContext(MainContext);
+  const {
+    create,
+    setCreate,
+    playlists,
+    setPlaylists,
+    playlistSong,
+    setPlaylistSong,
+    setPlaylistName,
+  } = useContext(MainContext);
   const { currentUser, userId } = useAuth();
 
-  console.log(userId)
+  console.log(userId);
   useEffect(() => {
     if (userId) {
-      console.log('avj bna')
+      console.log("avj bna");
       axios
-        .get(`http://localhost:8000/user/` + userId._id, {
-        })
+        .get(`http://localhost:8000/user/` + userId._id, {})
         .then((res) => {
           console.log(res.data);
-          setPlaylists(res.data.playlists)
+          setPlaylists(res.data.playlists);
         })
         .catch((error) => {
-          console.log(error)
+          console.log(error);
         });
     }
-
-  }, [userId])
-
+  }, [userId]);
 
   console.log(playlists);
   return (
@@ -60,14 +64,21 @@ export const Home = () => {
           <div className={styles.title}>Playlists</div>
           <div className={styles.playlistContainer}>
             {!playlists && <Spinner />}
-            {playlists && currentUser &&
+            {playlists &&
+              currentUser &&
               playlists.map((playlist, index) => {
                 return (
-                  <Link to={`/playlist/${playlist._id}`} onClick={() => {
-                    console.log(playlist.title)
-                    setPlaylistSong(true)
-                    window.localStorage.setItem("APP_PLAYLIST", JSON.stringify(playlist.title));
-                  }}>
+                  <Link
+                    to={`/playlist/${playlist._id}`}
+                    onClick={() => {
+                      console.log(playlist.title);
+                      setPlaylistSong(true);
+                      window.localStorage.setItem(
+                        "APP_PLAYLIST",
+                        JSON.stringify(playlist.title)
+                      );
+                    }}
+                  >
                     <PlayList
                       key={index + playlist}
                       // image={playlist.userId.image}

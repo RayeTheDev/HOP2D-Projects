@@ -1,16 +1,11 @@
-body {
-  /* width: 100vw;
-  height: 100vh;
-  background: linear-gradient(transparent, rgba(0, 0, 0, 1));
-  background-color: rgb(32, 87, 100);
-  background-repeat: no-repeat; */
-}
+
 .Container {
   width: 100%;
   /* height: 100vh; */
   /* display: grid; */
   padding-left: 15%;
   /* padding-right: 2%; */
+  transition: 500ms;
 }
 .topCont {
   width: 100%;
@@ -25,16 +20,19 @@ body {
   background-color: rgb(32, 87, 100); */
   background-color: #00dbde;
   background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
+
 }
 
 .line {
-  border: 1px solid black;
-  /* width: 90%; */
+  width: 100%;
+ color: white
 }
 .mainCont {
-  width: 85%;
-  padding-left: 30px;
+  width: 95%;
+  padding-left: 40px;
   padding-top: 20px;
+  display: grid;
+  grid-template-columns:  10fr;
 }
 .songContainer {
   width: 100%;
@@ -47,10 +45,16 @@ body {
   position: relative;
   gap: 20px;
 }
+.musicImg {
+  border-radius: 0px;
+  width: 50px;
+  height: 50px;
+}
 .id {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: bold;
   text-align: start;
+  opacity: 70%;
 }
 .song {
   display: flex;
@@ -58,7 +62,7 @@ body {
 }
 .songName {
   font-family: "Mulish", sans-serif;
-  font-size: 18px;
+  font-size: 23px;
   font-weight: bold;
 }
 /* img {
@@ -112,4 +116,37 @@ body {
   font-size: 15px;
   color: white;
   font-family: "Mulish", sans-serif;
+}
+.backArrow {
+  position: absolute;
+  top: 15px;
+  font-size: 35px;
+  color: white;
+}
+.backArrow:hover {
+  cursor: pointer;
+  color: gray
+}
+.listInfo {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+}
+/* .listInfo:nth-child(2) {
+  position: absolute;
+  top: 2px
+} */
+.listText {
+  font-size: 17px;
+  color: rgb(172, 172, 172);
+  font-family: "Mulish", sans-serif;
+
+}
+.txt {
+  margin-left: 20px;
+}
+
+.Player {
+  color: white;
+  background-color: black;
 }

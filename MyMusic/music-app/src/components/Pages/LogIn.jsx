@@ -41,6 +41,7 @@ export const LogIn = () => {
           .then((userCredential) => {
             const user = userCredential.user;
             navigate("/");
+            window.location.reload(false);
           })
           .catch((error) => {
             const errorCode = error.code;

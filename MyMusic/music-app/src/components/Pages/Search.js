@@ -8,6 +8,7 @@ import {
   Row,
   ThemeProvider,
 } from "react-bootstrap";
+
 import { Link } from "react-router-dom";
 import { useState, useEffect, createContext, useContext } from "react";
 import { Player } from "../Player";

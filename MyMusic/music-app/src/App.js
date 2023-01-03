@@ -13,6 +13,7 @@ import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 import { AuthProvider } from "./components/contexts/AuthContext";
 import { MainProvider } from "./components/contexts/MainProvider";
+import './App.css'
 
 export const ThemeContext = createContext({});
 

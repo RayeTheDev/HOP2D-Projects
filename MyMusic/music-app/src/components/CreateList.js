@@ -28,16 +28,15 @@ export const CreateList = () => {
           isPrivate: false,
         })
         .then((res) => {
-
+          playlistName.current.value = ""
           setCreate(false);
           axios
             .put(`http://localhost:8000/user/` + userId._id, {
               id: res.data._id
             })
             .then((res) => {
-
               console.log(res.data);
-
+              window.location.reload(false);
             })
             .catch((error) => {
               console.log(error)
