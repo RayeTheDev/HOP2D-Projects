@@ -18,8 +18,9 @@ export const ThemeContext = createContext({});
 
 function App() {
   return (
-    <MainProvider>
-      <AuthProvider>
+    <AuthProvider>
+      <MainProvider>
+
         <div className="App">
           <BrowserRouter>
             <NavBar />
@@ -38,8 +39,9 @@ function App() {
             </Routes>
           </BrowserRouter>
         </div>
-      </AuthProvider>
-    </MainProvider>
+
+      </MainProvider>
+    </AuthProvider>
   );
 }
 

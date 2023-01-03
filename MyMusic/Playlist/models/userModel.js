@@ -11,10 +11,9 @@ const userSchema = new Schema({
   // fbId: { type: Schema.Types.ObjectId, required: true },
   password: { type: String, required: true },
   createdAt: { type: Date, default: Date.now() },
-  playlists: { type: Schema.Types.ObjectId, ref: "Playlist" },
+  playlists: [{ type: Schema.Types.ObjectId, ref: "Playlist" }],
 });
 
 const User = model("User", userSchema);
 
 exports.User = User;
-  

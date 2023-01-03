@@ -4,6 +4,7 @@ import { Button } from "react-bootstrap";
 import styles from "./assets/createSong.module.css";
 import { MdOutlineDisabledByDefault } from 'react-icons/md'
 import { MainContext } from "./contexts/MainProvider";
+import { useParams } from "react-router";
 
 export const CreateSong = () => {
     const { create, setCreate, playlists, setPlaylists } =
@@ -12,6 +13,7 @@ export const CreateSong = () => {
     const [pName, setPName] = useState();
     const baseUrl = "http://localhost:8000";
     const [songId, setSongId] = useState()
+    const { id } = useParams("")
     const createSong = () => {
         const name = songName.current.value;
         if (name)
@@ -23,6 +25,17 @@ export const CreateSong = () => {
                     // setPlaylists([...playlists, res.data]);
                     setCreate(false);
                     console.log(res.data);
+                    axios
+                        .put(baseUrl + "/playlist/" + id, {
+                            id: res.data._id
+                        })
+                        .then((res) => {
+                            setCreate(false);
+                            console.log(res.data);
+                        })
+                        .catch((error) => {
+                            console.log(error);
+                        });
                 })
                 .catch((error) => {
                     console.log(error);

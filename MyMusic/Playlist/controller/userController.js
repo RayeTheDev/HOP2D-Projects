@@ -14,7 +14,7 @@ exports.createUser = async (req, res) => {
   const result = await new User(body).save();
   console.log(result);
   res.send(result);
- 
+
   // try { 
   //    const user = await User.create(body);
   //   // console.log(user)
@@ -23,12 +23,10 @@ exports.createUser = async (req, res) => {
   // } catch (err) {
   //   const errors = handleErrors(err);
   //   res.status(400).send('playlist not created')
-    
+
   // }
 
 };
-
-
 
 exports.getUsers = async (req, res) => {
   const result = await User.find({});
@@ -50,6 +48,15 @@ exports.loginUser = async (req, res) => {
 };
 exports.getUser = async (req, res) => {
   const id = req.params.id;
-  const result = await User.findById({ _id: id });
+  const result = await User.findById({ _id: id }).populate("playlists");
   res.send(result);
+};
+exports.addPlaylistToUser = async (req, res) => {
+  const userId = req.params.id;
+  const playlistId = req.body.id;
+
+  const user = await User.findById(userId);
+  user.playlists.push(playlistId);
+  await user.save();
+  res.send(user);
 };

@@ -11,6 +11,7 @@
   padding: 23px;
   gap: 25px;
   border-radius: 15px;
+  transition: 500ms;
 }
 .displayNone {
   display: none;

@@ -20,28 +20,12 @@ export const Songs = (props) => {
   const Navigate = useNavigate()
 
 
-  useEffect(() => {
-    axios
-    .get(`http://localhost:8000/playlist/${id}`, {
-    })
-    .then((res) => {
-      console.log('deleted');
-
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-  }, [])
-  console.log(id)
-
-
-
-  
   const audioElem = useRef();
 
   useEffect(() => {
     generateSongs();
     console.log(accessToken);
+
   }, []);
   useEffect(() => {
     if (selectedSong != null) {

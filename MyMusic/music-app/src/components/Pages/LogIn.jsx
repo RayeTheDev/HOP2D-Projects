@@ -20,7 +20,7 @@ export const LogIn = () => {
   const [emailI, setEmailI] = useState("");
   const [passwordI, setPasswordI] = useState("");
   const navigate = useNavigate();
-  const { currentUser, setIsLogIn } = useAuth();
+  const { currentUser, setIsLogIn, userId, setUserId } = useAuth();
   const [error, setError] = useState("");
 
   const baseUrl = "http://localhost:8000";
@@ -36,23 +36,23 @@ export const LogIn = () => {
       })
       .then((res) => {
         console.log(res.data);
+
         signInWithEmailAndPassword(auth, emailI, passwordI)
           .then((userCredential) => {
             const user = userCredential.user;
             navigate("/");
-            setIsLogIn(true);
           })
           .catch((error) => {
             const errorCode = error.code;
             setError(error.message);
           });
-        console.log(currentUser.password);
+        window.localStorage.setItem("APP_USER", JSON.stringify(res.data));
       })
       .catch((error) => {
         toast.error("Invalid username or password");
       });
   };
-
+  console.log(userId);
   return (
     <div className={styles.Container}>
       {/* {error && toast.error(error)} */}
@@ -71,8 +71,7 @@ export const LogIn = () => {
           <input
             onChange={(e) => setEmailI(e.target.value)}
             value={emailI}
-            className={styles.inp}
-          ></input>
+            className={styles.inp}></input>
         </div>
         <div className={styles.section1}>
           <span className={styles.section1Texts}>Password</span>
@@ -80,8 +79,7 @@ export const LogIn = () => {
             onChange={(e) => setPasswordI(e.target.value)}
             value={passwordI}
             className={styles.inp}
-            type="password"
-          ></input>
+            type="password"></input>
         </div>
         <span className={styles.section2Texts}>Forget your password? </span>
         <div className={styles.section2}>

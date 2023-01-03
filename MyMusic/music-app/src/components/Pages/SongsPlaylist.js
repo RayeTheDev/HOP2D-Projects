@@ -7,11 +7,11 @@ import { Player } from "../Player";
 import { MainContext } from "../contexts/MainProvider";
 import { useAuth } from "../contexts/AuthContext";
 import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
-import { Dropdown } from 'react-bootstrap'
+import { Dropdown, Spinner } from 'react-bootstrap'
 import { CreateSong } from "../CreateSong";
 
 export const SongsPlaylist = () => {
-  const { accessToken, playlistName, create, setCreate } = useContext(MainContext);
+  const { accessToken, playlistName, create, setCreate, setPlaylistName } = useContext(MainContext);
   const { currentUser } = useAuth()
   const [songs, setSongs] = useState();
   const [selectedSong, setSelectedSong] = useState(null);
@@ -26,6 +26,9 @@ export const SongsPlaylist = () => {
   const Navigate = useNavigate();
 
   useEffect(() => {
+    const data = window.localStorage.getItem('APP_PLAYLIST');
+    console.log(data)
+    if (data !== null) setPlaylistName(JSON.parse(data));
     axios
       .get(`http://localhost:8000/playlist/${id}`, {})
       .then((res) => {
@@ -35,8 +38,6 @@ export const SongsPlaylist = () => {
       .catch((error) => {
         console.log(error);
       });
-
-
 
   }, []);
 
@@ -94,31 +95,35 @@ export const SongsPlaylist = () => {
       <div className={styles.Container}>
 
         <div className={styles.topCont}>
-          <img className={styles.pImg} src="https://d2rd7etdn93tqb.cloudfront.net/wp-content/uploads/2022/03/spotify-playlist-cover-orange-headphones-032322.jpg"></img>
-          <div className={styles.infoCont}>
-            <span className={styles.playlistTexts}>Playlist</span>
-            <span className={styles.playlistTitle}>{playlistName}</span>
-            <span className={styles.playlistTexts}>Description</span>
-            <div>
-              <span className={styles.playlistTexts}>{currentUser && currentUser.email}, 1 Songs</span>
+          <div style={{ display: 'flex' }}>
+            <img className={styles.pImg} src="https://d2rd7etdn93tqb.cloudfront.net/wp-content/uploads/2022/03/spotify-playlist-cover-orange-headphones-032322.jpg"></img>
+            <div className={styles.infoCont}>
+              <span className={styles.playlistTexts}>Playlist</span>
+              <span className={styles.playlistTitle}>{playlistName}</span>
+              <span className={styles.playlistTexts}>Description</span>
+              <div>
+                <span className={styles.playlistTexts}>{!currentUser && <Spinner />}{currentUser && currentUser.email}, 1 Songs</span>
 
+              </div>
             </div>
           </div>
+
+          <Dropdown className={styles.dropdown}>
+            <Dropdown.Toggle id="dropdown-basic">
+              <BsThreeDots className={styles.threeDot} />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => setCreate(true)}>Add Songs</Dropdown.Item>
+              <Dropdown.Item onClick={Delete} href="#/action-2">Delete</Dropdown.Item>
+
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
-        <Dropdown className={styles.dropdown}>
-          <Dropdown.Toggle id="dropdown-basic">
-            <BsThreeDots className={styles.threeDot} />
-          </Dropdown.Toggle>
 
-          <Dropdown.Menu>
-            <Dropdown.Item onClick={() => setCreate(true)} href="#/action-1">Add Songs</Dropdown.Item>
-            <Dropdown.Item onClick={Delete} href="#/action-2">Delete</Dropdown.Item>
-
-          </Dropdown.Menu>
-        </Dropdown>
 
         {/* <AiFillDelete onClick={Delete} className={styles.delete} /> */}
-        <hr className={styles.line}></hr>
+        {/* <hr className={styles.line}></hr> */}
         <div className={styles.mainCont}>
           {songs &&
             songs.map((song, index) => {

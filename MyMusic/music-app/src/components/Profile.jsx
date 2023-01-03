@@ -9,7 +9,8 @@ import { useEffect } from "react";
 
 export const Profile = () => {
   const { currentUser } = useAuth();
-  const { setDisplayProfile, displayProfile } = useContext(MainContext);
+  const { setDisplayProfile, displayProfile, setPlaylists } =
+    useContext(MainContext);
   const auth = getAuth();
   let location = useLocation();
   useEffect(() => {
@@ -23,6 +24,7 @@ export const Profile = () => {
   const SignOut = () => {
     signOut(auth)
       .then(() => {
+        setPlaylists(null);
         console.log("sign out");
       })
       .catch((error) => {

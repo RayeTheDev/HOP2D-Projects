@@ -1,5 +1,6 @@
 import axios from "axios";
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useContext, useEffect, useId, useState } from "react";
+import { useAuth } from "./AuthContext";
 
 export const MainContext = createContext();
 
@@ -9,6 +10,7 @@ export const MainProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [playingTrack, setPlayingTrack] = useState();
+  const [userPlaylist, setUSerPlaylist] = useState()
   const [albums, setAlbums] = useState([]);
   const [isNavbar, setIsNavbar] = useState(false);
   const [artists, setArtists] = useState([]);
@@ -20,6 +22,9 @@ export const MainProvider = ({ children }) => {
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
   const audio = new Audio(albums.uri);
+  const { userId, setUserId } = useAuth()
+
+
 
   const value = {
     create,
@@ -49,6 +54,9 @@ export const MainProvider = ({ children }) => {
   };
 
   useEffect(() => {
+
+
+
     //API Access Token
     var authParameters = {
       method: "POST",
@@ -68,14 +76,12 @@ export const MainProvider = ({ children }) => {
         setAccessToken(data.access_token);
         console.log(data.access_token);
       });
+    const data = window.localStorage.getItem('APP_USER');
+    console.log(data)
+    if (data !== null) setUserId(JSON.parse(data));
 
-    (async () => {
-      const res = await axios.get("http://localhost:8000/playlists");
-      console.log(res.data);
-      setPlaylists(res.data);
-    })();
   }, []);
-
+  console.log(userId)
   //Search
   async function search() {
     console.log("Search For " + searchInput);

@@ -4,17 +4,20 @@ import { Button } from "react-bootstrap";
 import styles from "./assets/createlist.module.css";
 import { MdOutlineDisabledByDefault } from 'react-icons/md'
 import { MainContext } from "./contexts/MainProvider";
+import { useAuth } from "./contexts/AuthContext";
 
 export const CreateList = () => {
   const { create, setCreate, playlists, setPlaylists } =
     useContext(MainContext);
+  const { userId } = useAuth()
   let playlistName = useRef();
   const [pName, setPName] = useState();
   const [des, setDes] = useState("");
-
+  const [added, setAdded] = useState(false)
   // console.log(create);
   const baseUrl = "http://localhost:8000";
 
+  // console.log(userId)
   const createPlaylist = () => {
     const title = playlistName.current.value;
     if (title)
@@ -25,14 +28,28 @@ export const CreateList = () => {
           isPrivate: false,
         })
         .then((res) => {
-          setPlaylists([...playlists, res.data]);
+
           setCreate(false);
-          // console.log(res.data);
+          axios
+            .put(`http://localhost:8000/user/` + userId._id, {
+              id: res.data._id
+            })
+            .then((res) => {
+
+              console.log(res.data);
+
+            })
+            .catch((error) => {
+              console.log(error)
+            });
+
         })
         .catch((error) => {
           console.log(error);
         });
   };
+
+
   return (
     <div
       className={

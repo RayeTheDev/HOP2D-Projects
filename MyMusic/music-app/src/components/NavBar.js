@@ -13,7 +13,7 @@ import { MainContext } from "./contexts/MainProvider";
 
 
 export const NavBar = () => {
-  const { create, setCreate, setIsNavbar, isNavbar } = useContext(MainContext)
+  const { create, setCreate, setIsNavbar, isNavbar, playlists, setPlaylistSong, setPlaylistName } = useContext(MainContext)
   let location = useLocation()
   const { currentUser, isLogIn } = useAuth();
   useEffect(() => {
@@ -72,6 +72,20 @@ export const NavBar = () => {
             <Button className={styles.buttonSignUp}>Sign Up</Button>{" "}
           </Link>
 
+        </div>
+        <hr className={styles.line}></hr>
+        <div className={styles.playlistContainer}>
+          {playlists && playlists.map((playlist, index) => {
+            return (
+              <Link to={`/playlist/${playlist._id}`} onClick={() => {
+                console.log(playlist.title)
+                setPlaylistSong(true)
+                
+              }}>
+                <span className={styles.playlistTitle}>{playlist.title}</span>
+              </Link>
+            )
+          })}
         </div>
 
       </Container>
