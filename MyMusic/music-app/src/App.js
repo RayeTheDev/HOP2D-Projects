@@ -14,12 +14,15 @@ import axios from "axios";
 import { AuthProvider } from "./components/contexts/AuthContext";
 import { MainProvider } from "./components/contexts/MainProvider";
 import './App.css'
+import { StateProvider } from "./components/contexts/StateProvider";
+import reducer, { initialState } from "./components/contexts/reducer";
 
 export const ThemeContext = createContext({});
 
 function App() {
   return (
     <AuthProvider>
+      {/* <StateProvider initialState={initialState} reducer={reducer}> */}
       <MainProvider>
 
         <div className="App">
@@ -42,7 +45,8 @@ function App() {
         </div>
 
       </MainProvider>
-    </AuthProvider>
+      {/* </StateProvider> */}
+    </AuthProvider >
   );
 }
 

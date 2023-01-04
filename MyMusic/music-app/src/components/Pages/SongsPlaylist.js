@@ -60,36 +60,25 @@ export const SongsPlaylist = () => {
 
   const audioElem = useRef();
 
-  useEffect(() => {
-    if (selectedSong != null) {
-      if (isPlaying) {
-        audioElem.current.play();
-      } else {
-        audioElem.current.pause();
-      }
-    }
-  }, [isPlaying, selectedSong]);
+  // useEffect(() => {
+  //   if (selectedSong != null) {
+  //     if (isPlaying) {
+  //       audioElem.current.play();
+  //     } else {
+  //       audioElem.current.pause();
+  //     }
+  //   }
+  // }, [isPlaying, selectedSong]);
 
-  const onPlaying = () => {
-    const duration = audioElem.current.duration;
-    const ct = audioElem.current.currentTime;
-    // console.log(duration, ct)
-    setDur((ct / duration) * 100);
-    setLength(duration);
-  };
-  const ms = 54000000;
+  // const onPlaying = () => {
+  //   const duration = audioElem.current.duration;
+  //   const ct = audioElem.current.currentTime;
+  //   // console.log(duration, ct)
+  //   setDur((ct / duration) * 100);
+  //   setLength(duration);
+  // };
 
-  function padTo2Digits(num) {
-    return num.toString().padStart(2, "0");
-  }
-  function convertMsToTime(milliseconds) {
-    let seconds = Math.floor(milliseconds / 1000);
-    let minutes = Math.floor(seconds / 60);
-    let hours = Math.floor(minutes / 60);
-    seconds = seconds % 60;
-    minutes = minutes % 60;
-    return `${padTo2Digits(minutes)}:${padTo2Digits(seconds)}`;
-  }
+
 
   console.log(songs);
   console.log(playlistName);
@@ -141,7 +130,7 @@ export const SongsPlaylist = () => {
               <span className={styles.listText}>#</span>
               <span className={`${styles.listText} ${styles.txt}`}>Title</span>
             </div>
-            <span className={styles.listText}>Duration</span>
+            <span className={`${styles.listText} ${styles.marginRight}`}>Duration</span>
           </div>
           <hr className={styles.line}></hr>
           {songs &&
@@ -167,12 +156,29 @@ export const SongsPlaylist = () => {
 
                   <div className={styles.song}>
                     <span className={styles.songName}>{song.name}</span>
-                    <span className={styles.artist}>Artist name</span>
+                    {/* {!song.artist && <span className={styles.artist}>Artist Name</span>} */}
+                    {song.artistEx && <span className={styles.artist}>{song.artistEx}</span>}
+
                   </div>
                   <span className={styles.duration}>
                     {/* {convertMsToTime(song.duration_ms)} */}
                     00:0{song.duration}
                   </span>
+                  <Dropdown  className={styles.dots}>
+                    <Dropdown.Toggle >
+                      {/* <BsThreeDotsVertical  /> */}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item >
+                        Delete
+                        <Dropdown/>
+                      </Dropdown.Item>
+                      <Dropdown.Item >
+                        Save To Liked Songs
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
                   <Player />
                 </div>
               );

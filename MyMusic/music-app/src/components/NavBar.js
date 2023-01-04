@@ -23,7 +23,7 @@ export const NavBar = () => {
       setIsNavbar(false)
     }
   }, [location])
-  console.log(isLogIn)
+  // console.log(isLogIn)
 
 
 
@@ -80,7 +80,6 @@ export const NavBar = () => {
               <Link to={`/playlist/${playlist._id}`} onClick={() => {
                 console.log(playlist.title)
                 setPlaylistSong(true)
-                
               }}>
                 <span className={styles.playlistTitle}>{playlist.title}</span>
               </Link>

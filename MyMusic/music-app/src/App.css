@@ -3,10 +3,6 @@
   overflow-x: hidden;
 } */
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
 .rhap_main{
   border: none;
 }
@@ -27,4 +23,12 @@ color: white;
 }
 .rhap_time {
   color: white
+}
+.dropdown-toggle {
+  background-color:transparent;
+  border: none
+}
+.dropdown-toggle:hover {
+  background-color:transparent;
+  border: none
 }

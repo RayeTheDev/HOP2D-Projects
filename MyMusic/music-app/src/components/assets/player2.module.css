@@ -8,7 +8,7 @@
   display: none;
   bottom: 0%;
   padding-bottom: 10px;
-  z-index: 99909999999;
+  z-index: 99000;
   padding-bottom: 10px;
   left: 0;
   transition: 500ms;
@@ -21,7 +21,7 @@
 }
 
 .albumCont {
-  width:15%;
+  width: 15%;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -51,11 +51,10 @@
   display: flex;
 }
 @keyframes mymove {
-    0%{
-        bottom: -100%;
-    }
-    100%{
-        bottom: 0;
-    }
+  0% {
+    bottom: -100%;
   }
-
+  100% {
+    bottom: 0;
+  }
+}

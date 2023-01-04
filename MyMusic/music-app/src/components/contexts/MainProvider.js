@@ -81,8 +81,7 @@ export const MainProvider = ({ children }) => {
 
   }, []);
 
-
-
+  
   console.log(userId)
   //Search
   async function search() {

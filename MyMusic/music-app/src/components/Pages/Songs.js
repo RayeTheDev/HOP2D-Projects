@@ -5,12 +5,16 @@ import { AiFillDelete } from "react-icons/ai";
 import styles from "../assets/songs.module.css";
 import { Player } from "../Player";
 import { MainContext } from "../contexts/MainProvider";
-
+// import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 import { PlayerSecond } from "../PlayerSecond";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { Dropdown } from "react-bootstrap";
+import { FindPlaylist } from "../FindPlaylist";
 
 export const Songs = (props) => {
-  const { accessToken, playlistSong } = useContext(MainContext);
-  const [songs, setSongs] = useState([]);
+  const { accessToken, playlistSong} = useContext(MainContext);
+  const [songs, setSongs] = useState([]); 
   const [selectedSong, setSelectedSong] = useState(null);
   const [dur, setDur] = useState();
   const [p, setP] = useState(false);
@@ -20,12 +24,14 @@ export const Songs = (props) => {
   const [index, setIndex] = useState();
   const { id } = useParams("");
   const Navigate = useNavigate();
+  const [songId, setSongId] = useState()
 
   const audioElem = useRef();
 
   useEffect(() => {
+
     generateSongs();
-    console.log(accessToken);
+
   }, []);
   // useEffect(() => {
   //   if (selectedSong != null) {
@@ -85,35 +91,62 @@ export const Songs = (props) => {
   console.log(dur);
   return (
     <div className={styles.Container}>
+      <div className={styles.topCont}>
+      <span>hello</span>
+      </div>
       {/* <AiFillDelete onClick={Delete} className={styles.delete} /> */}
-      {songs &&
-        songs.map((song, index) => {
-          return (
-            <div
-              className={styles.songContainer}
-              onClick={() => {
-                setIndex(index);
-                setP(true);
-                setSong_data(song);
-                setSelectedSong(song.preview_url);
-                setIsPlaying(true);
-                console.log("haha");
-                // audioElem.current.play()
-              }}
-            >
-              {/* <img src={song.image} /> */}
-              <span className={styles.id}>{index + 1}</span>
-              <div className={styles.song}>
-                <span className={styles.songName}>{song.name}</span>
-                <span className={styles.artist}>{song.artists[0].name}</span>
+      <div className={styles.mainCont}>
+        {songs &&
+          songs.map((song, index) => {
+            return (
+              <div
+                className={styles.songContainer}
+                onClick={() => {
+                  setIndex(index);
+                  setP(true);
+                  setSong_data(song);
+                  setSelectedSong(song.preview_url);
+                  setIsPlaying(true);
+                  console.log("haha");
+                  // audioElem.current.play()
+                }}
+              >
+                {/* <img src={song.image} /> */}
+                <span className={styles.id}>{index + 1}</span>
+                <div className={styles.song}>
+                  <span className={styles.songName}>{song.name}</span>
+                  <span className={styles.artist}>{song.artists[0].name}</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span className={styles.duration}>
+                    {convertMsToTime(song.duration_ms)}
+                  </span>
+
+
+                  <Dropdown className={styles.dots}>
+                    <Dropdown.Toggle id="dropdown-basic">
+                      {/* <BsThreeDotsVertical  /> */}
+                    </Dropdown.Toggle>
+
+                    <Dropdown.Menu>
+                      <Dropdown.Item onClick={() => {
+                       setSongId(song)
+                      }}>
+                        Add To Playlist
+                        <Dropdown/>
+                      </Dropdown.Item>
+                      <Dropdown.Item >
+                        Save To Liked Songs
+                      </Dropdown.Item>
+                    </Dropdown.Menu>
+                  </Dropdown>
+
+                </div>
               </div>
-              <span className={styles.duration}>
-                {convertMsToTime(song.duration_ms)}
-              </span>
-              <Player />
-            </div>
-          );
-        })}
+            );
+          })}
+
+      </div>
 
       <>
         {/* <audio src={selectedSong} ref={audioElem} onTimeUpdate={onPlaying} />
@@ -132,7 +165,8 @@ export const Songs = (props) => {
           setSongData={setSong_data}
           songData={song_data}
           length={Math.trunc(length)} */}
-        <PlayerSecond src={selectedSong}  songData={song_data}  isPlaying = {p}/>
+        <PlayerSecond src={selectedSong} songData={song_data} isPlaying={p} />
+        <FindPlaylist songId ={songId}/>
       </>
     </div>
   );

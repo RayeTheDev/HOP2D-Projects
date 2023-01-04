@@ -10,8 +10,10 @@ import { CreateList } from "../CreateList";
 import { MainContext } from "../contexts/MainProvider";
 import { useAuth } from "../contexts/AuthContext";
 
+const PLAYLIST_ENDPOINT = "	https://api.spotify.com/v1/me/playlists";
 export const Home = () => {
   const [data, setData] = useState([]);
+
   const {
     create,
     setCreate,
@@ -20,10 +22,36 @@ export const Home = () => {
     playlistSong,
     setPlaylistSong,
     setPlaylistName,
+    accessToken,
   } = useContext(MainContext);
   const { currentUser, userId } = useAuth();
 
-  console.log(userId);
+  // const handleGetPlaylists = () => {
+  // }
+
+  // console.log(accessToken)
+  useEffect(() => {
+    const getPlaylistData = async () => {
+      const response = await axios
+        .get(PLAYLIST_ENDPOINT, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + accessToken,
+          },
+        })
+        .then((res) => {
+          console.log(res.data);
+          setData(res.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    };
+
+    getPlaylistData();
+  }, [accessToken]);
+
+  // console.log(userId);
   useEffect(() => {
     if (userId) {
       console.log("avj bna");
@@ -39,7 +67,7 @@ export const Home = () => {
     }
   }, [userId]);
 
-  console.log(playlists);
+  // console.log(playlists);
   return (
     <>
       <div
