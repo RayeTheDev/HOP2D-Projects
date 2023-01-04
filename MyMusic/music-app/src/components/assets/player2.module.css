@@ -21,7 +21,7 @@
 }
 
 .albumCont {
-  width:15%;
+  width: 15%;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -51,11 +51,10 @@
   display: flex;
 }
 @keyframes mymove {
-    0%{
-        bottom: -100%;
-    }
-    100%{
-        bottom: 0;
-    }
+  0% {
+    bottom: -100%;
   }
-
+  100% {
+    bottom: 0;
+  }
+}

@@ -19,7 +19,7 @@ app.get("/", (req, res) => {
 
 app.use(playlistRoutes, songRoutes, userRoutes, artistRoutes)
 
-  
+
 app.listen(port, () => {
   console.log(`Created at: http://localhost:${port}`);
 });

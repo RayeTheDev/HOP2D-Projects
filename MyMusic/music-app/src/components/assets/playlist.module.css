@@ -60,3 +60,14 @@
 .Container:hover {
   background-color: rgb(37, 37, 37);
 }
+.playIcon {
+  position: absolute;
+  font-size: 50px;
+  top: 110px;
+  right: 18px;
+  opacity: 0;
+  color: #1ed760;
+}
+.playIcon:hover {
+  opacity: 1;
+}

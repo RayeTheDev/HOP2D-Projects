@@ -55,8 +55,6 @@ export const MainProvider = ({ children }) => {
 
   useEffect(() => {
 
-
-
     //API Access Token
     var authParameters = {
       method: "POST",
@@ -81,6 +79,8 @@ export const MainProvider = ({ children }) => {
     if (data !== null) setUserId(JSON.parse(data));
 
   }, []);
+
+  
   console.log(userId)
   //Search
   async function search() {
