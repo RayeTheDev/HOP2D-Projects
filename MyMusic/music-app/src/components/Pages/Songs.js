@@ -6,15 +6,15 @@ import styles from "../assets/songs.module.css";
 import { Player } from "../Player";
 import { MainContext } from "../contexts/MainProvider";
 // import Dropdown from 'react-dropdown';
-import 'react-dropdown/style.css';
+// import 'react-dropdown/style.css';
 import { PlayerSecond } from "../PlayerSecond";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Dropdown } from "react-bootstrap";
 import { FindPlaylist } from "../FindPlaylist";
 
 export const Songs = (props) => {
-  const { accessToken, playlistSong} = useContext(MainContext);
-  const [songs, setSongs] = useState([]); 
+  const { accessToken, playlistSong } = useContext(MainContext);
+  const [songs, setSongs] = useState([]);
   const [selectedSong, setSelectedSong] = useState(null);
   const [dur, setDur] = useState();
   const [p, setP] = useState(false);
@@ -91,8 +91,8 @@ export const Songs = (props) => {
   console.log(dur);
   return (
     <div className={styles.Container}>
-      <div className={styles.topCont}>
-      <span>hello</span>
+      <div className={`${styles.topCont} ${styles.bgColor1}`}>
+        <span>hello</span>
       </div>
       {/* <AiFillDelete onClick={Delete} className={styles.delete} /> */}
       <div className={styles.mainCont}>
@@ -130,10 +130,10 @@ export const Songs = (props) => {
 
                     <Dropdown.Menu>
                       <Dropdown.Item onClick={() => {
-                       setSongId(song)
+                        setSongId(song)
                       }}>
                         Add To Playlist
-                        <Dropdown/>
+                        <Dropdown />
                       </Dropdown.Item>
                       <Dropdown.Item >
                         Save To Liked Songs
@@ -166,7 +166,7 @@ export const Songs = (props) => {
           songData={song_data}
           length={Math.trunc(length)} */}
         <PlayerSecond src={selectedSong} songData={song_data} isPlaying={p} />
-        <FindPlaylist songId ={songId}/>
+        <FindPlaylist songId={songId} setSongId={setSongId} />
       </>
     </div>
   );

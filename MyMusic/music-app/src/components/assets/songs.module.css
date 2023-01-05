@@ -23,6 +23,10 @@
   background-color: #00dbde;
   background-image: linear-gradient(90deg, #00dbde 0%, #fc00ff 100%);
 }
+.bgColor1 {
+  background-color: #0093e9;
+  background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
+}
 
 .line {
   width: 100%;
@@ -55,7 +59,7 @@
   height: 40px;
 }
 .id {
-  font-size: 17px;
+  font-size: 15px;
   font-weight: bold;
   text-align: start;
   opacity: 70%;
@@ -66,7 +70,7 @@
 }
 .songName {
   font-family: "Mulish", sans-serif;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: bold;
 }
 /* img {
@@ -75,7 +79,7 @@
 } */
 .artist {
   font-family: "Mulish", sans-serif;
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 100;
   opacity: 50%;
 }
@@ -84,6 +88,7 @@
   right: 40px;
   font-family: "Mulish", sans-serif;
   opacity: 60%;
+  font-size: 13px;
 }
 .duration2 {
   position: absolute;
@@ -134,6 +139,9 @@
   color: white;
 }
 .backArrow:hover {
+  font-size: 40px;
+}
+.backArrow:hover {
   cursor: pointer;
   color: gray;
 }
@@ -147,7 +155,7 @@
   top: 2px
 } */
 .listText {
-  font-size: 17px;
+  font-size: 14px;
   color: rgb(172, 172, 172);
   font-family: "Mulish", sans-serif;
 }

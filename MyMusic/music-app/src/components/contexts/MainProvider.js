@@ -18,6 +18,7 @@ export const MainProvider = ({ children }) => {
   const [playlists, setPlaylists] = useState([]);
   const [playlistName, setPlaylistName] = useState()
   const [playlistSong, setPlaylistSong] = useState(false);
+  const [localPlaylist, setLocalPlaylist] = useState([])
   const [displayProfile, setDisplayProfile] = useState(true)
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
@@ -50,7 +51,8 @@ export const MainProvider = ({ children }) => {
     playlistName,
     setPlaylistName,
     displayProfile,
-    setDisplayProfile
+    setDisplayProfile,
+    localPlaylist
   };
 
   useEffect(() => {
@@ -74,14 +76,17 @@ export const MainProvider = ({ children }) => {
         setAccessToken(data.access_token);
         console.log(data.access_token);
       });
-      
+
     const data = window.localStorage.getItem('APP_USER');
     console.log(data)
     if (data !== null) setUserId(JSON.parse(data));
 
+    const pData = window.localStorage.getItem('APP_PLAYLISTS');
+    console.log(pData)
+    if (pData !== null) setLocalPlaylist(JSON.parse(pData));
   }, []);
 
-  
+
   console.log(userId)
   //Search
   async function search() {

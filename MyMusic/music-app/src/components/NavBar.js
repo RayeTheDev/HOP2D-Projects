@@ -5,7 +5,7 @@ import { BiLibrary } from "react-icons/bi";
 import { AiFillHome, AiFillPlusCircle, AiFillHeart } from "react-icons/ai";
 import { Container, Button } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ThemeContext } from "../App";
 import { useAuth } from "./contexts/AuthContext";
 import { MainContext } from "./contexts/MainProvider";
@@ -13,9 +13,12 @@ import { MainContext } from "./contexts/MainProvider";
 
 
 export const NavBar = () => {
-  const { create, setCreate, setIsNavbar, isNavbar, playlists, setPlaylistSong, setPlaylistName } = useContext(MainContext)
+  const { create, setCreate, setIsNavbar, isNavbar, localPlaylist, setPlaylistSong, setPlaylistName } = useContext(MainContext)
   let location = useLocation()
   const { currentUser, isLogIn } = useAuth();
+
+
+
   useEffect(() => {
     if (location.pathname == '/login' || location.pathname == '/signup') {
       setIsNavbar(true)
@@ -26,7 +29,7 @@ export const NavBar = () => {
   // console.log(isLogIn)
 
 
-
+  console.log(localPlaylist)
   return (
 
     <div className={isNavbar ? `${styles.Container} ${styles.none}` : styles.Container}>
@@ -75,7 +78,7 @@ export const NavBar = () => {
         </div>
         <hr className={styles.line}></hr>
         <div className={styles.playlistContainer}>
-          {playlists && playlists.map((playlist, index) => {
+          {localPlaylist.map((playlist, index) => {
             return (
               <Link to={`/playlist/${playlist._id}`} onClick={() => {
                 console.log(playlist.title)

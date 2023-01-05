@@ -13,21 +13,19 @@ export const FindPlaylist = (props) => {
   const [pName, setPName] = useState();
   const [putId, setPutId] = useState();
   const baseUrl = "http://localhost:8000";
-  const [songId, setSongId] = useState();
+  // const [songId, setSongId] = useState();
   const { id } = useParams("");
   console.log(putId);
-  console.log(props.songId)
+  console.log(props.songId);
 
-  useEffect(() => {
-
-  })
+  useEffect(() => {});
 
   const addToPlaylist = (playlistId) => {
     axios
       .post(baseUrl + "/songs/", {
         name: props.songId.name,
-        artistEx: props.songId.artist,
-        url: props.songId.preview_url
+        artistEx: props.songId.artists[0].name,
+        url: props.songId.preview_url,
       })
       .then((res) => {
         // setCreate(false);
@@ -37,7 +35,6 @@ export const FindPlaylist = (props) => {
             id: res.data._id,
           })
           .then((res) => {
-
             // window.location.reload(false);
             console.log(res.data);
           })
@@ -53,13 +50,14 @@ export const FindPlaylist = (props) => {
   return (
     <div
       className={
-        props.songId ? styles.container : `${styles.container} ${styles.displayNone}`
-      }
-    >
+        props.songId
+          ? styles.container
+          : `${styles.container} ${styles.displayNone}`
+      }>
       <div className={styles.headSector}>
         <span className={styles.title}>Playlists</span>
         <MdOutlineDisabledByDefault
-          onClick={() => setCreate(false)}
+          onClick={() => props.setSongId(null)}
           className={styles.disable}
         />
       </div>
@@ -70,7 +68,7 @@ export const FindPlaylist = (props) => {
             playlists.map((playlist, index) => {
               console.log(playlist);
               return (
-                <span onClick={() => addToPlaylist(playlist._id,)}>
+                <span onClick={() => addToPlaylist(playlist._id)}>
                   {" "}
                   {playlist.title}
                 </span>

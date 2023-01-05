@@ -48,10 +48,21 @@ export const SongsPlaylist = () => {
   // console.log(id);
   const Delete = () => {
     axios
-      .delete(`http://localhost:8000/playlist/${id}`, {})
+      .delete(`http://localhost:8000/song/${id}`, {})
       .then((res) => {
         console.log("deleted");
         Navigate("/");
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  const RemoveSong = (id) => {
+    axios
+      .delete(`http://localhost:8000/song/${id}`, {})
+      .then((res) => {
+        console.log("deleted");
+        window.location.reload(false)
       })
       .catch((error) => {
         console.log(error);
@@ -87,7 +98,7 @@ export const SongsPlaylist = () => {
       <CreateSong />
       <div className={styles.Container}>
         <div className={styles.topCont}>
-          <BiArrowBack className={styles.backArrow} />
+          <BiArrowBack onClick={() => Navigate('/')} className={styles.backArrow} />
           <div style={{ display: "flex" }}>
             <img
               className={styles.pImg}
@@ -156,7 +167,7 @@ export const SongsPlaylist = () => {
 
                   <div className={styles.song}>
                     <span className={styles.songName}>{song.name}</span>
-                    {/* {!song.artist && <span className={styles.artist}>Artist Name</span>} */}
+                    {!song.artistEx && <span className={styles.artist}>Artist Name</span>}
                     {song.artistEx && <span className={styles.artist}>{song.artistEx}</span>}
 
                   </div>
@@ -164,15 +175,15 @@ export const SongsPlaylist = () => {
                     {/* {convertMsToTime(song.duration_ms)} */}
                     00:0{song.duration}
                   </span>
-                  <Dropdown  className={styles.dots}>
+                  <Dropdown className={styles.dots}>
                     <Dropdown.Toggle >
                       {/* <BsThreeDotsVertical  /> */}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu>
-                      <Dropdown.Item >
+                      <Dropdown.Item onClick={() => RemoveSong(song._id)}>
                         Delete
-                        <Dropdown/>
+                        <Dropdown />
                       </Dropdown.Item>
                       <Dropdown.Item >
                         Save To Liked Songs

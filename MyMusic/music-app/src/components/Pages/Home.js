@@ -30,26 +30,26 @@ export const Home = () => {
   // }
 
   // console.log(accessToken)
-  useEffect(() => {
-    const getPlaylistData = async () => {
-      const response = await axios
-        .get(PLAYLIST_ENDPOINT, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: "Bearer " + accessToken,
-          },
-        })
-        .then((res) => {
-          console.log(res.data);
-          setData(res.data);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    };
+  // useEffect(() => {
+  //   const getPlaylistData = async () => {
+  //     const response = await axios
+  //       .get(PLAYLIST_ENDPOINT, {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           Authorization: "Bearer " + accessToken,
+  //         },
+  //       })
+  //       .then((res) => {
+  //         console.log(res.data);
+  //         setData(res.data);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
-    getPlaylistData();
-  }, [accessToken]);
+  //   getPlaylistData();
+  // }, [accessToken]);
 
   // console.log(userId);
   useEffect(() => {
@@ -66,6 +66,14 @@ export const Home = () => {
         });
     }
   }, [userId]);
+
+  useEffect(() => {
+
+    window.localStorage.setItem(
+      "APP_PLAYLISTS",
+      JSON.stringify(playlists)
+    );
+  }, [playlists])
 
   // console.log(playlists);
   return (
@@ -110,6 +118,7 @@ export const Home = () => {
                     <PlayList
                       key={index + playlist}
                       // image={playlist.userId.image}
+                      description={playlist.description}
                       title={playlist.title}
                     />
                   </Link>
