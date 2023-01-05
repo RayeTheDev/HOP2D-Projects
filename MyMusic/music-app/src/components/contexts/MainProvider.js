@@ -10,22 +10,20 @@ export const MainProvider = ({ children }) => {
   const [searchInput, setSearchInput] = useState("");
   const [accessToken, setAccessToken] = useState("");
   const [playingTrack, setPlayingTrack] = useState();
-  const [userPlaylist, setUSerPlaylist] = useState()
+  const [userPlaylist, setUSerPlaylist] = useState();
   const [albums, setAlbums] = useState([]);
   const [isNavbar, setIsNavbar] = useState(false);
   const [artists, setArtists] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const [playlists, setPlaylists] = useState([]);
-  const [playlistName, setPlaylistName] = useState()
+  const [playlistName, setPlaylistName] = useState();
   const [playlistSong, setPlaylistSong] = useState(false);
-  const [localPlaylist, setLocalPlaylist] = useState([])
-  const [displayProfile, setDisplayProfile] = useState(true)
+  const [userInfo, setUserInfo] = useState([]);
+  const [displayProfile, setDisplayProfile] = useState(true);
   const CLIENT_ID = "7989d19bf0fa41c88e1a1acfd7e93c09";
   const CLIENT_SECRET = "78ef5245c2ac4fbfb059f2a375b199a5";
   const audio = new Audio(albums.uri);
-  const { userId, setUserId } = useAuth()
-
-
+  const { userId, setUserId } = useAuth();
 
   const value = {
     create,
@@ -52,11 +50,12 @@ export const MainProvider = ({ children }) => {
     setPlaylistName,
     displayProfile,
     setDisplayProfile,
-    localPlaylist
+    userInfo,
+    setUserInfo
+
   };
 
   useEffect(() => {
-
     //API Access Token
     var authParameters = {
       method: "POST",
@@ -74,20 +73,22 @@ export const MainProvider = ({ children }) => {
       .then((result) => result.json())
       .then((data) => {
         setAccessToken(data.access_token);
-        console.log(data.access_token);
+        // console.log(data.access_token);
       });
 
-    const data = window.localStorage.getItem('APP_USER');
-    console.log(data)
-    if (data !== null) setUserId(JSON.parse(data));
+    // const data = window.localStorage.getItem("APP_USER");
+    // console.log(data);
+    // const parsedData = JSON.parse(data)
+    // if (data !== null) setUserId(parsedData);
 
-    const pData = window.localStorage.getItem('APP_PLAYLISTS');
-    console.log(pData)
-    if (pData !== null) setLocalPlaylist(JSON.parse(pData));
+    const user = window.localStorage.getItem("APP_USER");
+    const parsedUser = JSON.parse(user)
+    // console.log(userInfoData)
+    if (user !== null) setUserInfo(parsedUser);
   }, []);
 
 
-  console.log(userId)
+  // console.log(userInfo)
   //Search
   async function search() {
     console.log("Search For " + searchInput);
@@ -120,9 +121,9 @@ export const MainProvider = ({ children }) => {
 
     var returnedAlbums = await fetch(
       "https://api.spotify.com/v1/artists/" +
-      artistID +
-      "/albums" +
-      "?include_groups=album&market=US&limit=50",
+        artistID +
+        "/albums" +
+        "?include_groups=album&market=US&limit=50",
       searchParameters
     )
       .then((response) => response.json())
@@ -132,9 +133,5 @@ export const MainProvider = ({ children }) => {
       });
   }
 
-  return (
-    <MainContext.Provider value={value}>
-      {children}
-    </MainContext.Provider>
-  )
+  return <MainContext.Provider value={value}>{children}</MainContext.Provider>;
 };

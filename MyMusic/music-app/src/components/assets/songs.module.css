@@ -138,9 +138,7 @@
   font-size: 35px;
   color: white;
 }
-.backArrow:hover {
-  font-size: 40px;
-}
+
 .backArrow:hover {
   cursor: pointer;
   color: gray;

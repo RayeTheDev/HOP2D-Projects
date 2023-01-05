@@ -11,7 +11,7 @@ exports.getSong = async (req, res) => {
   if (playlistId) {
     const result = await Song.find({ playlistId });
     res.send(result);
-    return
+    return  
   }
   const result = await Song.find({});
   res.send(result);

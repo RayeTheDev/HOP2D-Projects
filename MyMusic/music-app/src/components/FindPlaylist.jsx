@@ -3,22 +3,26 @@ import { useContext, useEffect, useRef, useState } from "react";
 import { Button } from "react-bootstrap";
 import styles from "./assets/createSong.module.css";
 import { MdOutlineDisabledByDefault } from "react-icons/md";
+import { ImCross } from "react-icons/im";
 import { MainContext } from "./contexts/MainProvider";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
 
 export const FindPlaylist = (props) => {
-  const { create, setCreate, playlists, setPlaylists } =
-    useContext(MainContext);
+  const { create, setCreate, userInfo, setPlaylists } = useContext(MainContext);
   const [pName, setPName] = useState();
   const [putId, setPutId] = useState();
+  const [list, setList] = useState();
   const baseUrl = "http://localhost:8000";
   // const [songId, setSongId] = useState();
   const { id } = useParams("");
   console.log(putId);
   console.log(props.songId);
 
-  useEffect(() => {});
+  useEffect(() => {
+    console.log(userInfo);
+    setList(userInfo.playlists);
+  }, [userInfo]);
 
   const addToPlaylist = (playlistId) => {
     axios
@@ -51,27 +55,35 @@ export const FindPlaylist = (props) => {
     <div
       className={
         props.songId
-          ? styles.container
-          : `${styles.container} ${styles.displayNone}`
-      }>
+          ? styles.container2
+          : `${styles.container2} ${styles.displayNone}`
+      }
+    >
+      <ImCross
+        onClick={() => props.setSongId(null)}
+        className={styles.disable}
+      />
+
       <div className={styles.headSector}>
         <span className={styles.title}>Playlists</span>
-        <MdOutlineDisabledByDefault
-          onClick={() => props.setSongId(null)}
-          className={styles.disable}
-        />
       </div>
+      <input
+        placeholder="Find Playlist"
+        className={`${styles.inp} ${styles.marginTop}`}
+      />
       <div className={styles.midSector}>
-        <input placeholder="Find Playlist" className={styles.inp} />
         <div className={styles.innerCont}>
-          {playlists &&
-            playlists.map((playlist, index) => {
+          {list &&
+            list.map((playlist, index) => {
               console.log(playlist);
               return (
-                <span onClick={() => addToPlaylist(playlist._id)}>
-                  {" "}
-                  {playlist.title}
-                </span>
+                <div style={{display: "flex", gap:"5px"}}>
+                  <span style={{opacity: "50%"}}>{index + 1}.</span>
+                  <span onClick={() => addToPlaylist(playlist._id)}>
+                    {" "}
+                    {playlist.title}
+                  </span>
+                </div>
               );
             })}
         </div>

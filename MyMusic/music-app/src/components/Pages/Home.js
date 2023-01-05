@@ -13,7 +13,7 @@ import { useAuth } from "../contexts/AuthContext";
 const PLAYLIST_ENDPOINT = "	https://api.spotify.com/v1/me/playlists";
 export const Home = () => {
   const [data, setData] = useState([]);
-
+  const [list, setList] = useState([]);
   const {
     create,
     setCreate,
@@ -23,6 +23,7 @@ export const Home = () => {
     setPlaylistSong,
     setPlaylistName,
     accessToken,
+    userInfo,
   } = useContext(MainContext);
   const { currentUser, userId } = useAuth();
 
@@ -53,29 +54,21 @@ export const Home = () => {
 
   // console.log(userId);
   useEffect(() => {
-    if (userId) {
-      console.log("avj bna");
+    setList(userInfo.playlists);
+
+    // console.log(userInfo);
+    if (userInfo._id)
       axios
-        .get(`http://localhost:8000/user/` + userId._id, {})
+        .get("http://localhost:8000/user/" + userInfo._id)
         .then((res) => {
           console.log(res.data);
           setPlaylists(res.data.playlists);
         })
-        .catch((error) => {
-          console.log(error);
+        .catch((err) => {
+          console.log(err);
         });
-    }
-  }, [userId]);
+  }, [userInfo]);
 
-  useEffect(() => {
-
-    window.localStorage.setItem(
-      "APP_PLAYLISTS",
-      JSON.stringify(playlists)
-    );
-  }, [playlists])
-
-  // console.log(playlists);
   return (
     <>
       <div
@@ -99,7 +92,7 @@ export const Home = () => {
         <div className={styles.contentContainer}>
           <div className={styles.title}>Playlists</div>
           <div className={styles.playlistContainer}>
-            {!playlists && <Spinner />}
+            {!userInfo && <Spinner />}
             {playlists &&
               currentUser &&
               playlists.map((playlist, index) => {
@@ -109,10 +102,11 @@ export const Home = () => {
                     onClick={() => {
                       console.log(playlist.title);
                       setPlaylistSong(true);
-                      window.localStorage.setItem(
-                        "APP_PLAYLIST",
-                        JSON.stringify(playlist.title)
-                      );
+
+                      // window.localStorage.setItem(
+                      //   "APP_PLAYLIST",
+                      //   JSON.stringify(playlist.title)
+                      // );
                     }}
                   >
                     <PlayList

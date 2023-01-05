@@ -10,12 +10,14 @@ import { BsThreeDots, BsThreeDotsVertical } from "react-icons/bs";
 import { Dropdown, Spinner } from "react-bootstrap";
 import { CreateSong } from "../CreateSong";
 import { BiArrowBack } from "react-icons/bi";
+import { MdOutlineArrowBackIosNew } from "react-icons/md";
 
-export const SongsPlaylist = () => {
-  const { accessToken, playlistName, create, setCreate, setPlaylistName } =
+export const SongsPlaylist = (props) => {
+  const { accessToken, playlistName, create, setCreate, setPlaylistName, userInfo } =
     useContext(MainContext);
   const { currentUser } = useAuth();
   const [songs, setSongs] = useState();
+  const [playlistData,setPlaylistData]=useState(null)
   const [selectedSong, setSelectedSong] = useState(null);
   const [dur, setDur] = useState();
   const [p, setP] = useState(false);
@@ -28,16 +30,16 @@ export const SongsPlaylist = () => {
   const Navigate = useNavigate();
 
   useEffect(() => {
-    const data = window.localStorage.getItem("APP_PLAYLIST");
-    console.log(data);
+    // const data = window.localStorage.getItem("APP_PLAYLIST");
+    // console.log(data);
 
-
-
-    if (data !== null) setPlaylistName(JSON.parse(data));
+    // if (data !== null) setPlaylistName(JSON.parse(data));
     axios
       .get(`http://localhost:8000/playlist/${id}`, {})
       .then((res) => {
-        // console.log(res.data.songs);
+        console.log(res.data);
+
+        setPlaylistData(res.data);
         setSongs(res.data.songs);
       })
       .catch((error) => {
@@ -62,7 +64,7 @@ export const SongsPlaylist = () => {
       .delete(`http://localhost:8000/song/${id}`, {})
       .then((res) => {
         console.log("deleted");
-        window.location.reload(false)
+        window.location.reload(false);
       })
       .catch((error) => {
         console.log(error);
@@ -89,8 +91,6 @@ export const SongsPlaylist = () => {
   //   setLength(duration);
   // };
 
-
-
   console.log(songs);
   console.log(playlistName);
   return (
@@ -98,7 +98,10 @@ export const SongsPlaylist = () => {
       <CreateSong />
       <div className={styles.Container}>
         <div className={styles.topCont}>
-          <BiArrowBack onClick={() => Navigate('/')} className={styles.backArrow} />
+          <MdOutlineArrowBackIosNew
+            onClick={() => Navigate("/")}
+            className={styles.backArrow}
+          />
           <div style={{ display: "flex" }}>
             <img
               className={styles.pImg}
@@ -106,7 +109,7 @@ export const SongsPlaylist = () => {
             ></img>
             <div className={styles.infoCont}>
               <span className={styles.playlistTexts}>Playlist</span>
-              <span className={styles.playlistTitle}>{playlistName}</span>
+              <span className={styles.playlistTitle}>{playlistData&&playlistData.title}</span>
               <span className={styles.playlistTexts}>Description</span>
               <div>
                 <span className={styles.playlistTexts}>
@@ -141,7 +144,9 @@ export const SongsPlaylist = () => {
               <span className={styles.listText}>#</span>
               <span className={`${styles.listText} ${styles.txt}`}>Title</span>
             </div>
-            <span className={`${styles.listText} ${styles.marginRight}`}>Duration</span>
+            <span className={`${styles.listText} ${styles.marginRight}`}>
+              Duration
+            </span>
           </div>
           <hr className={styles.line}></hr>
           {songs &&
@@ -167,16 +172,19 @@ export const SongsPlaylist = () => {
 
                   <div className={styles.song}>
                     <span className={styles.songName}>{song.name}</span>
-                    {!song.artistEx && <span className={styles.artist}>Artist Name</span>}
-                    {song.artistEx && <span className={styles.artist}>{song.artistEx}</span>}
-
+                    {!song.artistEx && (
+                      <span className={styles.artist}>Artist Name</span>
+                    )}
+                    {song.artistEx && (
+                      <span className={styles.artist}>{song.artistEx}</span>
+                    )}
                   </div>
                   <span className={styles.duration}>
                     {/* {convertMsToTime(song.duration_ms)} */}
                     00:0{song.duration}
                   </span>
                   <Dropdown className={styles.dots}>
-                    <Dropdown.Toggle >
+                    <Dropdown.Toggle>
                       {/* <BsThreeDotsVertical  /> */}
                     </Dropdown.Toggle>
 
@@ -185,9 +193,7 @@ export const SongsPlaylist = () => {
                         Delete
                         <Dropdown />
                       </Dropdown.Item>
-                      <Dropdown.Item >
-                        Save To Liked Songs
-                      </Dropdown.Item>
+                      <Dropdown.Item>Save To Liked Songs</Dropdown.Item>
                     </Dropdown.Menu>
                   </Dropdown>
                   <Player />

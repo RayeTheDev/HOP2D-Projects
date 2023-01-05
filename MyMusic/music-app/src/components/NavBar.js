@@ -10,31 +10,44 @@ import { ThemeContext } from "../App";
 import { useAuth } from "./contexts/AuthContext";
 import { MainContext } from "./contexts/MainProvider";
 
-
-
 export const NavBar = () => {
-  const { create, setCreate, setIsNavbar, isNavbar, localPlaylist, setPlaylistSong, setPlaylistName } = useContext(MainContext)
-  let location = useLocation()
-  const { currentUser, isLogIn } = useAuth();
+  const {
+    create,
+    setCreate,
+    setIsNavbar,
+    isNavbar,
+    localPlaylist,
+    setPlaylistSong,
+    setPlaylistName,
+    userInfo,
+  } = useContext(MainContext);
 
+  let location = useLocation();
+  const { currentUser, isLogIn } = useAuth();
+  const [list, setList] = useState([]);
+
+  useEffect(() => {
+    if (location.pathname == "/login" || location.pathname == "/signup") {
+      setIsNavbar(true);
+    } else {
+      setIsNavbar(false);
+    }
+  }, [location]);
 
 
   useEffect(() => {
-    if (location.pathname == '/login' || location.pathname == '/signup') {
-      setIsNavbar(true)
-    } else {
-      setIsNavbar(false)
-    }
-  }, [location])
-  // console.log(isLogIn)
+    // console.log(userInfo);
+    setList(userInfo.playlists);
+  }, [userInfo]);
 
-
-  console.log(localPlaylist)
+  // console.log(list);
   return (
-
-    <div className={isNavbar ? `${styles.Container} ${styles.none}` : styles.Container}>
+    <div
+      className={
+        isNavbar ? `${styles.Container} ${styles.none}` : styles.Container
+      }
+    >
       <Container>
-
         <div className={styles.logoCont}>
           {/* <img className={styles.logoImg} src={Logo} /> */}
           <BsMusicNoteList className={styles.logo} />
@@ -44,7 +57,9 @@ export const NavBar = () => {
         <div className={styles.textContainer}>
           <div className={styles.tInner}>
             <AiFillHome className={styles.icons} />
-            <Link to="/" className={styles.texts}>Home</Link>
+            <Link to="/" className={styles.texts}>
+              Home
+            </Link>
           </div>
           <div className={styles.tInner}>
             <BiLibrary className={styles.icons} />
@@ -52,14 +67,18 @@ export const NavBar = () => {
           </div>
           <div className={styles.tInner}>
             <BsSearch className={styles.icons} />
-            <Link to="/search" className={styles.texts}>Search</Link>
+            <Link to="/search" className={styles.texts}>
+              Search
+            </Link>
           </div>
         </div>
 
         <div className={styles.textContainer}>
           <div className={styles.tInner}>
             <AiFillPlusCircle className={styles.icons} />
-            <Link onClick={() => setCreate(!create)} className={styles.texts}>Create Playlist</Link>
+            <Link onClick={() => setCreate(!create)} className={styles.texts}>
+              Create Playlist
+            </Link>
           </div>
           <div className={styles.tInner}>
             <AiFillHeart className={styles.icons} />
@@ -67,30 +86,38 @@ export const NavBar = () => {
           </div>
         </div>
 
-        <div className={currentUser ? `${styles.bottomCont} ${styles.none}` : styles.bottomCont}>
+        <div
+          className={
+            currentUser
+              ? `${styles.bottomCont} ${styles.none}`
+              : styles.bottomCont
+          }
+        >
           <Link to="/login" onClick={() => setIsNavbar(true)}>
             <Button className={styles.buttonLogIn}>Log In</Button>{" "}
           </Link>
           <Link to="/signup">
             <Button className={styles.buttonSignUp}>Sign Up</Button>{" "}
           </Link>
-
         </div>
         <hr className={styles.line}></hr>
         <div className={styles.playlistContainer}>
-          {localPlaylist.map((playlist, index) => {
-            return (
-              <Link to={`/playlist/${playlist._id}`} onClick={() => {
-                console.log(playlist.title)
-                setPlaylistSong(true)
-              }}>
-                <span className={styles.playlistTitle}>{playlist.title}</span>
-              </Link>
-            )
-          })}
+          {list &&
+            list.map((playlist, index) => {
+              return (
+                <Link
+                  to={`/playlist/${playlist._id}`}
+                  onClick={() => {
+                    console.log(playlist.title);
+                    setPlaylistSong(true);
+                  }}
+                >
+                  <span className={styles.playlistTitle}>{playlist.title}</span>
+                </Link>
+              );
+            })}
         </div>
-
       </Container>
-    </div >
+    </div>
   );
 };

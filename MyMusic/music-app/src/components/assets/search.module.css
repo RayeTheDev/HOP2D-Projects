@@ -1,4 +1,4 @@
-body {
+/* body {
   height: 100vh;
   max-height: 1000vh;
   background-color: #4158d0;
@@ -9,7 +9,7 @@ body {
     #ffcc70 100%
   );
   background-repeat: no-repeat;
-}
+} */
 .Container {
   width: 100vw;
   padding-top: 20px;

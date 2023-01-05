@@ -7,9 +7,9 @@ import { MainContext } from "./contexts/MainProvider";
 import { useAuth } from "./contexts/AuthContext";
 
 export const CreateList = () => {
-  const { create, setCreate, playlists, setPlaylists } =
+  const { create, setCreate, playlists, setPlaylists, userInfo } =
     useContext(MainContext);
-  const { userId } = useAuth()
+
   let playlistName = useRef();
   const [pName, setPName] = useState();
   const [des, setDes] = useState("");
@@ -31,7 +31,7 @@ export const CreateList = () => {
           playlistName.current.value = ""
           setCreate(false);
           axios
-            .put(`http://localhost:8000/user/` + userId._id, {
+            .put(`http://localhost:8000/user/` + userInfo._id, {
               id: res.data._id
             })
             .then((res) => {

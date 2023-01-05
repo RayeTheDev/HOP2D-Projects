@@ -47,12 +47,23 @@ export const LogIn = () => {
             const errorCode = error.code;
             setError(error.message);
           });
-        window.localStorage.setItem("APP_USER", JSON.stringify(res.data));
+
+        axios
+          .get(`http://localhost:8000/user/` + res.data._id)
+          .then((res) => {
+            console.log(res.data);
+            // setPlaylists(res.data.playlists);
+            window.localStorage.setItem("APP_USER", JSON.stringify(res.data));
+          })
+          .catch((error) => {
+            console.log(error);
+          });
       })
       .catch((error) => {
         toast.error("Invalid username or password");
       });
   };
+
   console.log(userId);
   return (
     <div className={styles.Container}>
@@ -72,7 +83,8 @@ export const LogIn = () => {
           <input
             onChange={(e) => setEmailI(e.target.value)}
             value={emailI}
-            className={styles.inp}></input>
+            className={styles.inp}
+          ></input>
         </div>
         <div className={styles.section1}>
           <span className={styles.section1Texts}>Password</span>
@@ -80,7 +92,8 @@ export const LogIn = () => {
             onChange={(e) => setPasswordI(e.target.value)}
             value={passwordI}
             className={styles.inp}
-            type="password"></input>
+            type="password"
+          ></input>
         </div>
         <span className={styles.section2Texts}>Forget your password? </span>
         <div className={styles.section2}>
