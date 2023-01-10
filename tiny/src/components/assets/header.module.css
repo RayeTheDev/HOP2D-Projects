@@ -1,0 +1,31 @@
+* {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.Container {
+  width: 100vw;
+  padding-top: 40px;
+  padding-bottom: 20px;
+  padding-right: 180px;
+  position: fixed;
+  z-index: 111;
+  display: flex;
+  gap: 40px;
+  justify-content: end;
+  align-items: center;
+}
+.texts {
+  color: #02b589;
+  font-weight: bold;
+  font-size: 25px;
+}
+.button {
+  background-color: #02b589;
+  color: white;
+  font-size: 25px;
+  border: none;
+  padding-left: 45px;
+  padding-right: 45px;
+  border-radius: 100px;
+  font-weight: bold;
+}
