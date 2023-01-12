@@ -5,13 +5,17 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../context/AuthProvider";
 
 export const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const Navigate = useNavigate();
   const baseUrl = "http://localhost:9000";
+const {currentUser, setCurrentUser} = useContext(AuthContext)
+
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
@@ -21,7 +25,11 @@ export const Login = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
+        console.log(res.data);  
+        window.localStorage.setItem(
+          "APP_USER",
+          JSON.stringify(res.data._id))
+          setCurrentUser(res.data)
         Navigate("/");
       })
       .catch((error) => {

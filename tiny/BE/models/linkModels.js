@@ -1,7 +1,9 @@
 const { Schema, Types, model } = require('mongoose')
+const shortId = require('shortid')
 
 const linkSchema = new Schema({
-    url: { type: String, required: true },
+    full: { type: String, required: true },
+    short: { type: String, required: true, default: shortId.generate(4) }
 });
 
 const Link = model("Link", linkSchema);
