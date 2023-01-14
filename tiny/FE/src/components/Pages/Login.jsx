@@ -11,25 +11,25 @@ import { AuthContext } from "../context/AuthProvider";
 export const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
   const Navigate = useNavigate();
   const baseUrl = "http://localhost:9000";
-const {currentUser, setCurrentUser} = useContext(AuthContext)
-
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
+
+
     axios
       .post(baseUrl + "/login", {
         email: email,
         password: password,
       })
       .then((res) => {
-        console.log(res.data);  
-        window.localStorage.setItem(
-          "APP_USER",
-          JSON.stringify(res.data._id))
-          setCurrentUser(res.data)
+        console.log(res.data);
+        window.localStorage.setItem("APP_USER", JSON.stringify(res.data._id));
+        setCurrentUser(res.data._id);
         Navigate("/");
       })
       .catch((error) => {
@@ -44,7 +44,8 @@ const {currentUser, setCurrentUser} = useContext(AuthContext)
       <img
         onClick={() => Navigate("/")}
         src={Logo}
-        className={styles.logo}></img>
+        className={styles.logo}
+      ></img>
       <div className={styles.formContainer}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <p className={styles.title}>Нэвтрэх</p>
@@ -55,14 +56,16 @@ const {currentUser, setCurrentUser} = useContext(AuthContext)
           <input
             onChange={(e) => setEmail(e.target.value)}
             className={styles.inp}
-            placeholder="name@mail.domain"></input>
+            placeholder="name@mail.domain"
+          ></input>
         </div>
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үг</label>
           <input
             onChange={(e) => setPassword(e.target.value)}
             className={styles.inp}
-            placeholder="••••••••••"></input>
+            placeholder="••••••••••"
+          ></input>
         </div>
         <div className={styles.checkCont}>
           <input className={styles.checkBox} type="checkbox"></input>
@@ -76,7 +79,8 @@ const {currentUser, setCurrentUser} = useContext(AuthContext)
             display: "flex",
             justifyContent: "center",
             paddingTop: "15px",
-          }}>
+          }}
+        >
           <span onClick={() => Navigate("/signup")} className={styles.text}>
             Шинэ хэрэглэгч бол энд дарна уу?
           </span>
