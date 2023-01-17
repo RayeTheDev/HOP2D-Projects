@@ -1,5 +1,40 @@
 const { User } = require("../models/userModels");
+const jwt = require("jsonwebtoken")
+const handleErrors = (err) => {
+  console.log(err.message, err.code);
+  let errors = { email: "", password: "" };
 
+  if (err.code === 11000) {
+    errors.email = "That email is already registered";
+    return errors;
+  }
+
+  if (err.message.includes("User validation failed")) {
+    Object.values(err.errors).forEach(({ properties }) => {
+      errors[properties.path] = properties.message;
+    });
+  }
+  return errors;
+};
+
+exports.isValidUser = async (req, res, next) => {
+  const { email, password } = req.body;
+  const isAlready = await User.findOne({ email: email });
+  console.log(isAlready);
+
+  try {
+    if (isAlready !== null) {
+      res.status(400).send("That email is already registered");
+      return;
+    }
+    next()
+
+  
+  } catch (err) {
+    const errors = handleErrors(err);
+    res.status(400).send({ errors });
+  }
+};
 
 
 exports.checkUser = async (req, res, next) => {

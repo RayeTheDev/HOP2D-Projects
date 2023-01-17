@@ -8,7 +8,6 @@ export const MainProvider = ({ children }) => {
   const [user, setUser] = useState();
   const {currentUser} = useContext(AuthContext)
 
-  console.log(currentUser)
 
   useEffect(() => {
     if(currentUser)

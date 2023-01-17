@@ -10,8 +10,8 @@ router
     .post("/users", createUser)
     .post("/login", checkUser, loginUser)
     .post('/posts', getAuthToken)
-    .get("/users", authenticateToken,getUsers)
+    .post("/user", authenticateToken, getUsers)
     .get("/user/:id", getUser)
-    .delete("/user/:id", () => { });
+    .delete("/user/:id", () => {});
 
 exports.userRoutes = router;
