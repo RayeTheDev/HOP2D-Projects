@@ -36,19 +36,20 @@ export const Home = () => {
             БОГИНОСГОХ
           </Button>
         </div>
-      </div>
-      <div className={styles.urlContainer}>
-        <span className={styles.urlTexts}>Өгөгдсөн холбоос:</span>
-        {resUrl && <a href={resUrl.full}>{resUrl.full}</a>}
-        <span className={styles.urlTexts} style={{ marginTop: "40px" }}>
-          Богино холбоос:
-        </span>
         {resUrl && (
-          <a href={`http://localhost:9000/${resUrl.short}`}>
-            localhost:9000/{resUrl.short}{" "}
-          </a>
+          <div className={styles.urlContainer}>
+            <span className={styles.urlTexts}>Өгөгдсөн холбоос:</span>
+            <a href={resUrl.full}>{resUrl.full}</a>
+            <span className={styles.urlTexts} style={{ marginTop: "40px" }}>
+              Богино холбоос:
+            </span>
+            <a href={`http://localhost:9000/${resUrl.short}`}>
+              localhost:9000/{resUrl.short}{" "}
+            </a>
+          </div>
         )}
       </div>
+
       <div className={styles.footerCont}>
         <span>Made with ♥️ by Nest Academy</span>
         <span className={styles.bottomText}>©boginoo.io 2020</span>

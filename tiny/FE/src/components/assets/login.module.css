@@ -81,3 +81,8 @@ label {
 .text:hover {
   cursor: pointer;
 }
+
+.logo:hover {
+  cursor: pointer;
+
+}

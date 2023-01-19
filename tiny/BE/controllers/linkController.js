@@ -5,12 +5,11 @@ exports.createLink = async (req, res) => {
   const url = req.body;
   const result = await new Link(url).save();
   res.send(result);
-  //    res.redirect("/");
 };
 
 exports.getLinks = async (req, res) => {
   const result = await Link.find({});
-  res.send(result);
+  res.send(result); 
 };
 
 exports.getShortLink = async (req, res) => {

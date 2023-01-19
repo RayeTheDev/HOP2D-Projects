@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 export const Signup = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [confirmPass, setConfirmPass] = useState();
 
   const navigate = useNavigate();
   const baseUrl = "http://localhost:9000";
@@ -17,6 +18,11 @@ export const Signup = () => {
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
+
+    if(password !== confirmPass) {
+      toast.error('Passwords do not match')
+      return
+    }
     axios
       .post(baseUrl + "/users", {
         email: email,
@@ -35,7 +41,7 @@ export const Signup = () => {
   return (
     <div className={styles.Container}>
       <ToastContainer />
-      <img src={Logo} className={styles.logo}></img>
+      <img onClick={() => navigate('/')}src={Logo} className={styles.logo}></img>
       <div className={styles.formContainer}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <p className={styles.title}>Бүртгүүлэх</p>
@@ -57,7 +63,7 @@ export const Signup = () => {
         </div>
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үгээ давтна уу?</label>
-          <input className={styles.inp} placeholder="••••••••••"></input>
+          <input onChange={(e) => setConfirmPass(e.target.value)}className={styles.inp} placeholder="••••••••••"></input>
         </div>
 
         <Button

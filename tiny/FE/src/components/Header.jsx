@@ -9,12 +9,16 @@ import Dropdown from 'react-bootstrap/Dropdown';
 export const Header = () => {
   const Navigate = useNavigate();
   const [dis, setDis] = useState(false);
-  const { currentUser } = useContext(AuthContext);
-  const { user } = useContext(MainContext);
-  const options = [
-    'one', 'two', 'three'
-  ];
-  console.log(user);
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { user, setUser } = useContext(MainContext);
+
+  const LogOut = () => {
+    localStorage.clear();
+    setUser(null)
+    setCurrentUser(null)
+  }
+
+  console.log(currentUser);
   return (
     <div className={styles.Container}>
       <span className={styles.texts}>Хэрхэн ажилладаг вэ?</span>
@@ -35,9 +39,9 @@ export const Header = () => {
          </Dropdown.Toggle>
    
          <Dropdown.Menu>
-           <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-           <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
-           <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+           <Dropdown.Item>Action</Dropdown.Item>
+           <Dropdown.Item>Another action</Dropdown.Item>
+           <Dropdown.Item onClick={() => LogOut()}>Logout</Dropdown.Item>
          </Dropdown.Menu>
        </Dropdown>
     

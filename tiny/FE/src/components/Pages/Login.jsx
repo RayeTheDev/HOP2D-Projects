@@ -11,25 +11,24 @@ import { AuthContext } from "../context/AuthProvider";
 export const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+
   const Navigate = useNavigate();
   const baseUrl = "http://localhost:9000";
-const {currentUser, setCurrentUser} = useContext(AuthContext)
-
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
+
     axios
       .post(baseUrl + "/login", {
         email: email,
         password: password,
       })
       .then((res) => {
-        console.log(res.data);  
-        window.localStorage.setItem(
-          "APP_USER",
-          JSON.stringify(res.data._id))
-          setCurrentUser(res.data)
+        console.log(res.data);
+        window.localStorage.setItem("APP_USER", JSON.stringify(res.data._id));
+        setCurrentUser(res.data._id);
         Navigate("/");
       })
       .catch((error) => {
