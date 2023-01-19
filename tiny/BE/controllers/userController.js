@@ -1,12 +1,15 @@
 const { User } = require("../models/userModels");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
-
-
+const bcrypt = require("bcrypt");
 
 exports.createUser = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.create({ email, password });
+
+  const salt = await bcrypt.genSalt(1);
+  const hash = await bcrypt.hash(password, salt);
+
+  const user = await User.create({ email, password: hash });
   res.status(201).json(user);
 };
 
@@ -17,7 +20,7 @@ exports.getUsers = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email })
+  const user = await User.findOne({ email });
   const accessToken = jwt.sign(
     { email: email, password: password },
     process.env.ACCESS_TOKEN_SECRET,
@@ -28,15 +31,23 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.getAuthToken = async (req, res) => {
-  //   res.json(posts.filter((post) => (post.email = req.user.email)));
-  console.log("get auth token")
+  console.log("get auth token");
   res.send("User Exists");
 };
 
 exports.getUser = async (req, res) => {
   const id = req.params.id;
-  const result = await User.findById({ _id: id });
+  const result = await User.findById({ _id: id }).populate("history");
   res.send(result);
+};
 
+exports.addLinkToUser = async (req, res) => {
+  const userId = req.params.id;
+  const linkId = req.body.id;
 
+  const user = await User.findById(userId);
+  console.log(user);
+  user.history.push(linkId);
+  await user.save();
+  res.send(user)
 };

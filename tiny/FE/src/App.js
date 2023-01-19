@@ -8,7 +8,7 @@ import { useState } from "react";
 
 function App() {
 
-  const [token, setToken] = useState(window.localStorage.getItem('token'));
+
 
   return (
     <BrowserRouter>

@@ -1,6 +1,7 @@
 const { JsonWebTokenError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/userModels");
+const bcrypt = require("bcrypt");
 
 const handleErrors = (err) => {
   console.log(err.message, err.code);
@@ -29,25 +30,23 @@ exports.isValidUser = async (req, res, next) => {
       res.status(400).send("That email is already registered");
       return;
     }
-    next()
-
-
+    next();
   } catch (err) {
     const errors = handleErrors(err);
     res.status(400).send({ errors });
   }
 };
 
-
 exports.checkUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email });
+  const isMatch = await bcrypt.compare(password, user.password);
 
   console.log(user);
   if (user !== null) {
-    if (user.password === password) {
-      next()
+    if (isMatch) {
+      next();
     } else {
       res.status(401).json({ message: "Invalid password" });
     }
@@ -57,18 +56,19 @@ exports.checkUser = async (req, res, next) => {
 };
 
 exports.authenticateToken = (req, res, next) => {
-  console.log('authent')
-  const authHeader = req.headers.authorization
-  console.log(authHeader, 'authenticateToken');
+  const authHeader = req.headers.authorization;
+  console.log(authHeader, "authenticateToken");
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
 
-  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, result) => {
+  jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, async (err, result) => {
     if (err) {
-      res.send(err)
+      res.send(err);
     } else {
-      res.send(result)
-    }
+      const email = result.email;
+      const user = await User.findOne({ email: email });
+      res.send(user);
 
+    }
   });
 };

@@ -57,13 +57,14 @@ export const Signup = () => {
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үг</label>
           <input
+          type="password"
             onChange={(e) => setPassword(e.target.value)}
             className={styles.inp}
             placeholder="••••••••••"></input>
         </div>
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үгээ давтна уу?</label>
-          <input onChange={(e) => setConfirmPass(e.target.value)}className={styles.inp} placeholder="••••••••••"></input>
+          <input type="password" onChange={(e) => setConfirmPass(e.target.value)}className={styles.inp} placeholder="••••••••••"></input>
         </div>
 
         <Button

@@ -9,7 +9,7 @@ import { AuthContext, AuthProvider } from "../context/AuthProvider";
 import { MainContext } from "../context/MainProvider";
 
 export const Home = () => {
-  const { token } = useContext(AuthContext);
+  const { token , user} = useContext(AuthContext);
   const { isHistory } = useContext(MainContext);
   const [url, setUrl] = useState("");
   const [resUrl, setResUrl] = useState();
@@ -20,7 +20,6 @@ export const Home = () => {
     client
       .get("/links")
       .then((res) => {
-        console.log(res.data);
         setHistory(res.data);
       })
       .catch((err) => {
@@ -41,7 +40,9 @@ export const Home = () => {
         console.log(err);
       });
   };
-  console.log(token);
+
+  
+  console.log(user)
 
   return (
     <div className={styles.Container}>

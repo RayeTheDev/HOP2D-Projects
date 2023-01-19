@@ -22,8 +22,6 @@ export const MainProvider = ({ children }) => {
 
 
   const value = {
-    user,
-    setUser,
     isHistory,
     setIsHistory
   };

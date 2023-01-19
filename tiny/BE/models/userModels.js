@@ -15,6 +15,8 @@ const userSchema = new Schema({
         minlength: [6, 'Minimum password length is 6 character']
     },
     createdAt: { type: Date, default: Date.now() },
+
+    history : [{type: Schema.Types.ObjectId, ref: 'Link'}]
 });
 
 const User = model("User", userSchema);
