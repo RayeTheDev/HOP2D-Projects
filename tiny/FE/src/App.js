@@ -4,8 +4,12 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Header, Home, Login, Signup } from "./components";
 import { AuthProvider } from "./components/context/AuthProvider";
 import { MainProvider } from "./components/context/MainProvider";
+import { useState } from "react";
 
 function App() {
+
+  const [token, setToken] = useState(window.localStorage.getItem('token'));
+
   return (
     <BrowserRouter>
       <AuthProvider>

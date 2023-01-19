@@ -15,8 +15,7 @@ connect()
 
 app.get('/', async (req, res) => {
     res.send('Boginoo Home')
-    // const shortUrls = await Link.find()
-    // res.render()
+
 })
 
 app.use(linkRoutes)

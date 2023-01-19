@@ -14,7 +14,7 @@ export const Login = () => {
 
   const Navigate = useNavigate();
   const baseUrl = "http://localhost:9000";
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, setToken } = useContext(AuthContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -27,8 +27,8 @@ export const Login = () => {
       })
       .then((res) => {
         console.log(res.data);
-        window.localStorage.setItem("APP_USER", JSON.stringify(res.data._id));
-        setCurrentUser(res.data._id);
+        setToken(res.data.accessToken);
+        window.localStorage.setItem("token", res.data.accessToken);
         Navigate("/");
       })
       .catch((error) => {
@@ -76,7 +76,9 @@ export const Login = () => {
             justifyContent: "center",
             paddingTop: "15px",
           }}>
-          <span onClick={() => Navigate("/signup")} className={styles.text}>
+          <span
+            onClick={() => Navigate("/signup")}
+            className={`${styles.text} ${styles.underline}`}>
             Шинэ хэрэглэгч бол энд дарна уу?
           </span>
         </div>

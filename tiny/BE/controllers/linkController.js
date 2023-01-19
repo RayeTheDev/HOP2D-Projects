@@ -9,8 +9,9 @@ exports.createLink = async (req, res) => {
 
 exports.getLinks = async (req, res) => {
   const result = await Link.find({});
+  console.log(result, 'result');
   res.send(result); 
-};
+};  
 
 exports.getShortLink = async (req, res) => {
   const shortUrl = await Link.findOne({ short: req.params.shortUrl });

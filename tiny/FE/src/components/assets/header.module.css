@@ -32,5 +32,9 @@
 .profile {
   font-size: 18px;
   font-weight: bold;
+}
 
+.texts:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

@@ -9,7 +9,6 @@ const { checkUser, authenticateToken } = require("../middleware/userMiddleware")
 router
     .post("/users", createUser)
     .post("/login", checkUser, loginUser)
-    .post('/posts', getAuthToken)
     .post("/user", authenticateToken, getUsers)
     .get("/user/:id", getUser)
     .delete("/user/:id", () => { });
