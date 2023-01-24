@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useContext, useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
-import { links } from "../Client/Instance";
+import { links } from "../Client/useInstance";
 import styles from "../assets/home.module.css";
 import Logo from "../assets/img/logo-default.svg";
-import { client } from "../Client/Instance";
+import { client } from "../Client/useInstance";
 import { AuthContext, AuthProvider } from "../context/AuthProvider";
 import { MainContext } from "../context/MainProvider";
 
 export const Home = () => {
-  const { token, user } = useContext(AuthContext);
+  const { token, user, setUser } = useContext(AuthContext);
   const { isHistory } = useContext(MainContext);
   const [url, setUrl] = useState("");
   const [resUrl, setResUrl] = useState();
@@ -34,11 +34,17 @@ export const Home = () => {
       .post("/links", { full: url })
       .then((res) => {
         console.log(res.data);
-        setResUrl(res.data);
+  
         client
           .put("/user/" + user._id, { id: res.data._id })
           .then((res) => {
-            console.log(res.data);
+            client.get("/user/" + user._id)
+            .then((res) => {
+              setUser(res.data)
+            })
+            .catch((err) => {
+              console.log(err)
+            });
           })
           .catch((err) => {
             console.log(err);

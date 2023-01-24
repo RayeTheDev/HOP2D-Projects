@@ -40,14 +40,18 @@ exports.checkUser = async (req, res, next) => {
   const { email, password } = req.body;
 
   const user = await User.findOne({ email: email });
-  const isMatch = await bcrypt.compare(password, user.password);
 
-  console.log(user);
-  if (user !== null) {
-    if (isMatch) {
-      next();
+
+  if (user) {
+    if (user.email !== null && user.password !== null) {
+      const isMatch = await bcrypt.compare(password, user.password);
+      if (isMatch) {
+        next();
+      } else {
+        res.status(401).json({ message: "Invalid password" });
+      }
     } else {
-      res.status(401).json({ message: "Invalid password" });
+      res.status(401).json({ message: "Unreadable password or email" });
     }
   } else {
     res.status(401).json({ message: "User not found" });
@@ -55,7 +59,10 @@ exports.checkUser = async (req, res, next) => {
 };
 
 exports.authenticateToken = (req, res, next) => {
-  const authHeader = req.headers.authorization;
+
+  const authHeader = req.body.headers.Authorization
+
+
   console.log(authHeader, "authenticateToken");
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
@@ -67,7 +74,6 @@ exports.authenticateToken = (req, res, next) => {
       const email = result.email;
       const user = await User.findOne({ email: email });
       res.send(user);
-
     }
   });
 };

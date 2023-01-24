@@ -24,16 +24,20 @@ export const Header = () => {
   return (
     <div className={styles.Container}>
       <span className={styles.texts}>Хэрхэн ажилладаг вэ?</span>
-      <span onClick={() => navigate("/history")} className={styles.texts}>
-        Түүх
-      </span>
+      {user && (
+        <span onClick={() => navigate("/history")} className={styles.texts}>
+          Түүх
+        </span>
+      )}
+
       {!user && (
         <Button
           variant="success"
           className={styles.button}
           onClick={() => {
             Navigate("/login");
-          }}>
+          }}
+        >
           Нэвтрэх
         </Button>
       )}
