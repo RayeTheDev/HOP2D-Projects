@@ -27,6 +27,7 @@ export const Login = () => {
       })
       .then((res) => {
         console.log(res.data);
+        console.log("wtf");
         setToken(res.data.accessToken);
         window.localStorage.setItem("token", res.data.accessToken);
         Navigate("/");
@@ -59,7 +60,7 @@ export const Login = () => {
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үг</label>
           <input
-          type="password"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             className={styles.inp}
             placeholder="••••••••••"></input>

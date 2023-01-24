@@ -1,4 +1,3 @@
-const { JsonWebTokenError } = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
 const { User } = require("../models/userModels");
 const bcrypt = require("bcrypt");
@@ -40,7 +39,7 @@ exports.isValidUser = async (req, res, next) => {
 exports.checkUser = async (req, res, next) => {
   const { email, password } = req.body;
 
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email });
   const isMatch = await bcrypt.compare(password, user.password);
 
   console.log(user);

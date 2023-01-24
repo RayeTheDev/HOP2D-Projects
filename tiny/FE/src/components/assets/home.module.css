@@ -91,11 +91,7 @@ a {
   align-items: center;
   margin-top: 40px;
 }
-.hTitle {
-  color: #02b589;
-  font-size: 35px;
-  font-weight: bold;
-}
+
 .hUrlContainer {
   display: flex;
   text-align: start;

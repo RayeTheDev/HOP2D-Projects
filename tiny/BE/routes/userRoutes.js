@@ -7,9 +7,10 @@ const { checkUser, authenticateToken } = require("../middleware/userMiddleware")
 
 
 router
+    .get('/users', getUsers)
     .post("/users", createUser)
     .post("/login", checkUser, loginUser)
-    .post("/user", authenticateToken,)
+    .post("/user", authenticateToken)
     .get("/user/:id", getUser)
     .put("/user/:id", addLinkToUser)
     .delete("/user/:id", () => { });

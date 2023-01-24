@@ -12,23 +12,29 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [user, setUser] = useState()
   useEffect(() => {
-    if(token) {
-      setToken(window.localStorage.getItem('token'))
+    if (token) {
+      const decoded = jwt_decode(token)
+      console.log(decoded)
 
+      // axios.post('http://localhost:9000/user', {
+      //   headers: {
+      //     'Authorization': `Bearer ${token}`,
+      //   }
+      // })
       reqInstance.post('/user')
-      .then((response) => {
-        console.log(response.data)
-       
-        client.get('/user/' + response.data._id)
         .then((response) => {
-            setUser(response.data)
-        })
-        .catch((error) => {
+          // console.log(response.data)
+          console.log(decoded.email)
+          client.get('/user/' + response.data._id)
+            .then((response) => {
+              setUser(response.data)
+            })
+            .catch((error) => {
+              console.log(error)
+            });
+        }).catch((error) => {
           console.log(error)
-        });
-      }).catch((error) => {
-        console.log(error)
-      })
+        })
     }
   }, [token]);
 
@@ -36,7 +42,7 @@ export const AuthProvider = ({ children }) => {
   const value = {
     currentUser,
     setCurrentUser,
-    token, 
+    token,
     setToken,
     user,
     setUser

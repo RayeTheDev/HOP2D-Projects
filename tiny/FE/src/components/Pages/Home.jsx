@@ -9,7 +9,7 @@ import { AuthContext, AuthProvider } from "../context/AuthProvider";
 import { MainContext } from "../context/MainProvider";
 
 export const Home = () => {
-  const { token , user} = useContext(AuthContext);
+  const { token, user } = useContext(AuthContext);
   const { isHistory } = useContext(MainContext);
   const [url, setUrl] = useState("");
   const [resUrl, setResUrl] = useState();
@@ -35,14 +35,21 @@ export const Home = () => {
       .then((res) => {
         console.log(res.data);
         setResUrl(res.data);
+        client
+          .put("/user/" + user._id, { id: res.data._id })
+          .then((res) => {
+            console.log(res.data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err);
       });
   };
 
-  
-  console.log(user)
+  console.log(user);
 
   return (
     <div className={styles.Container}>
@@ -78,8 +85,8 @@ export const Home = () => {
         <div className={styles.historyContainer}>
           <span className={styles.hTitle}>Түүх</span>
 
-          {history &&
-            history.map((item) => {
+          {user.history &&
+            user.history.map((item) => {
               // console.log(item.full.slice(0, 10))
               return (
                 item.full &&

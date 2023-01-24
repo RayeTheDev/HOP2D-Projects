@@ -9,8 +9,11 @@ import Dropdown from "react-bootstrap/Dropdown";
 export const Header = () => {
   const Navigate = useNavigate();
   const [dis, setDis] = useState(false);
-  const { currentUser, setCurrentUser, user, setUser } = useContext(AuthContext);
+  const { currentUser, setCurrentUser, user, setUser } =
+    useContext(AuthContext);
   const { setIsHistory } = useContext(MainContext);
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const LogOut = () => {
     localStorage.clear();
@@ -21,18 +24,21 @@ export const Header = () => {
   return (
     <div className={styles.Container}>
       <span className={styles.texts}>Хэрхэн ажилладаг вэ?</span>
-      <span onClick={() => setIsHistory(true)} className={styles.texts}>
+      <span onClick={() => navigate("/history")} className={styles.texts}>
         Түүх
       </span>
-      {!user&& (
+      {!user && (
         <Button
           variant="success"
           className={styles.button}
-          onClick={() => Navigate("/login")}>
+          onClick={() => {
+            Navigate("/login");
+          }}>
           Нэвтрэх
         </Button>
       )}
 
+      {}
       {user && (
         <Dropdown>
           <Dropdown.Toggle variant="success" id="dropdown-basic">

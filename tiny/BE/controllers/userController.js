@@ -20,9 +20,9 @@ exports.getUsers = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: email });
   const accessToken = jwt.sign(
-    { email: email, password: password },
+    { email: user.email, password: user.password },
     process.env.ACCESS_TOKEN_SECRET,
     { expiresIn: "1d" }
   );
