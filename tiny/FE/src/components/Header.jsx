@@ -36,15 +36,14 @@ export const Header = () => {
           className={styles.button}
           onClick={() => {
             Navigate("/login");
-          }}
-        >
+          }}>
           Нэвтрэх
         </Button>
       )}
 
       {}
       {user && (
-        <Dropdown>
+        <Dropdown className={styles.profile}>
           <Dropdown.Toggle variant="success" id="dropdown-basic">
             {user && user.email}
           </Dropdown.Toggle>
