@@ -84,7 +84,7 @@ export const Home = () => {
               Богино холбоос:
             </span>
             <div>
-              <a href={`http://localhost:9000/${resUrl.short}`}>
+              <a href={`https://boginoo-bjhp.onrender.com/${resUrl.short}`}>
                 localhost:9000/{resUrl.short}{" "}
               </a>
               <span className={styles.copy}>Хуулах</span>

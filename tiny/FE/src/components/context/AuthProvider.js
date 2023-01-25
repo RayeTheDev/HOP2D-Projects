@@ -16,11 +16,11 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
 
-      axios.post('http://localhost:9000/user', {
+      axios.post('https://boginoo-bjhp.onrender.com/user', {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
-      }) .then((response) => {
+      }).then((response) => {
         // console.log(response.data)
         client.get('/user/' + response.data._id)
           .then((response) => {
@@ -32,8 +32,8 @@ export const AuthProvider = ({ children }) => {
       }).catch((error) => {
         console.log(error)
       })
-       
-    
+
+
     }
   }, [token]);
 

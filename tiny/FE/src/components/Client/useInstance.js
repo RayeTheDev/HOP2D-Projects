@@ -4,7 +4,7 @@ import { AuthContext } from "../context/AuthProvider";
 
 
 export const client = axios.create({
-  baseURL: "http://localhost:9000",
+  baseURL: "https://boginoo-bjhp.onrender.com",
   headers: {
     "Content-Type": "application/json",
   },
@@ -13,10 +13,10 @@ export const client = axios.create({
 
 
 
-export const useInstance =  () => {
+export const useInstance = () => {
   {
-  
-  
+
+
 
     // console.log(token)
     // axios.create({
@@ -26,6 +26,6 @@ export const useInstance =  () => {
     //     "Content-Type": "application/json",
     //   }
     // })                                
-  
+
   }
 }
