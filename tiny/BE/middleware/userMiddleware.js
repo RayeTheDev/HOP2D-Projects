@@ -61,8 +61,6 @@ exports.checkUser = async (req, res, next) => {
 exports.authenticateToken = (req, res, next) => {
 
   const authHeader = req.body.headers.Authorization
-
-
   console.log(authHeader, "authenticateToken");
   const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.sendStatus(401);
