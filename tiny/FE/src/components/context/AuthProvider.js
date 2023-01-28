@@ -9,6 +9,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState();
+  const [hCount, setHCount] = useState();
   const [token, setToken] = useState(window.localStorage.getItem('token'));
   const [user, setUser] = useState()
 
@@ -20,7 +21,7 @@ export const AuthProvider = ({ children }) => {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
-      }) .then((response) => {
+      }).then((response) => {
         // console.log(response.data)
         client.get('/user/' + response.data._id)
           .then((response) => {
@@ -29,11 +30,21 @@ export const AuthProvider = ({ children }) => {
           .catch((error) => {
             console.log(error)
           });
+
+          //Count history optional
+          client.get('/count/' + response.data._id)
+          .then((response) => {
+            setHCount(response.data)
+          })
+          .catch((error) => {
+            console.log(error)
+          });
+
       }).catch((error) => {
         console.log(error)
       })
-       
-    
+
+
     }
   }, [token]);
 
@@ -44,7 +55,8 @@ export const AuthProvider = ({ children }) => {
     token,
     setToken,
     user,
-    setUser
+    setUser,
+    hCount
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

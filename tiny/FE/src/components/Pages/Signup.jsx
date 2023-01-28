@@ -13,15 +13,15 @@ export const Signup = () => {
   const [confirmPass, setConfirmPass] = useState();
 
   const navigate = useNavigate();
-  const baseUrl = "http://localhost:9000";
+  const baseUrl = "https://boginoo-bjhp.onrender.com";
 
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
 
-    if(password !== confirmPass) {
-      toast.error('Passwords do not match')
-      return
+    if (password !== confirmPass) {
+      toast.error("Passwords do not match");
+      return;
     }
     axios
       .post(baseUrl + "/users", {
@@ -41,7 +41,10 @@ export const Signup = () => {
   return (
     <div className={styles.Container}>
       <ToastContainer />
-      <img onClick={() => navigate('/')}src={Logo} className={styles.logo}></img>
+      <img
+        onClick={() => navigate("/")}
+        src={Logo}
+        className={styles.logo}></img>
       <div className={styles.formContainer}>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <p className={styles.title}>Бүртгүүлэх</p>
@@ -57,14 +60,18 @@ export const Signup = () => {
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үг</label>
           <input
-          type="password"
+            type="password"
             onChange={(e) => setPassword(e.target.value)}
             className={styles.inp}
             placeholder="••••••••••"></input>
         </div>
         <div className={`${styles.inCont} ${styles.marginTop}`}>
           <label>Нууц үгээ давтна уу?</label>
-          <input type="password" onChange={(e) => setConfirmPass(e.target.value)}className={styles.inp} placeholder="••••••••••"></input>
+          <input
+            type="password"
+            onChange={(e) => setConfirmPass(e.target.value)}
+            className={styles.inp}
+            placeholder="••••••••••"></input>
         </div>
 
         <Button
