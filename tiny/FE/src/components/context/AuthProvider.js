@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
           'Authorization': `Bearer ${token}`,
         }
       }).then((response) => {
-        // console.log(response.data)
+
         client.get('/user/' + response.data._id)
           .then((response) => {
             setUser(response.data)

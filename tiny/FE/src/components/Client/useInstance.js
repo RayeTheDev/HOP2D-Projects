@@ -12,20 +12,3 @@ export const client = axios.create({
 
 
 
-
-export const useInstance = () => {
-  {
-
-
-
-    // console.log(token)
-    // axios.create({
-    //   baseURL: "http://localhost:9000",
-    //   headers: {
-    //     Authorization: `Bearer ${token}`,
-    //     "Content-Type": "application/json",
-    //   }
-    // })                                
-
-  }
-}

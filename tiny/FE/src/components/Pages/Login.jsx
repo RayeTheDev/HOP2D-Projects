@@ -8,16 +8,29 @@ import "react-toastify/dist/ReactToastify.css";
 import { useContext, useState } from "react";
 import { AuthContext } from "../context/AuthProvider";
 import ScaleLoader from "react-spinners/ScaleLoader";
+import { getAuth, signInWithPopup, FacebookAuthProvider } from "firebase/auth";
+import { auth, provider } from "../context/fbConfig";
+import FacebookProvider from "next-auth/providers/facebook";
+
 
 export const Login = () => {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
+  const [fb, setFb] = useState()
 
   const Navigate = useNavigate();
   const baseUrl = "https://boginoo-bjhp.onrender.com";
   const { currentUser, setCurrentUser, setToken } = useContext(AuthContext);
 
+  const loginWithFB = () => {
+    providers: [
+      FacebookProvider({
+        clientId: process.env.FACEBOOK_CLIENT_ID,
+        clientSecret: process.env.FACEBOOK_CLIENT_SECRET
+      })
+    ]
+  }
   const onSubmit = (e) => {
     e.preventDefault();
     console.log(email);
@@ -89,6 +102,7 @@ export const Login = () => {
               className={styles.button}>
               Нэвтрэх
             </Button>
+            <Button onClick={loginWithFB}>Facebook</Button>
             <div
               style={{
                 display: "flex",
