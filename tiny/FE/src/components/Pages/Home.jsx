@@ -57,8 +57,6 @@ export const Home = () => {
       });
   };
 
-  console.log(user);
-
   return (
     <div className={styles.Container}>
       <ToastContainer />

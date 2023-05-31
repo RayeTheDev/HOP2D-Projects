@@ -4,22 +4,22 @@ import { AuthContext } from "./context/AuthProvider";
 
 export const PaginationComp = ({ historyPerPage, totalHistory, paginate }) => {
   const [pageNumbers, setPageNumbers] = useState([])
-  const { hCount } = useContext(AuthContext);
-//    const pageNumber = []
+  const { hCount, user } = useContext(AuthContext);
+  //    const pageNumber = []
 
-useEffect(() => {
-    if(hCount)
-    for (let i = 1; i <= hCount.count; i++) {
+  useEffect(() => {
+    if (hCount)
+      for (let i = 1; i <= hCount.count; i++) {
         setPageNumbers(prev => [...prev, i])
-    } 
-}, [])
-   
+      }
+  }, [])
+
   return (
     <div>
       <Pagination>
         {pageNumbers.map((number, index) => {
           return (
-            <Pagination.Item key={number + index *7 -1}onClick={() => paginate(number)}>
+            <Pagination.Item key={number + index * 7 - 1} onClick={() => paginate(number)}>
               {number}
             </Pagination.Item>
           );

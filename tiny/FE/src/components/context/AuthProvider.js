@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
   useEffect(() => {
     if (token) {
 
-      axios.post('http://localhost:9000/user', {
+      axios.post('https://boginoo-bjhp.onrender.com/user', {
         headers: {
           'Authorization': `Bearer ${token}`,
         }
@@ -31,8 +31,8 @@ export const AuthProvider = ({ children }) => {
             console.log(error)
           });
 
-          //Count history optional
-          client.get('/count/' + response.data._id)
+        //Count history optional
+        client.get('/count/' + response.data._id)
           .then((response) => {
             setHCount(response.data)
           })

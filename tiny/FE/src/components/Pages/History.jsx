@@ -24,34 +24,31 @@ export const History = () => {
     setTimeout(() => {
       setLoading(false);
     }, 2000);
-
   }, []);
   useEffect(() => {
     if (user)
+      client
+        .get("/user/" + user._id + "?skip=0")
+        .then((res) => {
+          setHistory(res.data.history);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+  }, [user]);
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
     client
-      .get("/user/" + user._id +'?skip=0')
-      .then((res) => {  
+      .get("/user/" + user._id + `?skip=${pageNumber - 1}`)
+      .then((res) => {
         setHistory(res.data.history);
       })
       .catch((err) => {
-        console.error(err);
+        console.log(err);
       });
-  }, [user])
-
-
-
-  const paginate = (pageNumber) => {
-
-    setCurrentPage(pageNumber);
-    client.get('/user/' + user._id + `?skip=${pageNumber - 1}`)
-    .then((res) => {
-      setHistory(res.data.history);
-    }).catch((err) => {
-      console.log(err)
-    })
   };
 
-console.log(history)
   return (
     <div className={styles.container}>
       {loading ? (
@@ -69,7 +66,9 @@ console.log(history)
                   item.full &&
                   item.short && (
                     <>
-                      <div className={styles.urlContainer} key={index + item * 8}>
+                      <div
+                        className={styles.urlContainer}
+                        key={index + item * 8}>
                         <div className={styles.fullContainer}>
                           <span className={styles.hTexts}>
                             Өгөгдсөн холбоос:

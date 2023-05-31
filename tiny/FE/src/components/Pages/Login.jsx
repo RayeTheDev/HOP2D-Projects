@@ -20,7 +20,6 @@ export const Login = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log(email);
 
     axios
       .post(baseUrl + "/login", {
@@ -28,7 +27,6 @@ export const Login = () => {
         password: password,
       })
       .then((res) => {
-        console.log(res.data);
         setLoading(true);
         setTimeout(() => {
           setLoading(false);
@@ -77,7 +75,7 @@ export const Login = () => {
                 type="password"
                 onChange={(e) => setPassword(e.target.value)}
                 className={styles.inp}
-                placeholder="••••••••••"></input>
+                placeholder="••••••••••"></input> 
             </div>
             <div className={styles.checkCont}>
               <input className={styles.checkBox} type="checkbox"></input>
