@@ -4,13 +4,43 @@ body {
   background-image: linear-gradient(160deg, #0093e9 0%, #80d0c7 100%);
 }
 .App {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
   display: flex;
   justify-content: center;
+  position: relative;
+}
+.blurred {
+   filter: blur(8px);
+  -webkit-filter: blur(8px);
 }
 .contDiv {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+.WinWrapperCont {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    top: 0%;
+}
+.WinCont {
+  width: 280px;
+  height: 180px;
+  background: linear-gradient(111.8deg, rgb(0, 104, 155) 19.8%, rgb(0, 173, 239) 92.1%);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+.WinCont p {
+  color: white
 }
 p {
   font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
@@ -46,3 +76,5 @@ p {
   /* display: none; */
   background-color: green;
 }
+
+

@@ -1,5 +1,6 @@
 import "./App.css";
 import { useEffect, useState, useRef } from "react";
+import { WinAlert } from "./WinAlert";
 // import { v4 as uuidv4 } from "uuid";
 
 const Box = (props, gg) => {
@@ -93,11 +94,7 @@ function App() {
         choosed.current = [];
         setCount(0);
         console.log(win);
-        if (win === 8) {
-          gg.isWon = true;
-
-
-        }
+        
         return;
       }
 
@@ -136,14 +133,47 @@ function App() {
       });
     }
 
-    if (gg.isWon === true) {
-      document.body.style.backgroundColor = "red"
-    }
+
     shuffle();
   }, []);
 
+  const Retry = () => {
+
+    setWin(0)
+    setCount(0)
+    setInsert(0)
+    arr.forEach((item, index) => {
+      item.isSelected = false
+      item.isRemoved = false
+
+    })
+    setArr((prev) => {
+      const arr = [...prev];
+      let currentIndex = arr.length,
+        randomIndex;
+
+      // While there remain elements to shuffle.
+      while (currentIndex !== 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+
+        // And swap it with the current element.
+        [arr[currentIndex], arr[randomIndex]] = [
+          arr[randomIndex],
+          arr[currentIndex],
+        ];
+      }
+
+      return arr;
+    });
+
+
+  }
+
   return (
-    <div className="App">
+    <>
+      <div className={win == 8 ? "App blurred" : "App"}>
       <div className="contDiv">
         <p>Find Pairs</p>
         <div className="boxCont">
@@ -160,6 +190,11 @@ function App() {
         </div>
       </div>
     </div>
+
+      {win == 8 && <div className="WinWrapperCont"><WinAlert Retry={Retry} /></div>}
+    </>
+
+
   );
 }
 
