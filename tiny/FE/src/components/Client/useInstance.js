@@ -12,4 +12,7 @@ export const client = axios.create({
 
 
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 4912b11904949ae00196523e43a0a86a9ab6dec7
